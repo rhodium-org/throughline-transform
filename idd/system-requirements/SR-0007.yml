@@ -1,6 +1,6 @@
 uid: SR-0007
 type: system_requirement
-status: ratified
+status: implemented
 title: Cited clauses travel with the export, and the workbook is read-only
 text: The clauses of adopted sources that some item links to travel as one table
   per source, with the columns those clauses carry. The workbook opens read-only

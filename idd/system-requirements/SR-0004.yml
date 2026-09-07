@@ -1,6 +1,6 @@
 uid: SR-0004
 type: system_requirement
-status: ratified
+status: implemented
 title: Provenance is read from git and judged over the graph alone
 text: The repository name is read from the origin remote, or failing that the top-level
   directory's name; the ref from HEAD; the commit from HEAD; and cleanliness from

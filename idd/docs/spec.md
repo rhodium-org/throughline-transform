@@ -30,13 +30,13 @@ follows is this project's own.
 Why throughline-transform exists. Everything below grounds upward into this.
 
 <!-- tl:item INT-0001 -->
-**INT-0001 — The outputs of a graph come from the graph on disk, committed or not** — `intent`, status `proposed`
+**INT-0001 — The outputs of a graph come from the graph on disk, committed or not** — `intent`, status `ratified`
 
 > A person with a throughline graph on their own machine can produce every form a reader opens — a document, a spreadsheet, a folder of notes — from the working tree as it is, before anything is committed or pushed, with one command. The output says what state the tree was in.
 
 *Rationale:* The editor produces these outputs from a graph on GitHub. A graph that is not yet committed, or that lives where the editor cannot reach, has no way out. The person who needs the output most often has the graph open on their own disk and wants to see what a reader will see before they commit it.
 
-**origin**: ai
+**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5c8c4b4356e989b22048214676015a60315e57254b6ebf8bb963d7948a4ea541
 <!-- tl:end -->
 
 
@@ -45,33 +45,33 @@ Why throughline-transform exists. Everything below grounds upward into this.
 What is deliberately left out, recorded so a reviewer or an agent can point at it.
 
 <!-- tl:item NG-0001 -->
-**NG-0001 — No second renderer of an item's words** — `non_goal`, status `proposed`
+**NG-0001 — No second renderer of an item's words** — `non_goal`, status `ratified`
 
 > This tool never composes the prose of an item. Every word of an item in an output is written by tl docs. The tool adds containers, front matter and link syntax, and nothing else.
 
 *Rationale:* A second renderer drifts from what tl docs --check gates, and a document that quietly differs from the published specification is worse than none.
 
-**origin**: ai
+**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:f5c33390e2febaec19e6d13dba176393393481e4f256b9d023c921dd8bd9ab41
 <!-- tl:end -->
 
 <!-- tl:item NG-0002 -->
-**NG-0002 — No PDF writer** — `non_goal`, status `proposed`
+**NG-0002 — No PDF writer** — `non_goal`, status `ratified`
 
 > This tool ships no PDF renderer. The print-ready HTML output is what a browser prints to PDF.
 
 *Rationale:* A PDF library is the largest dependency this package could take, for a format every browser already produces with a renderer maintained by someone else.
 
-**origin**: ai
+**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:d94996ab16dfb87585262313cfd3acd1cada6b19c9d2a38abd4bdc9b655c7bfe
 <!-- tl:end -->
 
 <!-- tl:item NG-0003 -->
-**NG-0003 — No server and no user interface** — `non_goal`, status `proposed`
+**NG-0003 — No server and no user interface** — `non_goal`, status `ratified`
 
 > This tool is a command run over a directory. It listens on nothing, serves nothing and opens no window.
 
 *Rationale:* The editor is the interactive surface for this family. A second one here would be a second implementation to keep in step.
 
-**origin**: ai
+**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:a162c86b2df6460a5be7c61c68d3eb7694a4cb46c3d8fb4aae660cca4c0e9dfe
 <!-- tl:end -->
 
 
@@ -80,7 +80,7 @@ What is deliberately left out, recorded so a reviewer or an agent can point at i
 What a person with a graph on disk can do.
 
 <!-- tl:item UR-0001 -->
-**UR-0001 — Produce an output from a working tree with one command** — `user_requirement`, status `proposed`
+**UR-0001 — Produce an output from a working tree with one command** — `user_requirement`, status `ratified`
 
 > From a directory holding a graph, or from any directory beneath it, one command names a format and writes one file, or one folder when asked. It works on a tree with uncommitted changes and on a directory that is not under version control at all.
 
@@ -88,11 +88,11 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: Run the command on a graph with an uncommitted edit and on a copy outside git. Each produces the file, and each output's provenance says which it was.
+**origin**: ai · **verification**: Run the command on a graph with an uncommitted edit and on a copy outside git. Each produces the file, and each output's provenance says which it was. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3cf8d1cae9eb2de5c7843800fdd8949c09b35049d262fdac7bd89ce38cf8a773
 <!-- tl:end -->
 
 <!-- tl:item UR-0002 -->
-**UR-0002 — The same six forms the editor offers** — `user_requirement`, status `proposed`
+**UR-0002 — The same six forms the editor offers** — `user_requirement`, status `ratified`
 
 > Markdown, a folder of notes for a note-taking tool such as Obsidian, CSV, an Excel workbook, a Word document, and a print-ready HTML document. Each holds what the editor's export of the same graph holds: the same items, links, attributes and cited clauses, laid out the same way.
 
@@ -100,11 +100,11 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: For one graph, each output opens in an ordinary reader for that format and lists every item the graph holds. A notes output has one note per item and no wikilink that names no note.
+**origin**: ai · **verification**: For one graph, each output opens in an ordinary reader for that format and lists every item the graph holds. A notes output has one note per item and no wikilink that names no note. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:441c3e12f160a1d6e395b16ef26ee59e3a83f87ec69b89dc1d38727383c57022
 <!-- tl:end -->
 
 <!-- tl:item UR-0003 -->
-**UR-0003 — An output says what it was true of** — `user_requirement`, status `proposed`
+**UR-0003 — An output says what it was true of** — `user_requirement`, status `ratified`
 
 > Every output names the repository, the ref, the commit and the tool that produced it, and says whether the working tree was clean, had uncommitted changes, or was not under version control.
 
@@ -112,7 +112,7 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: The provenance lines of an output from a clean tree, a tree with an edit, and a folder outside git read differently, and each is right.
+**origin**: ai · **verification**: The provenance lines of an output from a clean tree, a tree with an edit, and a folder outside git read differently, and each is right. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5874c3937f9d7fc47b61fe150059ea6b758f08f0673cbcb40eacb1e1dbbd285c
 <!-- tl:end -->
 
 
@@ -121,7 +121,7 @@ What a person with a graph on disk can do.
 How the tool does it. Each implements a user requirement; several read a clause of throughline's own graph, cited as `tl:SR-…`.
 
 <!-- tl:item SR-0001 -->
-**SR-0001 — The entry point is decided by the graph, and the tool is run as a command** — `system_requirement`, status `proposed`
+**SR-0001 — The entry point is decided by the graph, and the tool is run as a command** — `system_requirement`, status `implemented`
 
 > A graph whose configuration declares sources is read through tl-compose; any other through tl. The tool is found beside this package's interpreter first and on the path second, and is run as a command with -C pointing at the graph. Its modules are never imported.
 
@@ -130,11 +130,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0187
 
-**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so.
+**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:eeec8888b58dbf7e839c7f2a6d9ae27c184bac2a18e4c4d5f9734f515c650e42
 <!-- tl:end -->
 
 <!-- tl:item SR-0002 -->
-**SR-0002 — The Markdown is asked of tl docs over a document of directives** — `system_requirement`, status `proposed`
+**SR-0002 — The Markdown is asked of tl docs over a document of directives** — `system_requirement`, status `implemented`
 
 > The Markdown output is a document of tl directives — a summary, a table of items, one traceability matrix per grounding link type, a catalogue of every item, and the mirrored clauses of adopted sources when the graph composes — handed to the docs command, written outside the graph, and read back. The region markers are stripped unless asked to stay.
 
@@ -143,11 +143,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0111, tl:SR-0113
 
-**origin**: ai · **priority**: must · **verification**: The Markdown for the fixture holds the catalogue block of every item, a block this package has no code to produce. With --markers the region markers are present; without, none.
+**origin**: ai · **priority**: must · **verification**: The Markdown for the fixture holds the catalogue block of every item, a block this package has no code to produce. With --markers the region markers are present; without, none. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5916267f5d0db1c4daa658ae5659d2d3d805e3cb21e41104f3b829049918293f
 <!-- tl:end -->
 
 <!-- tl:item SR-0003 -->
-**SR-0003 — The tool's shape is read in one place** — `system_requirement`, status `proposed`
+**SR-0003 — The tool's shape is read in one place** — `system_requirement`, status `implemented`
 
 > The item line, the attribute line and the identifier pattern the tool writes are defined once and read by every writer that cuts or reshapes the tool's Markdown. If the tool changes a line, every output falls back the same way.
 
@@ -156,11 +156,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0111
 
-**origin**: ai · **priority**: should · **verification**: One module holds the patterns. A search of the package finds no second definition of the item line.
+**origin**: ai · **priority**: should · **verification**: One module holds the patterns. A search of the package finds no second definition of the item line. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:ce5afe7aa1f654996f709ebb2fcd64b499883ed6d13aa94da32e4064ea156a45
 <!-- tl:end -->
 
 <!-- tl:item SR-0004 -->
-**SR-0004 — Provenance is read from git and judged over the graph alone** — `system_requirement`, status `proposed`
+**SR-0004 — Provenance is read from git and judged over the graph alone** — `system_requirement`, status `implemented`
 
 > The repository name is read from the origin remote, or failing that the top-level directory's name; the ref from HEAD; the commit from HEAD; and cleanliness from git status over the graph's directory only. Without a repository the tree is reported as not under version control. Without a commit it is reported as holding uncommitted changes.
 
@@ -168,22 +168,22 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0003
 
-**origin**: ai · **priority**: must · **verification**: A fixture copied into a repository reports clean; after an edit to one item it reports uncommitted changes with the same commit; outside git it reports not under version control with no ref and no commit.
+**origin**: ai · **priority**: must · **verification**: A fixture copied into a repository reports clean; after an edit to one item it reports uncommitted changes with the same commit; outside git it reports not under version control with no ref and no commit. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:249b07d7ebede023ddc29df6e3f265616758b185927a43ed4619fe832c3ad6ed
 <!-- tl:end -->
 
 <!-- tl:item SR-0005 -->
-**SR-0005 — A tabular output is one row per item, over the columns the graph declares** — `system_requirement`, status `proposed`
+**SR-0005 — A tabular output is one row per item, over the columns the graph declares** — `system_requirement`, status `implemented`
 
 > csv and xlsx put each item on a row. The columns are the uid, register, type, status, title, text, rationale and normative flag every item has, then each attribute any item in the table carries, then one column per link type listing the targets. The column set is read from the tool's export, never fixed here. One table for everything, or one per register with only the columns its own items use.
 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0055
 
-**origin**: ai · **priority**: must · **verification**: An attribute the package has no knowledge of appears as a populated column. Per register, the Intents table carries no priority column.
+**origin**: ai · **priority**: must · **verification**: An attribute the package has no knowledge of appears as a populated column. Per register, the Intents table carries no priority column. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:67277d2f6dbd425c9176fd872dd8b2e88a4e6be75eb90b8621fcc62c9d274f00
 <!-- tl:end -->
 
 <!-- tl:item SR-0006 -->
-**SR-0006 — A links table names both ends of every link by the sheet each is on** — `system_requirement`, status `proposed`
+**SR-0006 — A links table names both ends of every link by the sheet each is on** — `system_requirement`, status `implemented`
 
 > Beside the item tables, one table holds one row per link: the sheet and uid it starts from, the link type, and the sheet and uid it points at. A link into an adopted source names the namespace as the sheet. The rows are in item order.
 
@@ -191,11 +191,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: must · **verification**: Per register, a relates link between two system requirements names System requirements at both ends; a satisfies link into a source names the namespace.
+**origin**: ai · **priority**: must · **verification**: Per register, a relates link between two system requirements names System requirements at both ends; a satisfies link into a source names the namespace. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:43c700f598f7814de525dd8e84151adbe8128e9cec9a8996b183b21e5b78540c
 <!-- tl:end -->
 
 <!-- tl:item SR-0007 -->
-**SR-0007 — Cited clauses travel with the export, and the workbook is read-only** — `system_requirement`, status `proposed`
+**SR-0007 — Cited clauses travel with the export, and the workbook is read-only** — `system_requirement`, status `implemented`
 
 > The clauses of adopted sources that some item links to travel as one table per source, with the columns those clauses carry. The workbook opens read-only by recommendation with its structure locked and no password, and every sheet still sorts and filters. The csv archive says it cannot be protected.
 
@@ -203,11 +203,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: should · **verification**: The composed fixture's workbook holds a sheet named by the namespace with exactly the cited clause. The workbook XML carries read-only recommended, structure lock, and sort and filter allowed.
+**origin**: ai · **priority**: should · **verification**: The composed fixture's workbook holds a sheet named by the namespace with exactly the cited clause. The workbook XML carries read-only recommended, structure lock, and sort and filter allowed. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:8f54e2a4d79e1e2da0bfdc82212ede313e62a42bb6e893358600dbee44d5f9d8
 <!-- tl:end -->
 
 <!-- tl:item SR-0008 -->
-**SR-0008 — A document output reads as a document** — `system_requirement`, status `proposed`
+**SR-0008 — A document output reads as a document** — `system_requirement`, status `implemented`
 
 > The Word and HTML outputs open with a title page naming the provenance, then a contents list, then a section per register with a heading per item carrying its identifier and title, its type and status beneath, its words as a quotation, its rationale, and its attributes in smaller type. Cited clauses follow as one appendix per source with where the source comes from beneath its title. The Word contents is a field Word fills in. The HTML contents is a list of links; page numbers are the browser's to print.
 
@@ -215,11 +215,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: should · **verification**: The Word document carries Heading2 through Heading4 styles, a TOC field, and a page break per section. The HTML page holds one section per item, a contents list of anchors, and an A4 page rule.
+**origin**: ai · **priority**: should · **verification**: The Word document carries Heading2 through Heading4 styles, a TOC field, and a page break per section. The HTML page holds one section per item, a contents list of anchors, and an A4 page rule. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:a7d75e08596a7b76fa757dff4add5375f45f34699229f7da388f75879567939b
 <!-- tl:end -->
 
 <!-- tl:item SR-0009 -->
-**SR-0009 — A notes output is one note per item, cut from the catalogue, with wikilinks** — `system_requirement`, status `proposed`
+**SR-0009 — A notes output is one note per item, cut from the catalogue, with wikilinks** — `system_requirement`, status `implemented`
 
 > The catalogue and the mirrored clauses are written once and cut at the item line into one Markdown note per item, in a folder per register named by the register's title; cited clauses go under sources, one folder per namespace, with the colon of the identifier replaced by a space in the file name. Each note opens with YAML front matter holding type, status, normative flag and attributes as properties, the title as an alias, and a tag for the type and one for the status. Every identifier that names a note becomes a wikilink; a clause link shows the identifier the tool wrote as its text. A bracket pair the tool wrote in prose is escaped. An About note carries the provenance.
 
@@ -227,11 +227,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: should · **verification**: For the fixtures, one note per item under its register's folder, front matter that parses as YAML with the item's properties, every wikilink naming a note in the folder, the TOML brackets escaped, and a clause note named with a space where the colon was.
+**origin**: ai · **priority**: should · **verification**: For the fixtures, one note per item under its register's folder, front matter that parses as YAML with the item's properties, every wikilink naming a note in the folder, the TOML brackets escaped, and a clause note named with a space where the colon was. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:1bef3f4c748adc485b6f989a76d8007763cf21c8ddd0a762a76dd450c2517374
 <!-- tl:end -->
 
 <!-- tl:item SR-0010 -->
-**SR-0010 — No dependency beyond the throughline family and the standard library** — `system_requirement`, status `proposed`
+**SR-0010 — No dependency beyond the throughline family and the standard library** — `system_requirement`, status `implemented`
 
 > The package depends on throughline and throughline-compose and nothing else. xlsx and docx are written from their own specifications over the standard library's zip module. There is no PDF writer (NG-0002).
 
@@ -239,11 +239,11 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0001
 
-**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice.
+**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:28f9f34e41dc05bd7f10bf219fe526106ba999073d302c3fe52e85dc31f2b55e
 <!-- tl:end -->
 
 <!-- tl:item SR-0011 -->
-**SR-0011 — One file per run, a folder when asked, the same bytes for the same graph** — `system_requirement`, status `proposed`
+**SR-0011 — One file per run, a folder when asked, the same bytes for the same graph** — `system_requirement`, status `implemented`
 
 > Every format writes one file. The notes and csv outputs are a zip by default, or the files written into a folder with --folder. When no name is given one is chosen from the provenance. Zip timestamps are fixed at the format's epoch, so the same graph exported twice gives identical bytes. A path that would escape the folder is refused. A wrong directory, a tool that refuses, or a file that cannot be written is one line on stderr and exit code 1; a usage error is exit code 2.
 
@@ -251,7 +251,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0001
 
-**origin**: ai · **priority**: should · **verification**: Each format writes a file that opens; --folder unpacks the vault; two runs over one graph are byte-identical; a directory without a graph gives one line on stderr and exit 1; --folder on xlsx exits 2.
+**origin**: ai · **priority**: should · **verification**: Each format writes a file that opens; --folder unpacks the vault; two runs over one graph are byte-identical; a directory without a graph gives one line on stderr and exit 1; --folder on xlsx exits 2. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:288caa80a8c8f4f9faae9bcdd26baf94e5183f2ecbb520431f90e1ddd4d27b9c
 <!-- tl:end -->
 
 

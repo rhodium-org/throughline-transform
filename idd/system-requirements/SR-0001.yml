@@ -1,6 +1,6 @@
 uid: SR-0001
 type: system_requirement
-status: ratified
+status: implemented
 title: The entry point is decided by the graph, and the tool is run as a command
 text: A graph whose configuration declares sources is read through tl-compose; any
   other through tl. The tool is found beside this package's interpreter first and

@@ -1,6 +1,6 @@
 uid: SR-0006
 type: system_requirement
-status: ratified
+status: implemented
 title: A links table names both ends of every link by the sheet each is on
 text: 'Beside the item tables, one table holds one row per link: the sheet and uid
   it starts from, the link type, and the sheet and uid it points at. A link into

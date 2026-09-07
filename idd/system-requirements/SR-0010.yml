@@ -1,6 +1,6 @@
 uid: SR-0010
 type: system_requirement
-status: ratified
+status: implemented
 title: No dependency beyond the throughline family and the standard library
 text: The package depends on throughline and throughline-compose and nothing else.
   xlsx and docx are written from their own specifications over the standard library's

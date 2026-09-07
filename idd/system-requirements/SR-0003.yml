@@ -1,6 +1,6 @@
 uid: SR-0003
 type: system_requirement
-status: ratified
+status: implemented
 title: The tool's shape is read in one place
 text: The item line, the attribute line and the identifier pattern the tool writes
   are defined once and read by every writer that cuts or reshapes the tool's Markdown.

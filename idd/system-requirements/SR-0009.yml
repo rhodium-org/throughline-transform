@@ -1,6 +1,6 @@
 uid: SR-0009
 type: system_requirement
-status: ratified
+status: implemented
 title: A notes output is one note per item, cut from the catalogue, with wikilinks
 text: The catalogue and the mirrored clauses are written once and cut at the item
   line into one Markdown note per item, in a folder per register named by the register's

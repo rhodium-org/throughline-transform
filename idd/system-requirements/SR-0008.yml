@@ -1,6 +1,6 @@
 uid: SR-0008
 type: system_requirement
-status: ratified
+status: implemented
 title: A document output reads as a document
 text: The Word and HTML outputs open with a title page naming the provenance, then
   a contents list, then a section per register with a heading per item carrying its

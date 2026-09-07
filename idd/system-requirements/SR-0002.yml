@@ -1,6 +1,6 @@
 uid: SR-0002
 type: system_requirement
-status: ratified
+status: implemented
 title: The Markdown is asked of tl docs over a document of directives
 text: The Markdown output is a document of tl directives — a summary, a table of
   items, one traceability matrix per grounding link type, a catalogue of every item,

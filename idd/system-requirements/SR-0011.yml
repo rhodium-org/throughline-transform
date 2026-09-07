@@ -1,6 +1,6 @@
 uid: SR-0011
 type: system_requirement
-status: ratified
+status: implemented
 title: One file per run, a folder when asked, the same bytes for the same graph
 text: Every format writes one file. The notes and csv outputs are a zip by default,
   or the files written into a folder with --folder. When no name is given one is

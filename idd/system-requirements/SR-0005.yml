@@ -1,6 +1,6 @@
 uid: SR-0005
 type: system_requirement
-status: ratified
+status: implemented
 title: A tabular output is one row per item, over the columns the graph declares
 text: csv and xlsx put each item on a row. The columns are the uid, register, type,
   status, title, text, rationale and normative flag every item has, then each attribute
