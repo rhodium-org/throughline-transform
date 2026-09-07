@@ -1,0 +1,25 @@
+uid: SR-0012
+type: system_requirement
+status: proposed
+title: The blocks output is the document's structure as JSON
+text: The blocks format writes one JSON document holding the provenance and the list
+  of blocks the Word and HTML outputs are built from, in order. Each block carries
+  its text and, where present, its heading level, whether it is a quotation, small
+  print or front matter, whether it opens a group, its subtitle, its item's identifier,
+  type and status, and its table's header and rows. Absent fields are omitted. The
+  prose options of the document formats apply to it.
+rationale: The same list the two document writers consume, so a front end laying
+  out pages from it cannot disagree with them about the document. JSON because every
+  front end reads it and nothing here has to be invented.
+normative: true
+links:
+- target: UR-0004
+  type: implements
+- target: SR-0008
+  type: relates
+attrs:
+  origin: ai
+  priority: must
+  verification: tl-transform blocks over the fixture yields JSON whose blocks list
+    has one entry with an item field per item, whose headings agree with the docx
+    output, and whose provenance matches the other outputs.

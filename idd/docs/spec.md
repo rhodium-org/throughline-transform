@@ -17,11 +17,11 @@ follows is this project's own.
 ## Summary
 
 <!-- tl:stats True -->
-- **Items:** 18 — system_requirement 11 · non_goal 3 · user_requirement 3 · intent 1
-- **Links:** 19 — implements 11 · satisfies 5 · derives_from 3
+- **Items:** 25 — system_requirement 14 · user_requirement 6 · non_goal 3 · intent 2
+- **Links:** 28 — implements 14 · derives_from 6 · satisfies 5 · refines 2 · relates 1
 - **Grounding depth:** max 2 · mean 1.4
-- **Most connected:** UR-0002 (9) · INT-0001 (3) · SR-0002 (3)
-- **Degree distribution:** 0 → 3 · 1 → 7 · 2 → 4 · 3 → 3 · 9 → 1
+- **Most connected:** UR-0002 (9) · INT-0001 (3) · INT-0002 (3)
+- **Degree distribution:** 0 → 3 · 1 → 5 · 2 → 11 · 3 → 5 · 9 → 1
 <!-- tl:end -->
 
 
@@ -38,6 +38,17 @@ Why throughline-transform exists. Everything below grounds upward into this.
 
 **origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5c8c4b4356e989b22048214676015a60315e57254b6ebf8bb963d7948a4ea541
 <!-- tl:end -->
+
+<!-- tl:item INT-0002 -->
+**INT-0002 — One implementation of every form, for the command line and the editor alike** — `intent`, status `proposed`
+
+> The forms a graph leaves in — a document, a workbook, a folder of notes — are produced by one implementation, whichever surface asks for them. The throughline editor runs this package as a wheel under Pyodide, so an export from a browser tab and an export from a terminal are the same bytes for the same graph.
+
+*Rationale:* Before this package existed the editor held its own writers in TypeScript and this package ported them to Python, so there were two implementations of every form and a change to one had to be made in the other or they drifted. The editor already runs tl and tl-compose as unmodified wheels; running this package the same way ends the duplication.
+
+**origin**: ai
+<!-- tl:end -->
+
 
 
 ## Non-goals
@@ -115,6 +126,45 @@ What a person with a graph on disk can do.
 **origin**: ai · **verification**: The provenance lines of an output from a clean tree, a tree with an edit, and a folder outside git read differently, and each is right. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5874c3937f9d7fc47b61fe150059ea6b758f08f0673cbcb40eacb1e1dbbd285c
 <!-- tl:end -->
 
+<!-- tl:item UR-0004 -->
+**UR-0004 — A front end that lays out its own pages takes the document's structure from the tool** — `user_requirement`, status `proposed`
+
+> A caller that renders a document itself — the editor lays the PDF's pages out in the browser so its contents can carry page numbers — can ask for the document's structure as data: the title, the front matter, each heading with its level, each item heading with its identifier, type and status, each quotation, paragraph, attribute line and table, and each appendix with where its source comes from. It is the same structure the Word and HTML outputs are built from.
+
+*Rationale:* The editor's PDF is laid out by the browser's own engine so that the page numbers in the contents are the numbers on the pages. That cannot be done from an HTML file, and it must not be done by the editor reading the tool's Markdown, which is the second reading of the tool's shape this package exists to remove.
+
+*Derives from:* INT-0002
+
+**origin**: ai · **verification**: The blocks output for the fixture parses as JSON, carries one item entry per item with its identifier, type and status, and matches the headings the docx output carries.
+<!-- tl:end -->
+
+
+<!-- tl:item UR-0005 -->
+**UR-0005 — A caller that knows the repository, ref and commit states them** — `user_requirement`, status `proposed`
+
+> A caller that holds the graph's repository, ref, commit and working-tree state — the editor has them from the clone, and has no git to ask — can state them, and the output carries what was stated. Git is not consulted when they are given.
+
+*Rationale:* Under Pyodide there is no git. Left to itself the tool would report a graph the editor cloned at a known commit as not under version control, which is the one thing SR-0066 in the editor's graph forbids an export to get wrong.
+
+*Derives from:* INT-0002
+
+**origin**: ai · **verification**: With the four provenance flags given, the output's provenance lines carry the stated values, and no git command is run.
+<!-- tl:end -->
+
+
+<!-- tl:item UR-0006 -->
+**UR-0006 — The tool runs where there are no processes** — `user_requirement`, status `proposed`
+
+> On a platform that cannot start a process, such as Python under Pyodide in a browser, the tool still reaches tl and tl-compose, and every output is produced exactly as it is from a terminal.
+
+*Rationale:* The editor runs Python in a Web Worker under Pyodide, which has no fork and no exec. A tool that can only spawn a command cannot run there at all.
+
+*Derives from:* INT-0002
+
+**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command.
+<!-- tl:end -->
+
+
 
 ## System requirements
 
@@ -123,7 +173,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:item SR-0001 -->
 **SR-0001 — The entry point is decided by the graph, and the tool is run as a command** — `system_requirement`, status `implemented`
 
-> A graph whose configuration declares sources is read through tl-compose; any other through tl. The tool is found beside this package's interpreter first and on the path second, and is run as a command with -C pointing at the graph. Its modules are never imported.
+> A graph whose configuration declares sources is read through tl-compose; any other through tl. The tool is found beside this package's interpreter first and on the path second, and is run as a command with -C pointing at the graph. Its modules are never imported for their functions. On a platform without processes the console entry point the package declares is called in-process instead (SR-0014).
 
 *Rationale:* Over a composed graph the core command exits cleanly and writes a borrowed clause as its synthetic uid alone, dropping the reference number a conformance document exists to carry. The command line is the surface the tool publishes; its modules move between releases, and an import that worked last month is how a sibling package stopped starting.
 
@@ -254,6 +304,48 @@ How the tool does it. Each implements a user requirement; several read a clause 
 **origin**: ai · **priority**: should · **verification**: Each format writes a file that opens; --folder unpacks the vault; two runs over one graph are byte-identical; a directory without a graph gives one line on stderr and exit 1; --folder on xlsx exits 2. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:288caa80a8c8f4f9faae9bcdd26baf94e5183f2ecbb520431f90e1ddd4d27b9c
 <!-- tl:end -->
 
+<!-- tl:item SR-0012 -->
+**SR-0012 — The blocks output is the document's structure as JSON** — `system_requirement`, status `proposed`
+
+> The blocks format writes one JSON document holding the provenance and the list of blocks the Word and HTML outputs are built from, in order. Each block carries its text and, where present, its heading level, whether it is a quotation, small print or front matter, whether it opens a group, its subtitle, its item's identifier, type and status, and its table's header and rows. Absent fields are omitted. The prose options of the document formats apply to it.
+
+*Rationale:* The same list the two document writers consume, so a front end laying out pages from it cannot disagree with them about the document. JSON because every front end reads it and nothing here has to be invented.
+
+*Implements:* UR-0004
+*Relates:* SR-0008
+
+**origin**: ai · **priority**: must · **verification**: tl-transform blocks over the fixture yields JSON whose blocks list has one entry with an item field per item, whose headings agree with the docx output, and whose provenance matches the other outputs.
+<!-- tl:end -->
+
+
+<!-- tl:item SR-0013 -->
+**SR-0013 — Provenance flags replace the git reading when given** — `system_requirement`, status `proposed`
+
+> The options --repository, --ref, --commit and --tree state the provenance. When any of them is given, git is not run; an unstated ref or commit is none, and an unstated tree is not under version control. --tree accepts clean, dirty and untracked, written into the output in the words the git reading uses.
+
+*Rationale:* Four flags rather than one blob, because a caller reads them back in a shell history. Any one of them given means the caller knows better than git, so git is not asked at all rather than merged with what was stated.
+
+*Implements:* UR-0005
+*Refines:* SR-0004
+
+**origin**: ai · **priority**: must · **verification**: Run over a git working tree with --repository x/y --ref v1 --commit abc --tree clean, the output names x/y, v1, abc and clean; run with --repository alone, ref and commit read none and the tree reads not under version control.
+<!-- tl:end -->
+
+
+<!-- tl:item SR-0014 -->
+**SR-0014 — Without processes, the tool calls the console entry point the package declares** — `system_requirement`, status `proposed`
+
+> Where the platform reports itself as emscripten, or a process cannot be started, the tool loads the console entry point that throughline or throughline-compose declares in its package metadata under the name tl or tl-compose, calls it in-process with the same argument vector, and captures its standard output and error. A SystemExit is read as the exit code. Everywhere else the command is spawned as SR-0001 says.
+
+*Rationale:* The console entry point is declared in the package's own metadata and is what the tl command itself runs, so calling it is the command by another route. It is not an import of the tool's modules for their functions. Kept to platforms without processes, so on a terminal the contract of SR-0001 is unchanged.
+
+*Implements:* UR-0006
+*Refines:* SR-0001
+
+**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here.
+<!-- tl:end -->
+
+
 
 ## Traceability
 
@@ -265,6 +357,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 | UR-0001 | Produce an output from a working tree with one command | SR-0010, SR-0011 |
 | UR-0002 | The same six forms the editor offers | SR-0001, SR-0002, SR-0003, SR-0005, SR-0006, SR-0007, SR-0008, SR-0009 |
 | UR-0003 | An output says what it was true of | SR-0004 |
+| UR-0004 | A front end that lays out its own pages takes the document's structure from the tool | SR-0012 |
+| UR-0005 | A caller that knows the repository, ref and commit states them | SR-0013 |
+| UR-0006 | The tool runs where there are no processes | SR-0014 |
 <!-- tl:end -->
 
 ### derives from
@@ -273,4 +368,5 @@ How the tool does it. Each implements a user requirement; several read a clause 
 | UID | Title | Derives_from (incoming) |
 |---|---|---|
 | INT-0001 | The outputs of a graph come from the graph on disk, committed or not | UR-0001, UR-0002, UR-0003 |
+| INT-0002 | One implementation of every form, for the command line and the editor alike | UR-0004, UR-0005, UR-0006 |
 <!-- tl:end -->

@@ -1,0 +1,24 @@
+uid: UR-0004
+type: user_requirement
+status: proposed
+title: A front end that lays out its own pages takes the document's structure from
+  the tool
+text: 'A caller that renders a document itself — the editor lays the PDF''s pages
+  out in the browser so its contents can carry page numbers — can ask for the document''s
+  structure as data: the title, the front matter, each heading with its level, each
+  item heading with its identifier, type and status, each quotation, paragraph, attribute
+  line and table, and each appendix with where its source comes from. It is the same
+  structure the Word and HTML outputs are built from.'
+rationale: The editor's PDF is laid out by the browser's own engine so that the page
+  numbers in the contents are the numbers on the pages. That cannot be done from
+  an HTML file, and it must not be done by the editor reading the tool's Markdown,
+  which is the second reading of the tool's shape this package exists to remove.
+normative: true
+links:
+- target: INT-0002
+  type: derives_from
+attrs:
+  origin: ai
+  verification: The blocks output for the fixture parses as JSON, carries one item
+    entry per item with its identifier, type and status, and matches the headings
+    the docx output carries.

@@ -1,0 +1,16 @@
+uid: INT-0002
+type: intent
+status: proposed
+title: One implementation of every form, for the command line and the editor alike
+text: The forms a graph leaves in — a document, a workbook, a folder of notes — are
+  produced by one implementation, whichever surface asks for them. The throughline
+  editor runs this package as a wheel under Pyodide, so an export from a browser
+  tab and an export from a terminal are the same bytes for the same graph.
+rationale: Before this package existed the editor held its own writers in TypeScript
+  and this package ported them to Python, so there were two implementations of every
+  form and a change to one had to be made in the other or they drifted. The editor
+  already runs tl and tl-compose as unmodified wheels; running this package the same
+  way ends the duplication.
+normative: true
+attrs:
+  origin: ai

@@ -5,7 +5,8 @@ title: The entry point is decided by the graph, and the tool is run as a command
 text: A graph whose configuration declares sources is read through tl-compose; any
   other through tl. The tool is found beside this package's interpreter first and
   on the path second, and is run as a command with -C pointing at the graph. Its
-  modules are never imported.
+  modules are never imported for their functions. On a platform without processes
+  the console entry point the package declares is called in-process instead (SR-0014).
 rationale: Over a composed graph the core command exits cleanly and writes a borrowed
   clause as its synthetic uid alone, dropping the reference number a conformance
   document exists to carry. The command line is the surface the tool publishes; its

@@ -1,0 +1,18 @@
+uid: UR-0005
+type: user_requirement
+status: proposed
+title: A caller that knows the repository, ref and commit states them
+text: A caller that holds the graph's repository, ref, commit and working-tree state
+  — the editor has them from the clone, and has no git to ask — can state them, and
+  the output carries what was stated. Git is not consulted when they are given.
+rationale: Under Pyodide there is no git. Left to itself the tool would report a
+  graph the editor cloned at a known commit as not under version control, which is
+  the one thing SR-0066 in the editor's graph forbids an export to get wrong.
+normative: true
+links:
+- target: INT-0002
+  type: derives_from
+attrs:
+  origin: ai
+  verification: With the four provenance flags given, the output's provenance lines
+    carry the stated values, and no git command is run.

@@ -1,0 +1,23 @@
+uid: SR-0013
+type: system_requirement
+status: proposed
+title: Provenance flags replace the git reading when given
+text: The options --repository, --ref, --commit and --tree state the provenance.
+  When any of them is given, git is not run; an unstated ref or commit is none, and
+  an unstated tree is not under version control. --tree accepts clean, dirty and
+  untracked, written into the output in the words the git reading uses.
+rationale: Four flags rather than one blob, because a caller reads them back in a
+  shell history. Any one of them given means the caller knows better than git, so
+  git is not asked at all rather than merged with what was stated.
+normative: true
+links:
+- target: UR-0005
+  type: implements
+- target: SR-0004
+  type: refines
+attrs:
+  origin: ai
+  priority: must
+  verification: Run over a git working tree with --repository x/y --ref v1 --commit
+    abc --tree clean, the output names x/y, v1, abc and clean; run with --repository
+    alone, ref and commit read none and the tree reads not under version control.
