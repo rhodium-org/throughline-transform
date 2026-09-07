@@ -9,11 +9,16 @@ run over it would exit cleanly and drop every borrowed clause's own reference
 number, which is exactly the identifier a conformance document exists to carry.
 
 The tool is reached as a command, not imported. Its command line is the surface
-it publishes; its modules move between releases.
+it publishes; its modules move between releases. Where the platform has no
+processes — Python under Pyodide in a browser — the console entry point the
+package declares in its own metadata is called in-process instead (SR-0014):
+that entry point is what the ``tl`` command itself runs, so it is the command
+by another route, not an import of the tool's modules for their functions.
 """
 
 from __future__ import annotations
 
+import io
 import json
 import os
 import shutil
@@ -21,6 +26,8 @@ import subprocess
 import sys
 import tempfile
 import tomllib
+from contextlib import redirect_stderr, redirect_stdout
+from importlib.metadata import entry_points
 from pathlib import Path
 from typing import Any
 
@@ -75,17 +82,49 @@ def executable(name: str) -> str:
     raise TransformError(f"{name} is not installed beside this tool nor on the path")
 
 
+def has_processes() -> bool:
+    """Whether this platform can start a process at all."""
+    return sys.platform != "emscripten"
+
+
+def _in_process(name: str, argv: list[str]) -> tuple[int, str, str]:
+    """Call the console entry point the package declares for ``name``.
+
+    Resolved from package metadata, never from a module path written here, so
+    what runs is exactly what the ``tl`` command on a terminal runs.
+    """
+    found = [ep for ep in entry_points(group="console_scripts") if ep.name == name]
+    if not found:
+        raise TransformError(f"no package installed here declares the {name} command")
+    main = found[0].load()
+    out, err = io.StringIO(), io.StringIO()
+    with redirect_stdout(out), redirect_stderr(err):
+        try:
+            code = main(argv)
+        except SystemExit as exc:
+            code = exc.code if isinstance(exc.code, int) else (0 if exc.code is None else 1)
+    return int(code or 0), out.getvalue(), err.getvalue()
+
+
 def run(root: Path, args: list[str], composed: bool) -> str:
     """Run the tool over the graph and hand back what it wrote."""
-    command = [executable("tl-compose" if composed else "tl"), "-C", str(root), *args]
-    try:
-        done = subprocess.run(command, capture_output=True, text=True, encoding="utf-8")
-    except OSError as exc:  # pragma: no cover - the executable check above covers the common case
-        raise TransformError(f"could not run {command[0]}: {exc}") from exc
-    if done.returncode != 0:
-        detail = done.stderr.strip() or done.stdout.strip() or f"exit {done.returncode}"
-        raise TransformError(f"{Path(command[0]).name} {args[0]} failed — {detail}")
-    return done.stdout
+    name = "tl-compose" if composed else "tl"
+    argv = ["-C", str(root), *args]
+    if has_processes():
+        command = [executable(name), *argv]
+        try:
+            done = subprocess.run(command, capture_output=True, text=True, encoding="utf-8")
+            code, stdout, stderr = done.returncode, done.stdout, done.stderr
+        except OSError:
+            # A platform that has an executable but cannot start it: the
+            # entry point is the same command by the other route.
+            code, stdout, stderr = _in_process(name, argv)
+    else:
+        code, stdout, stderr = _in_process(name, argv)
+    if code != 0:
+        detail = stderr.strip() or stdout.strip() or f"exit {code}"
+        raise TransformError(f"{name} {args[0]} failed — {detail}")
+    return stdout
 
 
 def load(root: Path) -> Graph:

@@ -20,6 +20,9 @@ CLEAN = "clean"
 DIRTY = "uncommitted changes"
 UNTRACKED = "not under version control"
 
+#: The words a caller may state the tree in, and what each is written as.
+TREE_WORDS = {"clean": CLEAN, "dirty": DIRTY, "untracked": UNTRACKED}
+
 
 @dataclass(frozen=True)
 class Provenance:
@@ -89,3 +92,26 @@ def provenance_of(root: Path, tool: str) -> Provenance:
     if not commit:
         tree = DIRTY
     return Provenance(repository=repository, ref=ref, commit=commit, tree=tree, tool=tool)
+
+
+def stated(
+    tool: str,
+    repository: str | None,
+    ref: str | None,
+    commit: str | None,
+    tree: str | None,
+) -> Provenance:
+    """Provenance as the caller states it (SR-0013). Git is not consulted.
+
+    A caller that gives any of the four knows better than git — the editor
+    holds them from the clone and has no git to ask — so nothing is merged
+    with a reading; what is unstated is none, and an unstated tree is not
+    under version control.
+    """
+    return Provenance(
+        repository=repository or "graph",
+        ref=ref or "",
+        commit=commit or "",
+        tree=TREE_WORDS[tree] if tree else UNTRACKED,
+        tool=tool,
+    )

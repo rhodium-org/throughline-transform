@@ -58,10 +58,23 @@ second, and is run as a command — its command line is the surface it publishes
 | `xlsx` | The same as sheets, read-only by recommendation with the structure locked and no password. Sorting and filtering stay allowed; a spreadsheet nobody can sort is one nobody can review. |
 | `docx` | A title page with the provenance, a contents field Word fills in, a section per register, a heading per item with its type and status beneath, its words as a quotation, its rationale, its attributes in small print, and one appendix per cited source. |
 | `html` | The same document as one self-contained page with print typography, A4 page rules and a contents list of links. Print it to PDF; the browser numbers the pages. |
+| `blocks` | The document's structure as JSON — the same list of headings, quotations, paragraphs, attribute lines, tables and appendices the Word and HTML outputs are built from — for a front end that lays out its own pages. The editor's PDF is laid out from it. |
 
 Every output carries the repository, ref, commit, working-tree state and tool
 version it was taken from, because an output outlives the tree that made it and
-the first question anyone asks of one is what it was true of.
+the first question anyone asks of one is what it was true of. A caller that
+knows them without git — the editor holds them from its clone — states them with
+`--repository`, `--ref`, `--commit` and `--tree clean|dirty|untracked`, and git
+is then not consulted.
+
+## One implementation, two surfaces
+
+The [throughline editor](https://github.com/rhodium-org/throughline-editor)
+runs this package as a wheel under Pyodide beside `tl` and `tl-compose`, so an
+export from a browser tab and an export from a terminal are the same bytes for
+the same graph at the same commit. Pyodide has no processes, so there the tool
+calls the console entry point `tl` or `tl-compose` declares in its package
+metadata — the same function the command runs — instead of spawning it.
 
 ## Self-hosting
 

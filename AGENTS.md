@@ -37,6 +37,11 @@ Two rules bind every change here:
   output is read in one module, `shape.py` ([`SR-0003`](idd/system-requirements/SR-0003.yml)).
 - **Add no dependency** beyond `throughline` and `throughline-compose`
   ([`SR-0010`](idd/system-requirements/SR-0010.yml)).
+- **The editor runs this package under Pyodide** ([`INT-0002`](idd/intents/INT-0002.yml)).
+  Anything that spawns a process, reads git, or touches the file system outside
+  the output path must keep working with no processes and with provenance stated
+  by the caller (`SR-0013`, `SR-0014`). The `blocks` output is what the editor's
+  PDF layout consumes (`SR-0012`); its field names are a contract.
 
 ```bash
 python -m venv .venv && . .venv/bin/activate

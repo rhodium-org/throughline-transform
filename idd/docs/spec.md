@@ -305,7 +305,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:end -->
 
 <!-- tl:item SR-0012 -->
-**SR-0012 — The blocks output is the document's structure as JSON** — `system_requirement`, status `ratified`
+**SR-0012 — The blocks output is the document's structure as JSON** — `system_requirement`, status `implemented`
 
 > The blocks format writes one JSON document holding the provenance and the list of blocks the Word and HTML outputs are built from, in order. Each block carries its text and, where present, its heading level, whether it is a quotation, small print or front matter, whether it opens a group, its subtitle, its item's identifier, type and status, and its table's header and rows. Absent fields are omitted. The prose options of the document formats apply to it.
 
@@ -319,7 +319,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 
 <!-- tl:item SR-0013 -->
-**SR-0013 — Provenance flags replace the git reading when given** — `system_requirement`, status `ratified`
+**SR-0013 — Provenance flags replace the git reading when given** — `system_requirement`, status `implemented`
 
 > The options --repository, --ref, --commit and --tree state the provenance. When any of them is given, git is not run; an unstated ref or commit is none, and an unstated tree is not under version control. --tree accepts clean, dirty and untracked, written into the output in the words the git reading uses.
 
@@ -333,7 +333,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 
 <!-- tl:item SR-0014 -->
-**SR-0014 — Without processes, the tool calls the console entry point the package declares** — `system_requirement`, status `ratified`
+**SR-0014 — Without processes, the tool calls the console entry point the package declares** — `system_requirement`, status `implemented`
 
 > Where the platform reports itself as emscripten, or a process cannot be started, the tool loads the console entry point that throughline or throughline-compose declares in its package metadata under the name tl or tl-compose, calls it in-process with the same argument vector, and captures its standard output and error. A SystemExit is read as the exit code. Everywhere else the command is spawned as SR-0001 says.
 

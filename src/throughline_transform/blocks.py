@@ -14,6 +14,7 @@ and the attribute line is marked as the small print it is.
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
 
@@ -154,3 +155,29 @@ def as_blocks(
             continue
         blocks.append(Block(text=strip(re.sub(r"^[-*]\s+", "", text)), front=front))
     return blocks
+
+
+def as_dict(block: Block) -> dict:
+    """A block as data, absent fields omitted (SR-0012)."""
+    out: dict = {"text": block.text}
+    if block.heading:
+        out["heading"] = block.heading
+    for flag in ("quote", "small", "front", "group"):
+        if getattr(block, flag):
+            out[flag] = True
+    if block.subtitle:
+        out["subtitle"] = block.subtitle
+    if block.item:
+        out["item"] = dict(block.item)
+    if block.table:
+        out["table"] = {"header": list(block.table["header"]), "rows": [list(r) for r in block.table["rows"]]}
+    return out
+
+
+def to_json(blocks: list[Block], provenance_lines: list[str], provenance: dict) -> str:
+    """The document's structure as one JSON document: the provenance, then the blocks in order."""
+    return json.dumps(
+        {"provenance": provenance, "provenance_lines": provenance_lines, "blocks": [as_dict(b) for b in blocks]},
+        ensure_ascii=False,
+        indent=1,
+    )

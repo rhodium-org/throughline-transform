@@ -1,6 +1,6 @@
 uid: SR-0014
 type: system_requirement
-status: ratified
+status: implemented
 title: Without processes, the tool calls the console entry point the package declares
 text: Where the platform reports itself as emscripten, or a process cannot be started,
   the tool loads the console entry point that throughline or throughline-compose

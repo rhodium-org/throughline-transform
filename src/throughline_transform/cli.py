@@ -8,6 +8,10 @@
     tl-transform xlsx      [-C DIR] [-o FILE] [--split …]
     tl-transform docx      [-C DIR] [-o FILE] [--body …] [--matrix] [--no-stats]
     tl-transform html      [-C DIR] [-o FILE] [--body …] [--matrix] [--no-stats]
+    tl-transform blocks    [-C DIR] [-o FILE] [--body …] [--matrix] [--no-stats]
+
+Any format takes --repository, --ref, --commit and --tree to state the
+provenance instead of reading git (SR-0013).
 
 Exit codes: 0 written · 1 the tool or the file system refused · 2 usage.
 """
@@ -16,24 +20,24 @@ from __future__ import annotations
 
 import argparse
 import sys
-from dataclasses import replace
+from dataclasses import asdict, replace
 from pathlib import Path
 
 from throughline.version import distribution_version as _v
 
 from . import markdown as md
-from .blocks import as_blocks
+from .blocks import as_blocks, to_json
 from .html import to_html
 from .model import Graph, register_titles, source_titles
 from .notes import to_notes
 from .office import to_docx, to_xlsx
 from .package import Entry, archive, unpack, utf8
 from .project import TransformError, find_graph, load
-from .provenance import Provenance, provenance_of
+from .provenance import TREE_WORDS, Provenance, provenance_of, stated
 from .tables import Table, cited_sources, file_name, links_of, per_register, to_csv, whole_graph
 
-FORMATS = ("md", "notes", "csv", "xlsx", "docx", "html")
-PROSE = ("md", "docx", "html")
+FORMATS = ("md", "notes", "csv", "xlsx", "docx", "html", "blocks")
+PROSE = ("md", "docx", "html", "blocks")
 FOLDERS = ("notes", "csv")
 
 
@@ -58,11 +62,19 @@ def build_parser() -> argparse.ArgumentParser:
         "--body",
         choices=("catalog", "table", "both"),
         default="catalog",
-        help="md, docx, html: every item in full, a table of items, or both",
+        help="md, docx, html, blocks: every item in full, a table of items, or both",
     )
-    p.add_argument("--matrix", action="store_true", help="md, docx, html: add a traceability matrix per grounding link")
-    p.add_argument("--no-stats", dest="stats", action="store_false", help="md, docx, html: leave out the tool's summary")
+    p.add_argument("--matrix", action="store_true", help="md, docx, html, blocks: add a traceability matrix per grounding link")
+    p.add_argument("--no-stats", dest="stats", action="store_false", help="md, docx, html, blocks: leave out the tool's summary")
     p.add_argument("--markers", action="store_true", help="md: keep the tool's region markers so `tl docs` can refill the file")
+    p.add_argument("--repository", metavar="OWNER/NAME", help="state the repository instead of reading git")
+    p.add_argument("--ref", metavar="REF", help="state the ref instead of reading git")
+    p.add_argument("--commit", metavar="SHA", help="state the commit instead of reading git")
+    p.add_argument(
+        "--tree",
+        choices=tuple(TREE_WORDS),
+        help="state the working tree's state instead of reading git",
+    )
     p.add_argument(
         "--split",
         choices=("one", "per-register"),
@@ -92,6 +104,8 @@ def produce(graph: Graph, root: Path, fmt: str, opts: md.Options, provenance: Pr
         blocks = as_blocks(text, register_titles(graph), source_titles(graph))
         if fmt == "docx":
             return to_docx(blocks), f"{stem}.docx"
+        if fmt == "blocks":
+            return utf8(to_json(blocks, provenance.lines(), asdict(provenance))), f"{stem}-blocks.json"
         return utf8(to_html(blocks, provenance)), f"{stem}.html"
 
     if fmt == "notes":
@@ -140,7 +154,11 @@ def main(argv: list[str] | None = None) -> int:
     try:
         root = find_graph(args.directory)
         graph = load(root)
-        provenance = provenance_of(root, graph.tool_version)
+        provenance = (
+            stated(graph.tool_version, args.repository, args.ref, args.commit, args.tree)
+            if any((args.repository, args.ref, args.commit, args.tree))
+            else provenance_of(root, graph.tool_version)
+        )
         result, default = produce(graph, root, args.format, opts, provenance)
         target = write(result, default, args.output, args.folder)
     except (TransformError, OSError, ValueError) as exc:

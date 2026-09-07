@@ -1,6 +1,6 @@
 uid: SR-0012
 type: system_requirement
-status: ratified
+status: implemented
 title: The blocks output is the document's structure as JSON
 text: The blocks format writes one JSON document holding the provenance and the list
   of blocks the Word and HTML outputs are built from, in order. Each block carries
