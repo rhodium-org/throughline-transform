@@ -1,0 +1,27 @@
+uid: SR-0015
+type: system_requirement
+status: proposed
+title: A step that takes longer than a second says so on stderr
+text: The command works in three steps — reading the graph through tl or tl-compose,
+  asking the tool to write the document, and writing the output — and says nothing
+  while a step is quick. When a step has run for a second and not finished, one line
+  on stderr names the step and, for a composed graph, says that its sources may be
+  being fetched. The line is written once per slow step, never on stdout, and never
+  when the platform has no threads, where the caller shows its own progress.
+rationale: Reading a composed graph fetches its sources the first time and can take
+  many seconds with nothing on the screen, which reads as a hang. A message after
+  one second tells the person what is being waited for without adding noise to a
+  run that is quick. Stderr, so a script capturing stdout is unaffected. Skipped
+  where there are no threads because that is Pyodide, and the editor already shows
+  what it is doing.
+normative: true
+links:
+- target: UR-0001
+  type: implements
+attrs:
+  priority: should
+  origin: ai
+  verification: With the tool slowed so that reading the graph takes over a second,
+    stderr carries one line naming that step and stdout is unchanged; with a quick
+    run, stderr is empty; with the platform reported as having no threads, stderr
+    is empty regardless.

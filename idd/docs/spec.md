@@ -17,11 +17,11 @@ follows is this project's own.
 ## Summary
 
 <!-- tl:stats True -->
-- **Items:** 25 — system_requirement 14 · user_requirement 6 · non_goal 3 · intent 2
-- **Links:** 28 — implements 14 · derives_from 6 · satisfies 5 · refines 2 · relates 1
+- **Items:** 26 — system_requirement 15 · user_requirement 6 · non_goal 3 · intent 2
+- **Links:** 29 — implements 15 · derives_from 6 · satisfies 5 · refines 2 · relates 1
 - **Grounding depth:** max 2 · mean 1.4
-- **Most connected:** UR-0002 (9) · INT-0001 (3) · INT-0002 (3)
-- **Degree distribution:** 0 → 3 · 1 → 5 · 2 → 11 · 3 → 5 · 9 → 1
+- **Most connected:** UR-0002 (9) · UR-0001 (4) · INT-0001 (3)
+- **Degree distribution:** 0 → 3 · 1 → 6 · 2 → 11 · 3 → 4 · 4 → 1 · 9 → 1
 <!-- tl:end -->
 
 
@@ -277,7 +277,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: should · **verification**: For the fixtures, one note per item under its register's folder; each note opens with a level-one heading of its identifier and title and a line with its type and status; front matter parses as YAML with the item's properties and no attribute line follows the body; an item that something implements carries an Implements this line naming it as a wikilink; every wikilink names a note in the folder; the TOML brackets are escaped; a clause note is named with a space where the colon was. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:1bef3f4c748adc485b6f989a76d8007763cf21c8ddd0a762a76dd450c2517374
+**origin**: ai · **priority**: should · **verification**: For the fixtures, one note per item under its register's folder; each note opens with a level-one heading of its identifier and title and a line with its type and status; front matter parses as YAML with the item's properties and no attribute line follows the body; an item that something implements carries an Implements this line naming it as a wikilink; every wikilink names a note in the folder; the TOML brackets are escaped; a clause note is named with a space where the colon was. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:c17dbff0d34e2751ca92e03607778359e6cb2beefbfddd6f61483b06c64c6ba2
 <!-- tl:end -->
 
 <!-- tl:item SR-0010 -->
@@ -346,6 +346,18 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:end -->
 
 
+<!-- tl:item SR-0015 -->
+**SR-0015 — A step that takes longer than a second says so on stderr** — `system_requirement`, status `proposed`
+
+> The command works in three steps — reading the graph through tl or tl-compose, asking the tool to write the document, and writing the output — and says nothing while a step is quick. When a step has run for a second and not finished, one line on stderr names the step and, for a composed graph, says that its sources may be being fetched. The line is written once per slow step, never on stdout, and never when the platform has no threads, where the caller shows its own progress.
+
+*Rationale:* Reading a composed graph fetches its sources the first time and can take many seconds with nothing on the screen, which reads as a hang. A message after one second tells the person what is being waited for without adding noise to a run that is quick. Stderr, so a script capturing stdout is unaffected. Skipped where there are no threads because that is Pyodide, and the editor already shows what it is doing.
+
+*Implements:* UR-0001
+
+**priority**: should · **origin**: ai · **verification**: With the tool slowed so that reading the graph takes over a second, stderr carries one line naming that step and stdout is unchanged; with a quick run, stderr is empty; with the platform reported as having no threads, stderr is empty regardless.
+<!-- tl:end -->
+
 
 ## Traceability
 
@@ -354,7 +366,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:matrix incoming:implements links.incoming('implements') -->
 | UID | Title | Implements (incoming) |
 |---|---|---|
-| UR-0001 | Produce an output from a working tree with one command | SR-0010, SR-0011 |
+| UR-0001 | Produce an output from a working tree with one command | SR-0010, SR-0011, SR-0015 |
 | UR-0002 | The same six forms the editor offers | SR-0001, SR-0002, SR-0003, SR-0005, SR-0006, SR-0007, SR-0008, SR-0009 |
 | UR-0003 | An output says what it was true of | SR-0004 |
 | UR-0004 | A front end that lays out its own pages takes the document's structure from the tool | SR-0012 |

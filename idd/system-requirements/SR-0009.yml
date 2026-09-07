@@ -44,4 +44,4 @@ attrs:
     in the folder; the TOML brackets are escaped; a clause note is named with a space
     where the colon was.
   ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:1bef3f4c748adc485b6f989a76d8007763cf21c8ddd0a762a76dd450c2517374
+  ratified_fingerprint: sha256:c17dbff0d34e2751ca92e03607778359e6cb2beefbfddd6f61483b06c64c6ba2
