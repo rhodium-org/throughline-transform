@@ -40,13 +40,13 @@ Why throughline-transform exists. Everything below grounds upward into this.
 <!-- tl:end -->
 
 <!-- tl:item INT-0002 -->
-**INT-0002 — One implementation of every form, for the command line and the editor alike** — `intent`, status `proposed`
+**INT-0002 — One implementation of every form, for the command line and the editor alike** — `intent`, status `ratified`
 
 > The forms a graph leaves in — a document, a workbook, a folder of notes — are produced by one implementation, whichever surface asks for them. The throughline editor runs this package as a wheel under Pyodide, so an export from a browser tab and an export from a terminal are the same bytes for the same graph.
 
 *Rationale:* Before this package existed the editor held its own writers in TypeScript and this package ported them to Python, so there were two implementations of every form and a change to one had to be made in the other or they drifted. The editor already runs tl and tl-compose as unmodified wheels; running this package the same way ends the duplication.
 
-**origin**: ai
+**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:fd7fc42054311923a5d6946802b3e788ca4839e1ade4e1feb13485f66f7a0ba1
 <!-- tl:end -->
 
 
@@ -127,7 +127,7 @@ What a person with a graph on disk can do.
 <!-- tl:end -->
 
 <!-- tl:item UR-0004 -->
-**UR-0004 — A front end that lays out its own pages takes the document's structure from the tool** — `user_requirement`, status `proposed`
+**UR-0004 — A front end that lays out its own pages takes the document's structure from the tool** — `user_requirement`, status `ratified`
 
 > A caller that renders a document itself — the editor lays the PDF's pages out in the browser so its contents can carry page numbers — can ask for the document's structure as data: the title, the front matter, each heading with its level, each item heading with its identifier, type and status, each quotation, paragraph, attribute line and table, and each appendix with where its source comes from. It is the same structure the Word and HTML outputs are built from.
 
@@ -135,12 +135,12 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: The blocks output for the fixture parses as JSON, carries one item entry per item with its identifier, type and status, and matches the headings the docx output carries.
+**origin**: ai · **verification**: The blocks output for the fixture parses as JSON, carries one item entry per item with its identifier, type and status, and matches the headings the docx output carries. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:a3fd3f45e87a3ce64e171eb1fd2a11e45a0aa007ece9f0a24e241f0a45ddc8d1
 <!-- tl:end -->
 
 
 <!-- tl:item UR-0005 -->
-**UR-0005 — A caller that knows the repository, ref and commit states them** — `user_requirement`, status `proposed`
+**UR-0005 — A caller that knows the repository, ref and commit states them** — `user_requirement`, status `ratified`
 
 > A caller that holds the graph's repository, ref, commit and working-tree state — the editor has them from the clone, and has no git to ask — can state them, and the output carries what was stated. Git is not consulted when they are given.
 
@@ -148,12 +148,12 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: With the four provenance flags given, the output's provenance lines carry the stated values, and no git command is run.
+**origin**: ai · **verification**: With the four provenance flags given, the output's provenance lines carry the stated values, and no git command is run. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:dd5ac1f1953237d7c7de847229567eafe015a3300d1e49f31406692dd47c5479
 <!-- tl:end -->
 
 
 <!-- tl:item UR-0006 -->
-**UR-0006 — The tool runs where there are no processes** — `user_requirement`, status `proposed`
+**UR-0006 — The tool runs where there are no processes** — `user_requirement`, status `ratified`
 
 > On a platform that cannot start a process, such as Python under Pyodide in a browser, the tool still reaches tl and tl-compose, and every output is produced exactly as it is from a terminal.
 
@@ -161,7 +161,7 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command.
+**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3888eca1b900b5b05449ee093d3641ce63d26e5041e240b0517bb65e32de641d
 <!-- tl:end -->
 
 
@@ -180,7 +180,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0187
 
-**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:eeec8888b58dbf7e839c7f2a6d9ae27c184bac2a18e4c4d5f9734f515c650e42
+**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:d7e0fd0816f8f13e8fdb2b66ef32fe05ccb47c4147c82609b12da9b58ff7ca37
 <!-- tl:end -->
 
 <!-- tl:item SR-0002 -->
@@ -305,7 +305,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:end -->
 
 <!-- tl:item SR-0012 -->
-**SR-0012 — The blocks output is the document's structure as JSON** — `system_requirement`, status `proposed`
+**SR-0012 — The blocks output is the document's structure as JSON** — `system_requirement`, status `ratified`
 
 > The blocks format writes one JSON document holding the provenance and the list of blocks the Word and HTML outputs are built from, in order. Each block carries its text and, where present, its heading level, whether it is a quotation, small print or front matter, whether it opens a group, its subtitle, its item's identifier, type and status, and its table's header and rows. Absent fields are omitted. The prose options of the document formats apply to it.
 
@@ -314,12 +314,12 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0004
 *Relates:* SR-0008
 
-**origin**: ai · **priority**: must · **verification**: tl-transform blocks over the fixture yields JSON whose blocks list has one entry with an item field per item, whose headings agree with the docx output, and whose provenance matches the other outputs.
+**origin**: ai · **priority**: must · **verification**: tl-transform blocks over the fixture yields JSON whose blocks list has one entry with an item field per item, whose headings agree with the docx output, and whose provenance matches the other outputs. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:8e6c1a1311ddea7b2b9342bccfe5d5f5ea90b7d142a89971b81368e0d0010279
 <!-- tl:end -->
 
 
 <!-- tl:item SR-0013 -->
-**SR-0013 — Provenance flags replace the git reading when given** — `system_requirement`, status `proposed`
+**SR-0013 — Provenance flags replace the git reading when given** — `system_requirement`, status `ratified`
 
 > The options --repository, --ref, --commit and --tree state the provenance. When any of them is given, git is not run; an unstated ref or commit is none, and an unstated tree is not under version control. --tree accepts clean, dirty and untracked, written into the output in the words the git reading uses.
 
@@ -328,12 +328,12 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0005
 *Refines:* SR-0004
 
-**origin**: ai · **priority**: must · **verification**: Run over a git working tree with --repository x/y --ref v1 --commit abc --tree clean, the output names x/y, v1, abc and clean; run with --repository alone, ref and commit read none and the tree reads not under version control.
+**origin**: ai · **priority**: must · **verification**: Run over a git working tree with --repository x/y --ref v1 --commit abc --tree clean, the output names x/y, v1, abc and clean; run with --repository alone, ref and commit read none and the tree reads not under version control. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5270fc2db0a7f1fdb7df3da851c7711c4dc03d8ed2e7b3ce7cd93c8f81ec1563
 <!-- tl:end -->
 
 
 <!-- tl:item SR-0014 -->
-**SR-0014 — Without processes, the tool calls the console entry point the package declares** — `system_requirement`, status `proposed`
+**SR-0014 — Without processes, the tool calls the console entry point the package declares** — `system_requirement`, status `ratified`
 
 > Where the platform reports itself as emscripten, or a process cannot be started, the tool loads the console entry point that throughline or throughline-compose declares in its package metadata under the name tl or tl-compose, calls it in-process with the same argument vector, and captures its standard output and error. A SystemExit is read as the exit code. Everywhere else the command is spawned as SR-0001 says.
 
@@ -342,7 +342,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0006
 *Refines:* SR-0001
 
-**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here.
+**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3f55982a5e7505b84eb345b1c3da6367319c573c7ede94e5672e11ac4d53943d
 <!-- tl:end -->
 
 

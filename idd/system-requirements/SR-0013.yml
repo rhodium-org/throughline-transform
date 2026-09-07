@@ -1,6 +1,6 @@
 uid: SR-0013
 type: system_requirement
-status: proposed
+status: ratified
 title: Provenance flags replace the git reading when given
 text: The options --repository, --ref, --commit and --tree state the provenance.
   When any of them is given, git is not run; an unstated ref or commit is none, and
@@ -21,3 +21,5 @@ attrs:
   verification: Run over a git working tree with --repository x/y --ref v1 --commit
     abc --tree clean, the output names x/y, v1, abc and clean; run with --repository
     alone, ref and commit read none and the tree reads not under version control.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:5270fc2db0a7f1fdb7df3da851c7711c4dc03d8ed2e7b3ce7cd93c8f81ec1563

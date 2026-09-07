@@ -1,6 +1,6 @@
 uid: UR-0006
 type: user_requirement
-status: proposed
+status: ratified
 title: The tool runs where there are no processes
 text: On a platform that cannot start a process, such as Python under Pyodide in
   a browser, the tool still reaches tl and tl-compose, and every output is produced
@@ -15,3 +15,5 @@ attrs:
   origin: ai
   verification: With the platform reported as emscripten, every format for the fixture
     is produced and matches the output produced through the command.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:3888eca1b900b5b05449ee093d3641ce63d26e5041e240b0517bb65e32de641d

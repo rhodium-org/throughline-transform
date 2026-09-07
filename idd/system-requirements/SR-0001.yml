@@ -25,4 +25,4 @@ attrs:
     as src:SR-0001 and mirrors it. On the plain fixture the core command is run.
     Removing the tool from the path produces one line saying so.
   ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:eeec8888b58dbf7e839c7f2a6d9ae27c184bac2a18e4c4d5f9734f515c650e42
+  ratified_fingerprint: sha256:d7e0fd0816f8f13e8fdb2b66ef32fe05ccb47c4147c82609b12da9b58ff7ca37

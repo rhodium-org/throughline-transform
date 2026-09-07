@@ -1,6 +1,6 @@
 uid: UR-0005
 type: user_requirement
-status: proposed
+status: ratified
 title: A caller that knows the repository, ref and commit states them
 text: A caller that holds the graph's repository, ref, commit and working-tree state
   — the editor has them from the clone, and has no git to ask — can state them, and
@@ -16,3 +16,5 @@ attrs:
   origin: ai
   verification: With the four provenance flags given, the output's provenance lines
     carry the stated values, and no git command is run.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:dd5ac1f1953237d7c7de847229567eafe015a3300d1e49f31406692dd47c5479

@@ -1,6 +1,6 @@
 uid: INT-0002
 type: intent
-status: proposed
+status: ratified
 title: One implementation of every form, for the command line and the editor alike
 text: The forms a graph leaves in — a document, a workbook, a folder of notes — are
   produced by one implementation, whichever surface asks for them. The throughline
@@ -14,3 +14,5 @@ rationale: Before this package existed the editor held its own writers in TypeSc
 normative: true
 attrs:
   origin: ai
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:fd7fc42054311923a5d6946802b3e788ca4839e1ade4e1feb13485f66f7a0ba1

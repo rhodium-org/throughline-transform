@@ -1,6 +1,6 @@
 uid: SR-0012
 type: system_requirement
-status: proposed
+status: ratified
 title: The blocks output is the document's structure as JSON
 text: The blocks format writes one JSON document holding the provenance and the list
   of blocks the Word and HTML outputs are built from, in order. Each block carries
@@ -23,3 +23,5 @@ attrs:
   verification: tl-transform blocks over the fixture yields JSON whose blocks list
     has one entry with an item field per item, whose headings agree with the docx
     output, and whose provenance matches the other outputs.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:8e6c1a1311ddea7b2b9342bccfe5d5f5ea90b7d142a89971b81368e0d0010279

@@ -1,6 +1,6 @@
 uid: UR-0004
 type: user_requirement
-status: proposed
+status: ratified
 title: A front end that lays out its own pages takes the document's structure from
   the tool
 text: 'A caller that renders a document itself — the editor lays the PDF''s pages
@@ -22,3 +22,5 @@ attrs:
   verification: The blocks output for the fixture parses as JSON, carries one item
     entry per item with its identifier, type and status, and matches the headings
     the docx output carries.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:a3fd3f45e87a3ce64e171eb1fd2a11e45a0aa007ece9f0a24e241f0a45ddc8d1

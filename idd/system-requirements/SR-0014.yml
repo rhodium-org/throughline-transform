@@ -1,6 +1,6 @@
 uid: SR-0014
 type: system_requirement
-status: proposed
+status: ratified
 title: Without processes, the tool calls the console entry point the package declares
 text: Where the platform reports itself as emscripten, or a process cannot be started,
   the tool loads the console entry point that throughline or throughline-compose
@@ -24,3 +24,5 @@ attrs:
     the fixtures and the outputs equal those produced by spawning the command; the
     entry point is resolved from package metadata, not from a module path written
     here.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:3f55982a5e7505b84eb345b1c3da6367319c573c7ede94e5672e11ac4d53943d
