@@ -347,7 +347,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 
 <!-- tl:item SR-0015 -->
-**SR-0015 — A step that takes longer than a second says so on stderr** — `system_requirement`, status `proposed`
+**SR-0015 — A step that takes longer than a second says so on stderr** — `system_requirement`, status `ratified`
 
 > The command works in three steps — reading the graph through tl or tl-compose, asking the tool to write the document, and writing the output — and says nothing while a step is quick. When a step has run for a second and not finished, one line on stderr names the step and, for a composed graph, says that its sources may be being fetched. The line is written once per slow step, never on stdout, and never when the platform has no threads, where the caller shows its own progress.
 
@@ -355,7 +355,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0001
 
-**priority**: should · **origin**: ai · **verification**: With the tool slowed so that reading the graph takes over a second, stderr carries one line naming that step and stdout is unchanged; with a quick run, stderr is empty; with the platform reported as having no threads, stderr is empty regardless.
+**priority**: should · **origin**: ai · **verification**: With the tool slowed so that reading the graph takes over a second, stderr carries one line naming that step and stdout is unchanged; with a quick run, stderr is empty; with the platform reported as having no threads, stderr is empty regardless. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:46e70c987916faa37c99be0931c98579d70bf2ad5734abcaa5d269a5aaa2c746
 <!-- tl:end -->
 
 

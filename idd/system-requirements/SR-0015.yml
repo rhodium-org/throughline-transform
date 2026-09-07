@@ -1,6 +1,6 @@
 uid: SR-0015
 type: system_requirement
-status: proposed
+status: ratified
 title: A step that takes longer than a second says so on stderr
 text: The command works in three steps — reading the graph through tl or tl-compose,
   asking the tool to write the document, and writing the output — and says nothing
@@ -25,3 +25,5 @@ attrs:
     stderr carries one line naming that step and stdout is unchanged; with a quick
     run, stderr is empty; with the platform reported as having no threads, stderr
     is empty regardless.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:46e70c987916faa37c99be0931c98579d70bf2ad5734abcaa5d269a5aaa2c746
