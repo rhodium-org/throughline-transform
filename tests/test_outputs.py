@@ -235,8 +235,19 @@ def test_notes_are_one_per_item_with_front_matter_and_links(plain_graph: Path):
     sr2 = entries["System requirements/SR-0002.md"].decode()
     assert sr2.startswith('---\nuid: "SR-0002"\n')
     assert 'priority: "should"' in sr2 and '  - "type/system_requirement"' in sr2 and '  - "status/draft"' in sr2
+    # The body is the tool's block reshaped for a note (SR-0009): a heading,
+    # the type and status beneath, no attribute line, the incoming links.
+    body = sr2.split("\n---\n", 1)[1]
+    assert body.startswith("# SR-0002 — Declare it in \\[\\[sources\\]\\]\nsystem requirement · draft\n")
+    assert "**priority**" not in body and "**origin**" not in body
     assert "*Relates:* [[SR-0001]]" in sr2
     assert "*Implements:* [[UR-0002]]" in sr2
+    sr1 = entries["System requirements/SR-0001.md"].decode()
+    assert "*Refines this:* [[SR-0003]]" in sr1 and "*Relates this:* [[SR-0002]]" in sr1
+    ur1 = entries["User requirements/UR-0001.md"].decode()
+    assert "*Implements this:* [[SR-0001]]" in ur1
+    int1 = entries["Intents/INT-0001.md"].decode()
+    assert "*Derives from this:* [[UR-0001]], [[UR-0002]]" in int1
     # The TOML table in prose is escaped rather than becoming a ghost note. The
     # title in the front matter is a quoted YAML string, which the note tool
     # reads as a property, not as a link.
@@ -266,6 +277,9 @@ def test_borrowed_clause_notes_replace_the_colon(composed_graph: Path):
     assert 'uid: "src:SR-0001"' in clause and 'source: "src"' in clause
     citing = entries["vault/System requirements/SR-0001.md"].decode()
     assert "[[src SR-0001|src:SR-0001]]" in citing
+    # The clause shows which local items claim it.
+    assert "*Satisfies this:* [[SR-0001]]" in clause
+    assert clause.split("\n---\n", 1)[1].startswith("# src:SR-0001 — ")
     assert note_name("asvs:SR-0255") == "asvs SR-0255"
 
 

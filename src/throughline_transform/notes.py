@@ -10,7 +10,10 @@ clause of an adopted source, and an About note carrying the provenance.
 The prose is the tool's. The catalogue is written once and cut here at the
 item line, so the words in a note are the words ``tl docs`` publishes. What is
 added is what the tool has no view on: file boundaries, YAML front matter the
-note tool reads as properties, and link syntax.
+note tool reads as properties, link syntax, and the body reshaped for a note —
+the item line as the note's heading, the attribute line left to the front
+matter, and the incoming links written out so a reader sees what rests on the
+item without opening a pane (SR-0009, reversed on first use in Obsidian).
 """
 
 from __future__ import annotations
@@ -22,7 +25,7 @@ from dataclasses import dataclass, field
 from .model import Graph, Item, prefix_of, split_borrowed
 from .package import Entry, utf8
 from .provenance import Provenance
-from .shape import IDENTIFIER, ITEM_LINE
+from .shape import ATTRS_LINE, IDENTIFIER, ITEM_LINE
 
 _HEADING = re.compile(r"^#{1,3}\s+(.*)$")
 
@@ -150,6 +153,54 @@ def wikilink(line: str, own: str, names: dict[str, str]) -> str:
     return IDENTIFIER.sub(link, line)
 
 
+def _link(identifier: str, names: dict[str, str]) -> str:
+    name = names[identifier]
+    return f"[[{identifier}]]" if name == identifier else f"[[{name}|{identifier}]]"
+
+
+def _label(link_type: str) -> str:
+    """The tool's own label for a link type — ``derives_from`` -> ``Derives from``."""
+    return link_type.replace("_", " ").capitalize()
+
+
+def note_body(block: NoteBlock, graph: Graph, names: dict[str, str]) -> list[str]:
+    """The tool's block reshaped for a note (SR-0009).
+
+    The item line becomes a level-one heading with the type and status on the
+    line beneath; the words, rationale and outgoing link lines follow as the
+    tool wrote them, wikilinked; the attribute line goes, because the front
+    matter already carries every attribute; then one line per incoming link
+    type names what links to this item, worded as the link type reads with
+    the word "this", so a reader of a requirement sees what rests on it.
+    """
+    head = ITEM_LINE.match(block.lines[0])
+    assert head is not None
+    identifier, reference, title, type_, status = head.groups()
+    # The heading goes through the same link pass as any line: a title that
+    # names another item links to it, and a bracket pair in a title is prose.
+    lines = [
+        wikilink(f"# {identifier}{f' ({reference})' if reference else ''} — {title}", block.id, names),
+        f"{type_.replace('_', ' ')} · {status}",
+    ]
+    for line in block.lines[1:]:
+        if ATTRS_LINE.match(line):
+            continue
+        lines.append(wikilink(line, block.id, names))
+    while lines and not lines[-1]:
+        lines.pop()
+
+    by_type: dict[str, list[str]] = {}
+    for source, link_type in graph.incoming.get(block.id, []):
+        if source in names:
+            by_type.setdefault(link_type, []).append(source)
+    if by_type:
+        lines.append("")
+        for link_type in sorted(by_type):
+            sources = ", ".join(_link(uid, names) for uid in sorted(by_type[link_type]))
+            lines.append(f"*{_label(link_type)} this:* {sources}")
+    return lines
+
+
 def to_notes(markdown: str, graph: Graph, provenance: Provenance, folder: str = "") -> list[Entry]:
     """The notes, as the files of the folder. ``folder`` prefixes every path when set."""
     blocks = blocks_of(markdown)
@@ -166,7 +217,7 @@ def to_notes(markdown: str, graph: Graph, provenance: Provenance, folder: str = 
             raise ValueError(f"the tool wrote {block.id}, which is not in the graph's export")
         head = ITEM_LINE.match(block.lines[0])
         reference = head.group(2) if head else None
-        body = "\n".join(wikilink(line, block.id, names) for line in block.lines)
+        body = "\n".join(note_body(block, graph, names))
         entries.append(
             (
                 f"{prefix}{_folder_of(block, registers)}/{note_name(block.id)}.md",
