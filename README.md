@@ -67,6 +67,11 @@ knows them without git — the editor holds them from its clone — states them 
 `--repository`, `--ref`, `--commit` and `--tree clean|dirty|untracked`, and git
 is then not consulted.
 
+A quick run is silent. When a step — reading the graph, asking the tool to
+write the document, writing the file — has run for a second, one line on
+stderr says which, because a composed graph fetching its sources for the first
+time otherwise reads as a hang.
+
 ## One implementation, two surfaces
 
 The [throughline editor](https://github.com/rhodium-org/throughline-editor)

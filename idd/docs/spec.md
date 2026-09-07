@@ -347,7 +347,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 
 <!-- tl:item SR-0015 -->
-**SR-0015 — A step that takes longer than a second says so on stderr** — `system_requirement`, status `ratified`
+**SR-0015 — A step that takes longer than a second says so on stderr** — `system_requirement`, status `implemented`
 
 > The command works in three steps — reading the graph through tl or tl-compose, asking the tool to write the document, and writing the output — and says nothing while a step is quick. When a step has run for a second and not finished, one line on stderr names the step and, for a composed graph, says that its sources may be being fetched. The line is written once per slow step, never on stdout, and never when the platform has no threads, where the caller shows its own progress.
 

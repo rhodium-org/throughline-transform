@@ -32,6 +32,7 @@ from .model import Graph, register_titles, source_titles
 from .notes import to_notes
 from .office import to_docx, to_xlsx
 from .package import Entry, archive, unpack, utf8
+from .progress import slow
 from .project import TransformError, find_graph, load
 from .provenance import TREE_WORDS, Provenance, provenance_of, stated
 from .tables import Table, cited_sources, file_name, links_of, per_register, to_csv, whole_graph
@@ -160,7 +161,8 @@ def main(argv: list[str] | None = None) -> int:
             else provenance_of(root, graph.tool_version)
         )
         result, default = produce(graph, root, args.format, opts, provenance)
-        target = write(result, default, args.output, args.folder)
+        with slow(f"still writing {args.output or default}…"):
+            target = write(result, default, args.output, args.folder)
     except (TransformError, OSError, ValueError) as exc:
         print(f"tl-transform: {exc}", file=sys.stderr)
         return 1

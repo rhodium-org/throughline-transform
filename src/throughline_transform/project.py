@@ -32,6 +32,7 @@ from pathlib import Path
 from typing import Any
 
 from .model import Graph, index
+from .progress import slow
 
 CONFIG = "throughline.toml"
 
@@ -127,10 +128,16 @@ def run(root: Path, args: list[str], composed: bool) -> str:
     return stdout
 
 
+def _tool(composed: bool) -> str:
+    return "tl-compose" if composed else "tl"
+
+
 def load(root: Path) -> Graph:
     """The graph, as the tool exports it."""
     composed = is_composed(root)
-    raw: dict[str, Any] = json.loads(run(root, ["dump"], composed))
+    fetching = " — its sources may be being fetched" if composed else ""
+    with slow(f"still reading the graph with {_tool(composed)}{fetching}…"):
+        raw: dict[str, Any] = json.loads(run(root, ["dump"], composed))
     return index(raw, composed)
 
 
@@ -143,5 +150,6 @@ def docs(root: Path, document: str, composed: bool) -> str:
     with tempfile.TemporaryDirectory(prefix="tl-transform-") as scratch:
         path = Path(scratch) / "document.md"
         path.write_text(document, encoding="utf-8")
-        run(root, ["docs", str(path)], composed)
+        with slow(f"still asking {_tool(composed)} to write the document…"):
+            run(root, ["docs", str(path)], composed)
         return path.read_text(encoding="utf-8")

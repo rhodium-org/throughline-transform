@@ -1,6 +1,6 @@
 uid: SR-0015
 type: system_requirement
-status: ratified
+status: implemented
 title: A step that takes longer than a second says so on stderr
 text: The command works in three steps — reading the graph through tl or tl-compose,
   asking the tool to write the document, and writing the output — and says nothing

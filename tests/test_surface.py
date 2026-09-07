@@ -133,3 +133,51 @@ def test_a_failing_tool_is_reported_in_process(tmp_path: Path, monkeypatch: pyte
     with pytest.raises(project.TransformError) as exc:
         project.run(tmp_path, ["dump"], composed=False)
     assert "tl dump failed" in str(exc.value)
+
+
+# --- a word when a step is slow (SR-0015) -----------------------------------
+
+
+def _capture(capsys, argv):
+    code = main(argv)
+    out = capsys.readouterr()
+    return code, out.out, out.err
+
+
+def test_a_quick_run_says_nothing_on_stderr(plain_graph: Path, tmp_path: Path, capsys: pytest.CaptureFixture):
+    code, out, err = _capture(capsys, ["md", "-C", str(plain_graph), "-o", str(tmp_path / "q.md")])
+    assert code == 0 and err == "" and str(tmp_path / "q.md") in out
+
+
+def test_a_slow_step_is_named_once_on_stderr(composed_graph: Path, tmp_path: Path, capsys: pytest.CaptureFixture, monkeypatch: pytest.MonkeyPatch):
+    from throughline_transform import progress
+
+    monkeypatch.setattr(progress, "SLOW_AFTER", 0.2)
+    real = subprocess.run
+
+    def dawdle(cmd, *a, **k):
+        if "dump" in cmd:
+            import time
+
+            time.sleep(0.5)
+        return real(cmd, *a, **k)
+
+    monkeypatch.setattr(subprocess, "run", dawdle)
+    code, out, err = _capture(capsys, ["md", "-C", str(composed_graph), "-o", str(tmp_path / "s.md")])
+    assert code == 0
+    # Once per slow step: the reading step was made slow, and with the
+    # threshold this low the docs step over a composed graph may be too.
+    assert err.startswith("tl-transform: still reading the graph with tl-compose — its sources may be being fetched")
+    assert err.count("still reading") == 1
+    assert all(line.startswith("tl-transform: still ") for line in err.splitlines())
+    assert str(tmp_path / "s.md") in out
+
+
+def test_no_threads_means_no_feedback(composed_graph: Path, tmp_path: Path, capsys: pytest.CaptureFixture, monkeypatch: pytest.MonkeyPatch):
+    from throughline_transform import progress
+
+    monkeypatch.setattr(progress, "SLOW_AFTER", 0.05)
+    monkeypatch.setattr(sys, "platform", "emscripten")
+    assert not progress.has_threads()
+    code, _, err = _capture(capsys, ["notes", "-C", str(composed_graph), "-o", str(tmp_path / "n.zip"), "--repository", "r"])
+    assert code == 0 and err == ""
