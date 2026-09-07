@@ -1,0 +1,30 @@
+uid: SR-0009
+type: system_requirement
+status: ratified
+title: A notes output is one note per item, cut from the catalogue, with wikilinks
+text: The catalogue and the mirrored clauses are written once and cut at the item
+  line into one Markdown note per item, in a folder per register named by the register's
+  title; cited clauses go under sources, one folder per namespace, with the colon
+  of the identifier replaced by a space in the file name. Each note opens with YAML
+  front matter holding type, status, normative flag and attributes as properties,
+  the title as an alias, and a tag for the type and one for the status. Every identifier
+  that names a note becomes a wikilink; a clause link shows the identifier the tool
+  wrote as its text. A bracket pair the tool wrote in prose is escaped. An About
+  note carries the provenance.
+rationale: The same shape the editor produces, so a vault from either opens the same
+  way. The colon is replaced because a note tool refuses one in a name and links
+  by basename across the whole vault. Brackets in prose are escaped because an item
+  that says declare it in [[sources]] would otherwise draw a ghost note.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+attrs:
+  origin: ai
+  priority: should
+  verification: For the fixtures, one note per item under its register's folder,
+    front matter that parses as YAML with the item's properties, every wikilink naming
+    a note in the folder, the TOML brackets escaped, and a clause note named with
+    a space where the colon was.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:1bef3f4c748adc485b6f989a76d8007763cf21c8ddd0a762a76dd450c2517374

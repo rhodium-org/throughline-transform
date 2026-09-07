@@ -1,0 +1,23 @@
+uid: SR-0004
+type: system_requirement
+status: ratified
+title: Provenance is read from git and judged over the graph alone
+text: The repository name is read from the origin remote, or failing that the top-level
+  directory's name; the ref from HEAD; the commit from HEAD; and cleanliness from
+  git status over the graph's directory only. Without a repository the tree is reported
+  as not under version control. Without a commit it is reported as holding uncommitted
+  changes.
+rationale: Judged over the graph's directory, not the whole repository, because an
+  output is of the graph and a change elsewhere does not alter what it says.
+normative: true
+links:
+- target: UR-0003
+  type: implements
+attrs:
+  origin: ai
+  priority: must
+  verification: A fixture copied into a repository reports clean; after an edit to
+    one item it reports uncommitted changes with the same commit; outside git it
+    reports not under version control with no ref and no commit.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:249b07d7ebede023ddc29df6e3f265616758b185927a43ed4619fe832c3ad6ed

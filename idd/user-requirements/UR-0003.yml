@@ -1,0 +1,20 @@
+uid: UR-0003
+type: user_requirement
+status: ratified
+title: An output says what it was true of
+text: Every output names the repository, the ref, the commit and the tool that produced
+  it, and says whether the working tree was clean, had uncommitted changes, or was
+  not under version control.
+rationale: An output outlives the tree that made it. An output of an uncommitted
+  graph is useful and must say what it is, because a reader holding the file cannot
+  tell.
+normative: true
+links:
+- target: INT-0001
+  type: derives_from
+attrs:
+  origin: ai
+  verification: The provenance lines of an output from a clean tree, a tree with
+    an edit, and a folder outside git read differently, and each is right.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:5874c3937f9d7fc47b61fe150059ea6b758f08f0673cbcb40eacb1e1dbbd285c

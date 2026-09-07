@@ -1,0 +1,26 @@
+uid: SR-0008
+type: system_requirement
+status: ratified
+title: A document output reads as a document
+text: The Word and HTML outputs open with a title page naming the provenance, then
+  a contents list, then a section per register with a heading per item carrying its
+  identifier and title, its type and status beneath, its words as a quotation, its
+  rationale, and its attributes in smaller type. Cited clauses follow as one appendix
+  per source with where the source comes from beneath its title. The Word contents
+  is a field Word fills in. The HTML contents is a list of links; page numbers are
+  the browser's to print.
+rationale: The structure is read from the shape of the tool's Markdown (SR-0003),
+  never rendered from the graph. Page numbers in HTML would need a paged-media engine
+  no browser ships for print; the browser's own header and footer number the pages.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+attrs:
+  origin: ai
+  priority: should
+  verification: The Word document carries Heading2 through Heading4 styles, a TOC
+    field, and a page break per section. The HTML page holds one section per item,
+    a contents list of anchors, and an A4 page rule.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:a7d75e08596a7b76fa757dff4add5375f45f34699229f7da388f75879567939b

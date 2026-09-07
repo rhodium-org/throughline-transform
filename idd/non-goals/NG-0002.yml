@@ -1,0 +1,13 @@
+uid: NG-0002
+type: non_goal
+status: ratified
+title: No PDF writer
+text: This tool ships no PDF renderer. The print-ready HTML output is what a browser
+  prints to PDF.
+rationale: A PDF library is the largest dependency this package could take, for a
+  format every browser already produces with a renderer maintained by someone else.
+normative: true
+attrs:
+  origin: ai
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:d94996ab16dfb87585262313cfd3acd1cada6b19c9d2a38abd4bdc9b655c7bfe

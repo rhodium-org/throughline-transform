@@ -1,0 +1,13 @@
+uid: NG-0003
+type: non_goal
+status: ratified
+title: No server and no user interface
+text: This tool is a command run over a directory. It listens on nothing, serves
+  nothing and opens no window.
+rationale: The editor is the interactive surface for this family. A second one here
+  would be a second implementation to keep in step.
+normative: true
+attrs:
+  origin: ai
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:a162c86b2df6460a5be7c61c68d3eb7694a4cb46c3d8fb4aae660cca4c0e9dfe

@@ -1,0 +1,24 @@
+uid: SR-0011
+type: system_requirement
+status: ratified
+title: One file per run, a folder when asked, the same bytes for the same graph
+text: Every format writes one file. The notes and csv outputs are a zip by default,
+  or the files written into a folder with --folder. When no name is given one is
+  chosen from the provenance. Zip timestamps are fixed at the format's epoch, so
+  the same graph exported twice gives identical bytes. A path that would escape the
+  folder is refused. A wrong directory, a tool that refuses, or a file that cannot
+  be written is one line on stderr and exit code 1; a usage error is exit code 2.
+rationale: An output that differs only in when it was taken cannot be compared with
+  the one before it, and comparing them is what people do with a specification.
+normative: true
+links:
+- target: UR-0001
+  type: implements
+attrs:
+  origin: ai
+  priority: should
+  verification: Each format writes a file that opens; --folder unpacks the vault;
+    two runs over one graph are byte-identical; a directory without a graph gives
+    one line on stderr and exit 1; --folder on xlsx exits 2.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:288caa80a8c8f4f9faae9bcdd26baf94e5183f2ecbb520431f90e1ddd4d27b9c

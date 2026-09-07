@@ -1,0 +1,102 @@
+[project]
+name = "throughline-transform"
+format_version = 3
+
+# Root item types may exist ungrounded; everything else must reach a root
+# through a grounding link (the scope-avalanche grounding layer). A non_goal is
+# a root but NOT a delivery root: it is negative space, so nothing derives from
+# it and it is never flagged 'unserved'.
+# throughline-transform is a client of throughline: every word of an item in an
+# output is written by `tl docs`, and the structure comes from `tl dump`. Adopting
+# throughline's own graph as a pinned source lets a requirement here point at the
+# upstream clause it reads — `satisfies: tl:SR-0111` for the catalogue directive —
+# so the dependency is a fact the validator holds rather than prose in a rationale.
+# The namespace is 'tl', the name the tool answers to. subdir is 'idd' because
+# throughline keeps its graph there. A moved ref is NOT refetched: bumping this
+# needs the cached tree for the old ref cleared.
+[[sources]]
+namespace = "tl"
+url = "https://github.com/rhodium-org/throughline"
+ref = "v2.2.0"
+subdir = "idd"
+
+# Published documents: `tl-compose docs` renders idd/docs/spec.md from the graph
+# and `docs --check` gates its freshness; with paths set, a live normative item no
+# document names is reported by `check --strict`.
+[docs]
+paths = ["docs/*.md"]
+
+[grounding]
+root_types = ["intent", "non_goal"]
+# A non_goal is a root but not a delivery root: it is negative space.
+delivery_roots = ["intent"]
+ground_link_types = ["derives_from", "implements"]
+ai_origins = ["ai", "hybrid"]
+
+[types.intent]
+attrs.origin = { type = "enum", values = ["human", "ai", "hybrid"] }
+
+[types.non_goal]
+attrs.origin = { type = "enum", values = ["human", "ai", "hybrid"] }
+
+[types.user_requirement]
+attrs.origin = { type = "enum", values = ["human", "ai", "hybrid"] }
+attrs.verification = { type = "string" }
+
+[types.system_requirement]
+attrs.origin = { type = "enum", values = ["human", "ai", "hybrid"] }
+attrs.priority = { type = "enum", values = ["undecided", "must", "should", "could"], normative = true }
+attrs.verification = { type = "string" }
+
+[links]
+# satisfies is the borrowed-clause link: a requirement here reads a clause of the
+# source's, and the reference is resolved rather than asserted.
+types = ["derives_from", "implements", "refines", "relates", "satisfies", "excludes"]
+
+[link_rules]
+derives_from = { from = ["user_requirement"], to = ["intent"] }
+implements   = { from = ["system_requirement"], to = ["user_requirement"] }
+refines      = { from = ["system_requirement", "user_requirement"], to = ["system_requirement", "user_requirement"] }
+satisfies    = { from = ["system_requirement"], to = ["system_requirement"] }
+excludes     = { from = ["non_goal"], to = ["system_requirement"] }
+
+[status]
+# draft = actively moving toward approval; deferred = acknowledged and grounded
+# but deliberately parked (a backlog wish-list item, not on the active front).
+values = ["proposed", "draft", "deferred", "approved", "ratified", "implemented",
+          "verified", "suspect", "rejected", "deleted"]
+
+# Semantic status roles (SR-0131): which declared status plays each role the
+# tool's operations act on — `tl new` births at 'initial', `tl ratify` writes
+# 'ratified', `tl invalidate` writes 'invalidated' and reads 'invalidated' +
+# 'tombstone' as dead, `tl delete` writes 'tombstone'. Operations resolve status
+# through these roles, never a literal, so a project renames a status freely by
+# editing here. Delete this table only if you drive every status move by hand.
+[status.roles]
+initial = "draft"
+proposed = "proposed"
+ratified = "ratified"
+invalidated = "rejected"
+suspect = "suspect"
+tombstone = "deleted"
+
+# Allowed status moves (SR-0083). `tl check` compares each item against its
+# status in the previous commit and flags any change these do not permit. Delete
+# this table to leave every status freely reachable.
+# Every live status keeps a route to 'ratified' (SR-0150) — in particular the two
+# statuses below 'proposed' can move back to it, so scope that was authored or
+# parked without ratification can still be put forward for a human to accept.
+# Every live status also keeps a route to 'suspect' (SR-0175), so that an item
+# whose grounding is withdrawn can be flagged wherever it currently sits — the
+# statuses below 'approved' hold the items whose grounding is least settled.
+[transitions]
+proposed    = ["draft", "approved", "ratified", "deferred", "suspect", "rejected", "deleted"]
+draft       = ["proposed", "approved", "deferred", "suspect", "rejected", "deleted"]
+deferred    = ["proposed", "draft", "approved", "suspect", "rejected", "deleted"]
+approved    = ["ratified", "implemented", "deferred", "suspect", "rejected", "deleted"]
+ratified    = ["implemented", "suspect", "rejected", "deleted"]
+implemented = ["verified", "suspect", "rejected", "deleted"]
+verified    = ["implemented", "suspect", "deleted"]
+suspect     = ["approved", "ratified", "implemented", "verified", "rejected", "deleted"]
+rejected    = ["draft", "deleted"]
+

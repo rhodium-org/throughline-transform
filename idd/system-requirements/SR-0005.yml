@@ -1,0 +1,22 @@
+uid: SR-0005
+type: system_requirement
+status: ratified
+title: A tabular output is one row per item, over the columns the graph declares
+text: csv and xlsx put each item on a row. The columns are the uid, register, type,
+  status, title, text, rationale and normative flag every item has, then each attribute
+  any item in the table carries, then one column per link type listing the targets.
+  The column set is read from the tool's export, never fixed here. One table for
+  everything, or one per register with only the columns its own items use.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+- target: tl:SR-0055
+  type: satisfies
+attrs:
+  origin: ai
+  priority: must
+  verification: An attribute the package has no knowledge of appears as a populated
+    column. Per register, the Intents table carries no priority column.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:67277d2f6dbd425c9176fd872dd8b2e88a4e6be75eb90b8621fcc62c9d274f00

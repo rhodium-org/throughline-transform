@@ -1,0 +1,20 @@
+uid: SR-0006
+type: system_requirement
+status: ratified
+title: A links table names both ends of every link by the sheet each is on
+text: 'Beside the item tables, one table holds one row per link: the sheet and uid
+  it starts from, the link type, and the sheet and uid it points at. A link into
+  an adopted source names the namespace as the sheet. The rows are in item order.'
+rationale: A reviewer follows what rests on what. A links table can be sorted and
+  filtered by either end; a link listed in a cell cannot.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+attrs:
+  origin: ai
+  priority: must
+  verification: Per register, a relates link between two system requirements names
+    System requirements at both ends; a satisfies link into a source names the namespace.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:43c700f598f7814de525dd8e84151adbe8128e9cec9a8996b183b21e5b78540c

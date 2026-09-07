@@ -1,0 +1,21 @@
+uid: SR-0010
+type: system_requirement
+status: ratified
+title: No dependency beyond the throughline family and the standard library
+text: The package depends on throughline and throughline-compose and nothing else.
+  xlsx and docx are written from their own specifications over the standard library's
+  zip module. There is no PDF writer (NG-0002).
+rationale: Every dependency is one more thing to audit for a tool people install
+  with pipx to run over their own requirements. The cost of writing two Office formats
+  by hand is a few hundred lines already proven in the editor.
+normative: true
+links:
+- target: UR-0001
+  type: implements
+attrs:
+  origin: ai
+  priority: must
+  verification: The dependency list in pyproject.toml names the two packages only.
+    The Office outputs open in LibreOffice.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:28f9f34e41dc05bd7f10bf219fe526106ba999073d302c3fe52e85dc31f2b55e

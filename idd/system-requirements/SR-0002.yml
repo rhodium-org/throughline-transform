@@ -1,0 +1,27 @@
+uid: SR-0002
+type: system_requirement
+status: ratified
+title: The Markdown is asked of tl docs over a document of directives
+text: The Markdown output is a document of tl directives — a summary, a table of
+  items, one traceability matrix per grounding link type, a catalogue of every item,
+  and the mirrored clauses of adopted sources when the graph composes — handed to
+  the docs command, written outside the graph, and read back. The region markers
+  are stripped unless asked to stay.
+rationale: The alternative is rendering items here, which NG-0001 refuses. Written
+  outside the graph so an output can never be mistaken for a change to it.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+- target: tl:SR-0111
+  type: satisfies
+- target: tl:SR-0113
+  type: satisfies
+attrs:
+  origin: ai
+  priority: must
+  verification: The Markdown for the fixture holds the catalogue block of every item,
+    a block this package has no code to produce. With --markers the region markers
+    are present; without, none.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:5916267f5d0db1c4daa658ae5659d2d3d805e3cb21e41104f3b829049918293f

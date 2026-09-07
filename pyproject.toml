@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "throughline-transform"
+version = "0.1.0"
+description = "Turn a throughline requirements graph on disk, committed or not, into the forms its readers open: Markdown, a folder of Obsidian notes, CSV, an Excel workbook, a Word document, or a print-ready HTML document. Ships the tl-transform CLI."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Henry J Grech-Cini", email = "henry.grechcini@gmail.com" }]
+keywords = [
+  "requirements",
+  "requirements-management",
+  "export",
+  "obsidian",
+  "docx",
+  "xlsx",
+  "markdown",
+  "traceability",
+  "idd",
+  "intent-driven-development",
+  "throughline",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Documentation",
+  "Topic :: Office/Business",
+]
+# The prose of every output is the tool's own: this package asks `tl docs` for the
+# Markdown and `tl dump` for the structure, and writes nothing of an item itself
+# (SR-0002). `tl:catalog` and `tl:sourced` as they are rendered from 2.2.0 and
+# 0.16.1 are the shapes this package reads (SR-0003); it was written against those
+# releases and the floors say so. compose 0.16.1 requires throughline 2.2.0, so the
+# two floors are one fact stated at both ends.
+dependencies = ["throughline-compose>=0.16.1", "throughline>=2.2.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.urls]
+Homepage = "https://github.com/rhodium-org/throughline-transform"
+Repository = "https://github.com/rhodium-org/throughline-transform"
+Issues = "https://github.com/rhodium-org/throughline-transform/issues"
+
+[project.scripts]
+tl-transform = "throughline_transform.cli:main"
+throughline-transform = "throughline_transform.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

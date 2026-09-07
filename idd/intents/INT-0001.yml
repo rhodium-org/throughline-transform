@@ -1,0 +1,17 @@
+uid: INT-0001
+type: intent
+status: ratified
+title: The outputs of a graph come from the graph on disk, committed or not
+text: A person with a throughline graph on their own machine can produce every form
+  a reader opens — a document, a spreadsheet, a folder of notes — from the working
+  tree as it is, before anything is committed or pushed, with one command. The output
+  says what state the tree was in.
+rationale: The editor produces these outputs from a graph on GitHub. A graph that
+  is not yet committed, or that lives where the editor cannot reach, has no way out.
+  The person who needs the output most often has the graph open on their own disk
+  and wants to see what a reader will see before they commit it.
+normative: true
+attrs:
+  origin: ai
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:5c8c4b4356e989b22048214676015a60315e57254b6ebf8bb963d7948a4ea541

@@ -1,0 +1,22 @@
+uid: UR-0001
+type: user_requirement
+status: ratified
+title: Produce an output from a working tree with one command
+text: From a directory holding a graph, or from any directory beneath it, one command
+  names a format and writes one file, or one folder when asked. It works on a tree
+  with uncommitted changes and on a directory that is not under version control at
+  all.
+rationale: The graph a person is writing is the one they want to see rendered, and
+  it is not yet committed. Requiring a commit first, or a push, puts the check after
+  the decision it should inform.
+normative: true
+links:
+- target: INT-0001
+  type: derives_from
+attrs:
+  origin: ai
+  verification: Run the command on a graph with an uncommitted edit and on a copy
+    outside git. Each produces the file, and each output's provenance says which
+    it was.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:3cf8d1cae9eb2de5c7843800fdd8949c09b35049d262fdac7bd89ce38cf8a773

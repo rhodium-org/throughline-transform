@@ -1,0 +1,22 @@
+uid: UR-0002
+type: user_requirement
+status: ratified
+title: The same six forms the editor offers
+text: 'Markdown, a folder of notes for a note-taking tool such as Obsidian, CSV,
+  an Excel workbook, a Word document, and a print-ready HTML document. Each holds
+  what the editor''s export of the same graph holds: the same items, links, attributes
+  and cited clauses, laid out the same way.'
+rationale: A reader who was handed a workbook from the editor last week and a workbook
+  from this tool today should not be able to tell which made it. Two shapes for one
+  graph would be two things to explain.
+normative: true
+links:
+- target: INT-0001
+  type: derives_from
+attrs:
+  origin: ai
+  verification: For one graph, each output opens in an ordinary reader for that format
+    and lists every item the graph holds. A notes output has one note per item and
+    no wikilink that names no note.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:441c3e12f160a1d6e395b16ef26ee59e3a83f87ec69b89dc1d38727383c57022

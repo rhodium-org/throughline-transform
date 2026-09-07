@@ -1,0 +1,60 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    name: test (${{ matrix.os }}, py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.12"]
+        include:
+          # Prove the supported floor (Python >= 3.11).
+          - os: ubuntu-latest
+            python-version: "3.11"
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Unit tests
+        # The fixture graphs are built by the installed tl, so this also proves
+        # the package reaches the tool beside its own interpreter (SR-0001).
+        run: pytest -q
+
+      - name: The tool over its own graph, every format
+        # Dogfooding: the graph under idd/ composes throughline as a source, so
+        # this is the composed path with real borrowed clauses. Network needed.
+        run: |
+          for f in md notes csv xlsx docx html; do tl-transform $f -C idd -o /tmp/self.$f; done
+          ls -l /tmp/self.*
+
+      - name: Self-host gate (this repo's own requirements must stay grounded)
+        # tl-compose, not bare tl: this graph adopts throughline's own as a
+        # pinned source so a requirement here can point at the upstream clause it
+        # reads. The source is fetched from git, so this step needs network access.
+        run: tl-compose -C idd check --strict --quiet
+
+      - name: Published spec is current
+        # idd/docs/spec.md is rendered from the graph; an item edited without
+        # regenerating it leaves the document quietly wrong. The completeness
+        # half — a live normative item no document names — is reported by the
+        # strict check above, which `[docs] paths` is what switches on.
+        run: tl-compose -C idd docs --check
+
+  # The very round-trip that gates publication, run on every change too, so a
+  # break is found at the commit that caused it and not after the release.
+  sdist-suite:
+    uses: ./.github/workflows/sdist-suite.yml

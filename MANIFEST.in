@@ -1,0 +1,4 @@
+# setuptools' default sdist file set ships modules matching test*.py but not the
+# shared conftest that defines their fixtures, so the shipped suite would error
+# at collection. Ship it so the suite runs green from the sdist.
+include tests/conftest.py

@@ -1,0 +1,27 @@
+uid: SR-0001
+type: system_requirement
+status: ratified
+title: The entry point is decided by the graph, and the tool is run as a command
+text: A graph whose configuration declares sources is read through tl-compose; any
+  other through tl. The tool is found beside this package's interpreter first and
+  on the path second, and is run as a command with -C pointing at the graph. Its
+  modules are never imported.
+rationale: Over a composed graph the core command exits cleanly and writes a borrowed
+  clause as its synthetic uid alone, dropping the reference number a conformance
+  document exists to carry. The command line is the surface the tool publishes; its
+  modules move between releases, and an import that worked last month is how a sibling
+  package stopped starting.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+- target: tl:SR-0187
+  type: satisfies
+attrs:
+  origin: ai
+  priority: must
+  verification: On the composed fixture the Markdown carries the borrowed clause
+    as src:SR-0001 and mirrors it. On the plain fixture the core command is run.
+    Removing the tool from the path produces one line saying so.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:eeec8888b58dbf7e839c7f2a6d9ae27c184bac2a18e4c4d5f9734f515c650e42

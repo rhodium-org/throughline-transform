@@ -1,0 +1,23 @@
+uid: SR-0003
+type: system_requirement
+status: ratified
+title: The tool's shape is read in one place
+text: The item line, the attribute line and the identifier pattern the tool writes
+  are defined once and read by every writer that cuts or reshapes the tool's Markdown.
+  If the tool changes a line, every output falls back the same way.
+rationale: The document formats and the notes both cut the catalogue at the item
+  line. Two definitions of that line is how they would come to disagree about where
+  an item starts.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+- target: tl:SR-0111
+  type: satisfies
+attrs:
+  origin: ai
+  priority: should
+  verification: One module holds the patterns. A search of the package finds no second
+    definition of the item line.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:ce5afe7aa1f654996f709ebb2fcd64b499883ed6d13aa94da32e4064ea156a45

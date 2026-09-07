@@ -1,0 +1,23 @@
+uid: SR-0007
+type: system_requirement
+status: ratified
+title: Cited clauses travel with the export, and the workbook is read-only
+text: The clauses of adopted sources that some item links to travel as one table
+  per source, with the columns those clauses carry. The workbook opens read-only
+  by recommendation with its structure locked and no password, and every sheet still
+  sorts and filters. The csv archive says it cannot be protected.
+rationale: An export is a record handed to people who did not make it. A copy edited
+  on its way round is no longer a record of anything. csv has no protection, so the
+  archive says so rather than leaving a reader to assume.
+normative: true
+links:
+- target: UR-0002
+  type: implements
+attrs:
+  origin: ai
+  priority: should
+  verification: The composed fixture's workbook holds a sheet named by the namespace
+    with exactly the cited clause. The workbook XML carries read-only recommended,
+    structure lock, and sort and filter allowed.
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:8f54e2a4d79e1e2da0bfdc82212ede313e62a42bb6e893358600dbee44d5f9d8
