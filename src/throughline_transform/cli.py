@@ -152,10 +152,14 @@ def main(argv: list[str] | None = None) -> int:
     try:
         root = find_graph(args.directory)
         graph = load(root)
+        # UR-0003: the tool that produced the output, named as tl-ratify names itself —
+        # this package first, then the throughline that read the graph. The dump
+        # records throughline's bare distribution version.
+        producer = f"throughline-transform {_v('throughline-transform')} (throughline {graph.tool_version})"
         provenance = (
-            stated(graph.tool_version, args.repository, args.ref, args.commit, args.tree)
+            stated(producer, args.repository, args.ref, args.commit, args.tree)
             if any((args.repository, args.ref, args.commit, args.tree))
-            else provenance_of(root, graph.tool_version)
+            else provenance_of(root, producer)
         )
         result, default = produce(graph, root, args.format, opts, provenance)
         with slow(f"still writing {args.output or default}…"):

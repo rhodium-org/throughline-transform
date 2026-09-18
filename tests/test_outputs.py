@@ -322,6 +322,15 @@ def test_provenance_reads_git_and_notices_uncommitted_changes(git_graph: Path):
     subprocess.run(["git", "-C", str(git_graph), "checkout", "--", "."], check=True)
 
 
+def test_the_output_names_the_tool_that_produced_it(plain_graph: Path, tmp_path: Path):
+    # UR-0003: "the tool that produced it" is this package, named first, and then the
+    # throughline that read the graph; the dump records only throughline's version.
+    out = tmp_path / "named.md"
+    assert main(["md", "-C", str(plain_graph), "-o", str(out), "--repository", "r"]) == 0
+    line = next(l for l in out.read_text().splitlines() if "Produced by:" in l)
+    assert re.search(r"Produced by: throughline-transform \S+ \(throughline \S+\)$", line), line
+
+
 # --- the command (UR-0001, SR-0011) -----------------------------------------
 
 
