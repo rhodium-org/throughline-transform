@@ -161,7 +161,7 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3888eca1b900b5b05449ee093d3641ce63d26e5041e240b0517bb65e32de641d
+**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:c58882ade187f85235ccc85d98ea7d7f1859bcb737567182d61e74cb62bddcad
 <!-- tl:end -->
 
 
@@ -180,7 +180,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0187
 
-**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:d7e0fd0816f8f13e8fdb2b66ef32fe05ccb47c4147c82609b12da9b58ff7ca37
+**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:1ebf0b8c50fff9eb6d5835723d46b9ee76b1ba5f979859881a061de9a2e321db
 <!-- tl:end -->
 
 <!-- tl:item SR-0002 -->
@@ -289,7 +289,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0001
 
-**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:28f9f34e41dc05bd7f10bf219fe526106ba999073d302c3fe52e85dc31f2b55e
+**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:00a9707d29a3e292d32f3f51131a2c694f166373410220c90234451cc8ce7254
 <!-- tl:end -->
 
 <!-- tl:item SR-0011 -->
@@ -342,7 +342,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0006
 *Refines:* SR-0001
 
-**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3f55982a5e7505b84eb345b1c3da6367319c573c7ede94e5672e11ac4d53943d
+**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:da400e35ac2046d0f707eb3d10147ee37a19c03d21b97e908331b5c4d8291902
 <!-- tl:end -->
 
 

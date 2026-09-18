@@ -25,4 +25,4 @@ attrs:
     entry point is resolved from package metadata, not from a module path written
     here.
   ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:3f55982a5e7505b84eb345b1c3da6367319c573c7ede94e5672e11ac4d53943d
+  ratified_fingerprint: sha256:da400e35ac2046d0f707eb3d10147ee37a19c03d21b97e908331b5c4d8291902

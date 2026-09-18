@@ -16,4 +16,4 @@ attrs:
   verification: With the platform reported as emscripten, every format for the fixture
     is produced and matches the output produced through the command.
   ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:3888eca1b900b5b05449ee093d3641ce63d26e5041e240b0517bb65e32de641d
+  ratified_fingerprint: sha256:c58882ade187f85235ccc85d98ea7d7f1859bcb737567182d61e74cb62bddcad

@@ -18,4 +18,4 @@ attrs:
   verification: The dependency list in pyproject.toml names the two packages only.
     The Office outputs open in LibreOffice.
   ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:28f9f34e41dc05bd7f10bf219fe526106ba999073d302c3fe52e85dc31f2b55e
+  ratified_fingerprint: sha256:00a9707d29a3e292d32f3f51131a2c694f166373410220c90234451cc8ce7254
