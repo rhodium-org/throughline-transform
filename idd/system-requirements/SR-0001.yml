@@ -2,11 +2,12 @@ uid: SR-0001
 type: system_requirement
 status: implemented
 title: The entry point is decided by the graph, and the tool is run as a command
-text: A graph whose configuration declares sources is read through tl-compose; any
-  other through tl. The tool is found beside this package's interpreter first and
-  on the path second, and is run as a command with -C pointing at the graph. Its
-  modules are never imported for their functions. On a platform without processes
-  the console entry point the package declares is called in-process instead (SR-0014).
+text: Every graph is read through tl, which composes a graph that declares sources
+  itself; tl-compose is a second name for the same program. The tool is found beside
+  this package's interpreter first and on the path second, and is run as a command
+  with -C pointing at the graph. Its modules are never imported for their functions.
+  On a platform without processes the console entry point the package declares is
+  called in-process instead (SR-0014).
 rationale: Over a composed graph the core command exits cleanly and writes a borrowed
   clause as its synthetic uid alone, dropping the reference number a conformance
   document exists to carry. The command line is the surface the tool publishes; its
@@ -25,4 +26,4 @@ attrs:
     as src:SR-0001 and mirrors it. On the plain fixture the core command is run.
     Removing the tool from the path produces one line saying so.
   ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:d7e0fd0816f8f13e8fdb2b66ef32fe05ccb47c4147c82609b12da9b58ff7ca37
+  ratified_fingerprint: sha256:1ebf0b8c50fff9eb6d5835723d46b9ee76b1ba5f979859881a061de9a2e321db

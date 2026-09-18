@@ -4,7 +4,7 @@ A [throughline](https://github.com/rhodium-org/throughline) requirements graph o
 disk — committed or not — in the forms its readers open. One command, one file:
 
 ```bash
-pipx install throughline-transform      # pulls tl and tl-compose along too
+pipx install throughline-transform      # pulls tl along too
 
 tl-transform md      -C idd             # Markdown, written by the tool itself
 tl-transform notes   -C idd             # a folder of notes for Obsidian (zip)
@@ -35,16 +35,16 @@ worse than none. That is [`NG-0001`](idd/non-goals/NG-0001.yml).
 **It ships no PDF writer** ([`NG-0002`](idd/non-goals/NG-0002.yml)). Every
 browser prints to PDF with a renderer that is already on the machine.
 
-**It depends on nothing but the family.** `throughline` and
-`throughline-compose`, and the standard library's `zipfile` for the two Office
-formats, which are written from their own specifications.
+**It depends on nothing but the family.** `throughline` alone (composition is
+the Tool's own since 3.11.1), and the standard library's `zipfile` for the two
+Office formats, which are written from their own specifications.
 
 ## Which tool answers
 
-A graph whose `throughline.toml` declares `[[sources]]` is read through
-`tl-compose`; any other through `tl`. That is not cosmetic: over a composed graph
-the core command exits cleanly and writes a borrowed clause as its synthetic uid
-alone, dropping the reference number a conformance document exists to carry.
+Every graph is read through `tl`, which composes a graph that declares
+`[[sources]]` itself, so a borrowed clause is written with the reference number
+a conformance document exists to carry; `tl-compose` is a second name for the
+same program.
 The tool is found beside this package's interpreter first and on the path
 second, and is run as a command — its command line is the surface it publishes.
 
@@ -75,11 +75,11 @@ time otherwise reads as a hang.
 ## One implementation, two surfaces
 
 The [throughline editor](https://github.com/rhodium-org/throughline-editor)
-runs this package as a wheel under Pyodide beside `tl` and `tl-compose`, so an
-export from a browser tab and an export from a terminal are the same bytes for
-the same graph at the same commit. Pyodide has no processes, so there the tool
-calls the console entry point `tl` or `tl-compose` declares in its package
-metadata — the same function the command runs — instead of spawning it.
+runs this package as a wheel under Pyodide beside `tl`, so an export from a
+browser tab and an export from a terminal are the same bytes for the same graph
+at the same commit. Pyodide has no processes, so there the tool calls the
+console entry point `tl` declares in its package metadata — the same function
+the command runs — instead of spawning it.
 
 ## Self-hosting
 

@@ -109,7 +109,7 @@ def _in_process(name: str, argv: list[str]) -> tuple[int, str, str]:
 
 def run(root: Path, args: list[str], composed: bool) -> str:
     """Run the tool over the graph and hand back what it wrote."""
-    name = "tl-compose" if composed else "tl"
+    name = "tl"  # tl composes a graph that declares sources itself (throughline 3.11.1)
     argv = ["-C", str(root), *args]
     if has_processes():
         command = [executable(name), *argv]
@@ -129,7 +129,7 @@ def run(root: Path, args: list[str], composed: bool) -> str:
 
 
 def _tool(composed: bool) -> str:
-    return "tl-compose" if composed else "tl"
+    return "tl"  # tl composes a graph that declares sources itself (throughline 3.11.1)
 
 
 def load(root: Path) -> Graph:

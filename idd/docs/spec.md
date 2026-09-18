@@ -155,13 +155,13 @@ What a person with a graph on disk can do.
 <!-- tl:item UR-0006 -->
 **UR-0006 — The tool runs where there are no processes** — `user_requirement`, status `ratified`
 
-> On a platform that cannot start a process, such as Python under Pyodide in a browser, the tool still reaches tl and tl-compose, and every output is produced exactly as it is from a terminal.
+> On a platform that cannot start a process, such as Python under Pyodide in a browser, the tool still reaches tl, and every output is produced exactly as it is from a terminal.
 
 *Rationale:* The editor runs Python in a Web Worker under Pyodide, which has no fork and no exec. A tool that can only spawn a command cannot run there at all.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3888eca1b900b5b05449ee093d3641ce63d26e5041e240b0517bb65e32de641d
+**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:c58882ade187f85235ccc85d98ea7d7f1859bcb737567182d61e74cb62bddcad
 <!-- tl:end -->
 
 
@@ -173,14 +173,14 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:item SR-0001 -->
 **SR-0001 — The entry point is decided by the graph, and the tool is run as a command** — `system_requirement`, status `implemented`
 
-> A graph whose configuration declares sources is read through tl-compose; any other through tl. The tool is found beside this package's interpreter first and on the path second, and is run as a command with -C pointing at the graph. Its modules are never imported for their functions. On a platform without processes the console entry point the package declares is called in-process instead (SR-0014).
+> Every graph is read through tl, which composes a graph that declares sources itself; tl-compose is a second name for the same program. The tool is found beside this package's interpreter first and on the path second, and is run as a command with -C pointing at the graph. Its modules are never imported for their functions. On a platform without processes the console entry point the package declares is called in-process instead (SR-0014).
 
 *Rationale:* Over a composed graph the core command exits cleanly and writes a borrowed clause as its synthetic uid alone, dropping the reference number a conformance document exists to carry. The command line is the surface the tool publishes; its modules move between releases, and an import that worked last month is how a sibling package stopped starting.
 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0187
 
-**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:d7e0fd0816f8f13e8fdb2b66ef32fe05ccb47c4147c82609b12da9b58ff7ca37
+**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:1ebf0b8c50fff9eb6d5835723d46b9ee76b1ba5f979859881a061de9a2e321db
 <!-- tl:end -->
 
 <!-- tl:item SR-0002 -->
@@ -283,13 +283,13 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:item SR-0010 -->
 **SR-0010 — No dependency beyond the throughline family and the standard library** — `system_requirement`, status `implemented`
 
-> The package depends on throughline and throughline-compose and nothing else. xlsx and docx are written from their own specifications over the standard library's zip module. There is no PDF writer (NG-0002).
+> The package depends on throughline and nothing else. xlsx and docx are written from their own specifications over the standard library's zip module. There is no PDF writer (NG-0002).
 
 *Rationale:* Every dependency is one more thing to audit for a tool people install with pipx to run over their own requirements. The cost of writing two Office formats by hand is a few hundred lines already proven in the editor.
 
 *Implements:* UR-0001
 
-**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:28f9f34e41dc05bd7f10bf219fe526106ba999073d302c3fe52e85dc31f2b55e
+**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:00a9707d29a3e292d32f3f51131a2c694f166373410220c90234451cc8ce7254
 <!-- tl:end -->
 
 <!-- tl:item SR-0011 -->
@@ -335,14 +335,14 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:item SR-0014 -->
 **SR-0014 — Without processes, the tool calls the console entry point the package declares** — `system_requirement`, status `implemented`
 
-> Where the platform reports itself as emscripten, or a process cannot be started, the tool loads the console entry point that throughline or throughline-compose declares in its package metadata under the name tl or tl-compose, calls it in-process with the same argument vector, and captures its standard output and error. A SystemExit is read as the exit code. Everywhere else the command is spawned as SR-0001 says.
+> Where the platform reports itself as emscripten, or a process cannot be started, the tool loads the console entry point that throughline declares in its package metadata under the name tl, calls it in-process with the same argument vector, and captures its standard output and error. A SystemExit is read as the exit code. Everywhere else the command is spawned as SR-0001 says.
 
 *Rationale:* The console entry point is declared in the package's own metadata and is what the tl command itself runs, so calling it is the command by another route. It is not an import of the tool's modules for their functions. Kept to platforms without processes, so on a terminal the contract of SR-0001 is unchanged.
 
 *Implements:* UR-0006
 *Refines:* SR-0001
 
-**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3f55982a5e7505b84eb345b1c3da6367319c573c7ede94e5672e11ac4d53943d
+**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:da400e35ac2046d0f707eb3d10147ee37a19c03d21b97e908331b5c4d8291902
 <!-- tl:end -->
 
 

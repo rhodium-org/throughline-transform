@@ -23,7 +23,7 @@ BIN = Path(sys.executable).parent
 
 
 def _tl(root: Path, *args: str, compose: bool = False) -> str:
-    exe = BIN / ("tl-compose" if compose else "tl")
+    exe = BIN / "tl"  # tl composes a graph that declares sources itself (throughline 3.11.1)
     if not exe.exists():  # pragma: no cover - only when the suite runs outside its venv
         exe = Path(shutil.which(exe.name) or exe.name)
     done = subprocess.run([str(exe), "-C", str(root), *args], capture_output=True, text=True, encoding="utf-8")

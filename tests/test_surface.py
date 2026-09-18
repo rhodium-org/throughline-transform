@@ -167,7 +167,7 @@ def test_a_slow_step_is_named_once_on_stderr(composed_graph: Path, tmp_path: Pat
     assert code == 0
     # Once per slow step: the reading step was made slow, and with the
     # threshold this low the docs step over a composed graph may be too.
-    assert err.startswith("tl-transform: still reading the graph with tl-compose — its sources may be being fetched")
+    assert err.startswith("tl-transform: still reading the graph with tl — its sources may be being fetched")
     assert err.count("still reading") == 1
     assert all(line.startswith("tl-transform: still ") for line in err.splitlines())
     assert str(tmp_path / "s.md") in out

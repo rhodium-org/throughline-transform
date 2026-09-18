@@ -3,10 +3,10 @@ type: system_requirement
 status: implemented
 title: Without processes, the tool calls the console entry point the package declares
 text: Where the platform reports itself as emscripten, or a process cannot be started,
-  the tool loads the console entry point that throughline or throughline-compose
-  declares in its package metadata under the name tl or tl-compose, calls it in-process
-  with the same argument vector, and captures its standard output and error. A SystemExit
-  is read as the exit code. Everywhere else the command is spawned as SR-0001 says.
+  the tool loads the console entry point that throughline declares in its package
+  metadata under the name tl, calls it in-process with the same argument vector,
+  and captures its standard output and error. A SystemExit is read as the exit code.
+  Everywhere else the command is spawned as SR-0001 says.
 rationale: The console entry point is declared in the package's own metadata and
   is what the tl command itself runs, so calling it is the command by another route.
   It is not an import of the tool's modules for their functions. Kept to platforms
@@ -25,4 +25,4 @@ attrs:
     entry point is resolved from package metadata, not from a module path written
     here.
   ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:3f55982a5e7505b84eb345b1c3da6367319c573c7ede94e5672e11ac4d53943d
+  ratified_fingerprint: sha256:da400e35ac2046d0f707eb3d10147ee37a19c03d21b97e908331b5c4d8291902
