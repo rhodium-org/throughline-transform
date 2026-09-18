@@ -43,10 +43,7 @@ FOLDERS = ("notes", "csv")
 
 
 def version_string() -> str:
-    return (
-        f"tl-transform {_v('throughline-transform')} "
-        f"(throughline-compose {_v('throughline-compose')}, throughline {_v('throughline')})"
-    )
+    return f"tl-transform {_v('throughline-transform')} (throughline {_v('throughline')})"
 
 
 def build_parser() -> argparse.ArgumentParser:

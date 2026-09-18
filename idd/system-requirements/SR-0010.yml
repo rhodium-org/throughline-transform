@@ -2,9 +2,9 @@ uid: SR-0010
 type: system_requirement
 status: implemented
 title: No dependency beyond the throughline family and the standard library
-text: The package depends on throughline and throughline-compose and nothing else.
-  xlsx and docx are written from their own specifications over the standard library's
-  zip module. There is no PDF writer (NG-0002).
+text: The package depends on throughline and nothing else. xlsx and docx are written
+  from their own specifications over the standard library's zip module. There is
+  no PDF writer (NG-0002).
 rationale: Every dependency is one more thing to audit for a tool people install
   with pipx to run over their own requirements. The cost of writing two Office formats
   by hand is a few hundred lines already proven in the editor.
