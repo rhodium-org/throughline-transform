@@ -9,8 +9,8 @@ text: The forms a graph leaves in — a document, a workbook, a folder of notes 
 rationale: Before this package existed the editor held its own writers in TypeScript
   and this package ported them to Python, so there were two implementations of every
   form and a change to one had to be made in the other or they drifted. The editor
-  already runs tl and tl-compose as unmodified wheels; running this package the same
-  way ends the duplication.
+  already runs throughline, the tl command, as an unmodified wheel; running this
+  package the same way ends the duplication.
 normative: true
 attrs:
   origin: ai

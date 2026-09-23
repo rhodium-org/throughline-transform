@@ -42,17 +42,17 @@ jobs:
           ls -l /tmp/self.*
 
       - name: Self-host gate (this repo's own requirements must stay grounded)
-        # tl-compose, not bare tl: this graph adopts throughline's own as a
-        # pinned source so a requirement here can point at the upstream clause it
-        # reads. The source is fetched from git, so this step needs network access.
-        run: tl-compose -C idd check --strict --quiet
+        # This graph adopts throughline's own as a pinned source so a requirement
+        # here can point at the upstream clause it reads, and tl composes it. The
+        # source is fetched from git, so this step needs network access.
+        run: tl -C idd check --strict --quiet
 
       - name: Published spec is current
         # idd/docs/spec.md is rendered from the graph; an item edited without
         # regenerating it leaves the document quietly wrong. The completeness
         # half — a live normative item no document names — is reported by the
         # strict check above, which `[docs] paths` is what switches on.
-        run: tl-compose -C idd docs --check
+        run: tl -C idd docs --check
 
   # The very round-trip that gates publication, run on every change too, so a
   # break is found at the commit that caused it and not after the release.

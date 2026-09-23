@@ -12,15 +12,16 @@ format_version = 3
 # upstream clause it reads — `satisfies: tl:SR-0111` for the catalogue directive —
 # so the dependency is a fact the validator holds rather than prose in a rationale.
 # The namespace is 'tl', the name the tool answers to. subdir is 'idd' because
-# throughline keeps its graph there. A moved ref is NOT refetched: bumping this
-# needs the cached tree for the old ref cleared.
+# throughline keeps its graph there. tl picks up a moved ref: it asks the origin
+# what the ref points at now and refetches when it has moved, so bumping this
+# needs no cache cleared.
 [[sources]]
 namespace = "tl"
 url = "https://github.com/rhodium-org/throughline"
 ref = "v2.2.0"
 subdir = "idd"
 
-# Published documents: `tl-compose docs` renders idd/docs/spec.md from the graph
+# Published documents: `tl docs` renders idd/docs/spec.md from the graph
 # and `docs --check` gates its freshness; with paths set, a live normative item no
 # document names is reported by `check --strict`.
 [docs]

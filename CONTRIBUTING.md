@@ -17,22 +17,21 @@ source .venv/bin/activate           # Windows: .venv\Scripts\activate
 python -m pip install -e '.[dev]'
 ```
 
-That pulls [throughline-compose][tlc] and [throughline][tl] along too. Python 3.11
-or later.
+That pulls [throughline][tl] along too. Python 3.11 or later.
 
-### If you're also working on throughline or throughline-compose
+### If you're also working on throughline
 
 Chain the editable installs in a single command so the resolver never reaches
 the package index, then verify every path is your checkout:
 
 ```bash
-pip install -e ../throughline -e ../throughline-compose -e '.[dev]'
-python -c "import throughline as a, throughline_compose as b, throughline_transform as c; \
-[print(m.__file__) for m in (a, b, c)]"
+pip install -e ../throughline -e '.[dev]'
+python -c "import throughline as a, throughline_transform as b; \
+[print(m.__file__) for m in (a, b)]"
 ```
 
-Mind that `tl-transform` runs `tl` and `tl-compose` as commands found beside its
-own interpreter, so the ones in your venv are the ones it uses.
+Mind that `tl-transform` runs `tl` as a command found beside its own
+interpreter, so the one in your venv is the one it uses.
 
 ## Run the tests
 
@@ -49,8 +48,8 @@ This repository manages its own requirements with the family it belongs to — t
 live in [`idd/`](idd) and compose throughline's graph as a pinned source:
 
 ```bash
-tl-compose -C idd check --strict
-tl-compose -C idd docs --check
+tl -C idd check --strict
+tl -C idd docs --check
 ```
 
 ## Making a change
@@ -62,4 +61,3 @@ tl-compose -C idd docs --check
 4. Cite the UID in the commit message.
 
 [tl]: https://github.com/rhodium-org/throughline
-[tlc]: https://github.com/rhodium-org/throughline-compose

@@ -31,7 +31,7 @@ class Item:
     normative: bool | None = None
     links: list[Link] = field(default_factory=list)
     attrs: dict[str, Any] = field(default_factory=dict)
-    #: The namespace a borrowed item came from, as ``tl-compose dump`` states it.
+    #: The namespace a borrowed item came from, as ``tl dump`` states it.
     #: ``None`` on the graph's own items.
     source: str | None = None
 

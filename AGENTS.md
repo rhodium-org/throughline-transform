@@ -11,8 +11,8 @@ that turns a [throughline](https://github.com/rhodium-org/throughline) requireme
 graph on disk — committed or not — into the forms its readers open: Markdown, a
 folder of Obsidian notes, CSV, an Excel workbook, a Word document, or a print-ready
 HTML page. It is compose-aware: a graph that declares `[[sources]]` is read through
-[`tl-compose`](https://github.com/rhodium-org/throughline-compose). It is
-self-hosting: its own requirements live under [`idd/`](idd).
+`tl`, which composes its sources itself. It is self-hosting: its own requirements
+live under [`idd/`](idd).
 
 ## Using tl-transform in a project
 
@@ -29,13 +29,13 @@ handing an output to a person should say the same.
 
 ## Working on this repo
 
-Read [`idd/`](idd) first — run `tl-compose -C idd context` for the generated brief.
+Read [`idd/`](idd) first — run `tl -C idd context` for the generated brief.
 Two rules bind every change here:
 
 - **Never render an item's words.** Every word of an item in an output comes from
   `tl docs` ([`NG-0001`](idd/non-goals/NG-0001.yml)). The shape of the tool's
   output is read in one module, `shape.py` ([`SR-0003`](idd/system-requirements/SR-0003.yml)).
-- **Add no dependency** beyond `throughline` and `throughline-compose`
+- **Add no dependency** beyond `throughline`
   ([`SR-0010`](idd/system-requirements/SR-0010.yml)).
 - **The editor runs this package under Pyodide** ([`INT-0002`](idd/intents/INT-0002.yml)).
   Anything that spawns a process, reads git, or touches the file system outside
@@ -47,8 +47,8 @@ Two rules bind every change here:
 python -m venv .venv && . .venv/bin/activate
 pip install -e ".[dev]"
 pytest -q                                 # the fixture graphs are built by the installed tl
-tl-compose -C idd check --strict          # this repo's own graph — keep it green
-tl-compose -C idd docs --check            # its published spec — regenerate with `docs`
+tl -C idd check --strict                  # this repo's own graph — keep it green
+tl -C idd docs --check                    # its published spec — regenerate with `docs`
 ```
 
 Ground the change in an `idd/` item (create it, and have a human ratify it if

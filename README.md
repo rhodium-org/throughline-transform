@@ -43,8 +43,7 @@ Office formats, which are written from their own specifications.
 
 Every graph is read through `tl`, which composes a graph that declares
 `[[sources]]` itself, so a borrowed clause is written with the reference number
-a conformance document exists to carry; `tl-compose` is a second name for the
-same program.
+a conformance document exists to carry.
 The tool is found beside this package's interpreter first and on the path
 second, and is run as a command — its command line is the surface it publishes.
 
@@ -89,8 +88,8 @@ clause of the tool it reads (`satisfies: tl:SR-0111`) and have the citation
 resolved rather than asserted.
 
 ```bash
-tl-compose -C idd check --strict     # the grounding gate
-tl-compose -C idd docs --check       # idd/docs/spec.md must match the graph
+tl -C idd check --strict             # the grounding gate
+tl -C idd docs --check               # idd/docs/spec.md must match the graph
 tl-transform html -C idd             # and the tool over its own graph
 ```
 

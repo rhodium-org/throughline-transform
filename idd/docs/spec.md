@@ -1,12 +1,12 @@
 # throughline-transform — specification
 
 <!-- Generated from this repository's own requirements graph. Do not edit the
-     blocks between `tl:item` markers by hand — run `tl-compose -C idd docs` and
+     blocks between `tl:item` markers by hand — run `tl -C idd docs` and
      they are rewritten from the graph. The headings and the prose between blocks
      are hand-owned and are left alone.
 
-     `tl-compose -C idd docs --check` fails if any block here has fallen behind the
-     graph, and `tl-compose -C idd check --strict` fails if a live normative item is
+     `tl -C idd docs --check` fails if any block here has fallen behind the
+     graph, and `tl -C idd check --strict` fails if a live normative item is
      missing from this document altogether. -->
 
 This document is the whole of what throughline-transform is built to, rendered
@@ -44,7 +44,7 @@ Why throughline-transform exists. Everything below grounds upward into this.
 
 > The forms a graph leaves in — a document, a workbook, a folder of notes — are produced by one implementation, whichever surface asks for them. The throughline editor runs this package as a wheel under Pyodide, so an export from a browser tab and an export from a terminal are the same bytes for the same graph.
 
-*Rationale:* Before this package existed the editor held its own writers in TypeScript and this package ported them to Python, so there were two implementations of every form and a change to one had to be made in the other or they drifted. The editor already runs tl and tl-compose as unmodified wheels; running this package the same way ends the duplication.
+*Rationale:* Before this package existed the editor held its own writers in TypeScript and this package ported them to Python, so there were two implementations of every form and a change to one had to be made in the other or they drifted. The editor already runs throughline, the tl command, as an unmodified wheel; running this package the same way ends the duplication.
 
 **origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:fd7fc42054311923a5d6946802b3e788ca4839e1ade4e1feb13485f66f7a0ba1
 <!-- tl:end -->

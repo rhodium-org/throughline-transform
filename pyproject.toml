@@ -37,11 +37,11 @@ classifiers = [
 ]
 # The prose of every output is the tool's own: this package asks `tl docs` for the
 # Markdown and `tl dump` for the structure, and writes nothing of an item itself
-# (SR-0002). `tl:catalog` and `tl:sourced` as they are rendered from 2.2.0 and
-# 0.16.1 are the shapes this package reads (SR-0003); it was written against those
-# releases and the floors say so. compose 0.16.1 requires throughline 2.2.0, so the
-# two floors are one fact stated at both ends.
-dependencies = ["throughline>=3.11.1"]  # composition is the Tool's own since 3.11.1 (throughline UR-0037); tl-compose is a second name for tl
+# (SR-0002). `tl:catalog` and `tl:sourced` are the shapes this package reads
+# (SR-0003). It was written against throughline 2.2.0 and throughline-compose
+# 0.16.1; since 3.11.1 composition is the Tool's own (throughline UR-0037), `tl`
+# renders both directives, and throughline is the one floor.
+dependencies = ["throughline>=3.11.1"]  # composition is the Tool's own since 3.11.1 (throughline UR-0037)
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]

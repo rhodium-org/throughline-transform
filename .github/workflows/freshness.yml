@@ -1,9 +1,8 @@
 name: freshness
 
-# throughline and throughline-compose are declared as floors, not locked, so CI
-# resolves whatever PyPI happens to publish. A green check is therefore only true
-# on the day it ran: a release of either can turn this repo red without a commit
-# here. This package reads the shape of what the tool writes (SR-0003), which is
+# throughline is declared as a floor, not locked, so CI resolves whatever PyPI
+# happens to publish. A green check is therefore only true on the day it ran: a
+# release of it can turn this repo red without a commit here. This package reads the shape of what the tool writes (SR-0003), which is
 # exactly the kind of dependency a release can move, so the ceiling job is the
 # one that says so before a contributor meets it.
 
@@ -39,7 +38,7 @@ jobs:
         run: pytest -q
 
       - name: Self-host gate
-        run: tl-compose -C idd check --strict --quiet
+        run: tl -C idd check --strict --quiet
 
   floor:
     name: declared minimum dependencies
@@ -73,4 +72,4 @@ jobs:
         run: pytest -q
 
       - name: Self-host gate
-        run: tl-compose -C idd check --strict --quiet
+        run: tl -C idd check --strict --quiet
