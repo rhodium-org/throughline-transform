@@ -11,7 +11,8 @@
     tl-transform blocks    [-C DIR] [-o FILE] [--body …] [--matrix] [--no-stats]
 
 Any format takes --repository, --ref, --commit and --tree to state the
-provenance instead of reading git (SR-0013).
+provenance instead of reading git (SR-0013), and --only UID[,UID…] to hold
+only the items named, saying how many of how many it holds (SR-0016).
 
 Exit codes: 0 written · 1 the tool or the file system refused · 2 usage.
 """
@@ -20,7 +21,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from dataclasses import asdict, replace
+from dataclasses import replace
 from pathlib import Path
 
 from throughline.version import distribution_version as _v
@@ -28,7 +29,7 @@ from throughline.version import distribution_version as _v
 from . import markdown as md
 from .blocks import as_blocks, to_json
 from .html import to_html
-from .model import Graph, register_titles, source_titles
+from .model import Graph, narrowed, register_titles, source_titles
 from .notes import to_notes
 from .office import to_docx, to_xlsx
 from .package import Entry, archive, unpack, utf8
@@ -79,12 +80,29 @@ def build_parser() -> argparse.ArgumentParser:
         default="one",
         help="csv, xlsx: one table of everything, or one per register",
     )
+    p.add_argument(
+        "--only",
+        action="append",
+        metavar="UID[,UID…]",
+        help="any format: hold only these items, and say so; may be given more than once",
+    )
     return p
 
 
-def _tables(graph: Graph, split: str) -> tuple[list[Table], Table, list[Table]]:
-    tables = per_register(graph) if split == "per-register" else [whole_graph(graph)]
-    return tables, links_of(tables), cited_sources(graph)
+def named(values: list[str] | None) -> tuple[str, ...]:
+    """The identifiers --only names, once each, in the order given (SR-0016)."""
+    seen: dict[str, None] = {}
+    for value in values or []:
+        for uid in value.split(","):
+            if uid.strip():
+                seen.setdefault(uid.strip(), None)
+    return tuple(seen)
+
+
+def _tables(graph: Graph, split: str, only: tuple[str, ...] = ()) -> tuple[list[Table], Table, list[Table]]:
+    held = narrowed(graph, only) if only else graph
+    tables = per_register(held) if split == "per-register" else [whole_graph(held)]
+    return tables, links_of(tables, narrowed=bool(only)), cited_sources(held)
 
 
 def _about(provenance: Provenance, extra: list[list[str]] | None = None) -> Table:
@@ -103,7 +121,7 @@ def produce(graph: Graph, root: Path, fmt: str, opts: md.Options, provenance: Pr
         if fmt == "docx":
             return to_docx(blocks), f"{stem}.docx"
         if fmt == "blocks":
-            return utf8(to_json(blocks, provenance.lines(), asdict(provenance))), f"{stem}-blocks.json"
+            return utf8(to_json(blocks, provenance.lines(), provenance.record())), f"{stem}-blocks.json"
         return utf8(to_html(blocks, provenance)), f"{stem}.html"
 
     if fmt == "notes":
@@ -112,7 +130,7 @@ def produce(graph: Graph, root: Path, fmt: str, opts: md.Options, provenance: Pr
         )
         return to_notes(text, graph, provenance), f"{stem}-notes"
 
-    tables, links, sources = _tables(graph, opts.split)
+    tables, links, sources = _tables(graph, opts.split, opts.only)
     if fmt == "xlsx":
         return to_xlsx([*tables, links, *sources, _about(provenance)]), f"{stem}.xlsx"
 
@@ -148,10 +166,18 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if args.folder and args.format not in FOLDERS:
         parser.error(f"--folder applies to {' and '.join(FOLDERS)}, not {args.format}")
-    opts = md.Options(body=args.body, matrix=args.matrix, stats=args.stats, markers=args.markers, split=args.split)
+    only = named(args.only)
+    if args.only is not None and not only:
+        parser.error("--only names no item")
+    opts = md.Options(body=args.body, matrix=args.matrix, stats=args.stats, markers=args.markers, split=args.split, only=only)
     try:
         root = find_graph(args.directory)
         graph = load(root)
+        # SR-0016: an item asked for and not held is the caller's mistake, said
+        # before anything is written rather than a document quietly without it.
+        missing = [uid for uid in only if uid not in graph.items]
+        if missing:
+            parser.error(f"--only names what the graph does not hold: {', '.join(missing)}")
         # UR-0003: the tool that produced the output, named as tl-ratify names itself —
         # this package first, then the throughline that read the graph. The dump
         # records throughline's bare distribution version.
@@ -161,6 +187,8 @@ def main(argv: list[str] | None = None) -> int:
             if any((args.repository, args.ref, args.commit, args.tree))
             else provenance_of(root, producer)
         )
+        if only:
+            provenance = replace(provenance, items=f"{len(only)} of {len(graph.items)}")
         result, default = produce(graph, root, args.format, opts, provenance)
         with slow(f"still writing {args.output or default}…"):
             target = write(result, default, args.output, args.folder)

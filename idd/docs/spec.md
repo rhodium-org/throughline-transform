@@ -17,11 +17,11 @@ follows is this project's own.
 ## Summary
 
 <!-- tl:stats True -->
-- **Items:** 26 — system_requirement 15 · user_requirement 6 · non_goal 3 · intent 2
-- **Links:** 29 — implements 15 · derives_from 6 · satisfies 5 · refines 2 · relates 1
+- **Items:** 28 — system_requirement 16 · user_requirement 7 · non_goal 3 · intent 2
+- **Links:** 33 — implements 16 · derives_from 7 · satisfies 6 · refines 2 · relates 2
 - **Grounding depth:** max 2 · mean 1.4
-- **Most connected:** UR-0002 (9) · UR-0001 (4) · INT-0001 (3)
-- **Degree distribution:** 0 → 3 · 1 → 6 · 2 → 11 · 3 → 4 · 4 → 1 · 9 → 1
+- **Most connected:** UR-0002 (9) · INT-0001 (4) · SR-0002 (4)
+- **Degree distribution:** 0 → 3 · 1 → 6 · 2 → 12 · 3 → 3 · 4 → 3 · 9 → 1
 <!-- tl:end -->
 
 
@@ -162,6 +162,19 @@ What a person with a graph on disk can do.
 *Derives from:* INT-0002
 
 **origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:c58882ade187f85235ccc85d98ea7d7f1859bcb737567182d61e74cb62bddcad
+<!-- tl:end -->
+
+
+<!-- tl:item UR-0007 -->
+**UR-0007 — An output holds only the items its caller names, and says so** — `user_requirement`, status `ratified`
+
+> A caller may name the items an output holds. Every form then holds those items and no others, with the links between them, and says it holds a selection: how many items of how many. Named nothing, an output holds every item, as it always has.
+
+*Rationale:* The operator, 26 September 2026, on table.iddn.uk: "I want to be able to generate the doc containing all the items or the filtered doc." A reader who has narrowed a list to what they must decide wants the document of that list, not of the whole graph; filtering the file afterwards would mean rendering items outside tl docs, which NG-0001 refuses. The count is said because a partial document read as a whole one misleads. Who pays: nobody new. A caller that names nothing gets the bytes it got before (SR-0011).
+
+*Derives from:* INT-0001
+
+**origin**: ai · **verification**: For one graph and two items named, each form holds those two and no other, and its provenance says 2 of the graph's count. With nothing named, each output is byte for byte what it was before the option existed. · **ratified_by**: Henry Grech-Cini · **ratified_id**: github:rhodium289 · **ratified_fingerprint**: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
 <!-- tl:end -->
 
 
@@ -359,6 +372,21 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:end -->
 
 
+<!-- tl:item SR-0016 -->
+**SR-0016 — --only narrows every form to the items it names** — `system_requirement`, status `implemented`
+
+> --only takes item identifiers separated by commas and may be given more than once. For md, docx, html and blocks, each directive's expression is joined with uid in [the identifiers], so tl docs writes only those items. The tabular outputs keep only their rows, and the links table only links with both ends kept. The notes output writes only their notes, and an identifier left out stays plain text, not a wikilink. The provenance lines add the items held, n of N. An identifier the graph does not hold is a usage error, exit 2, naming it, and nothing is written.
+
+*Rationale:* Identifiers rather than a filter expression, because the caller's own filter — the table's free-text search, a hand-picked set — is often not a tl expression, while the items it leaves are always a list of identifiers. Joining the directives' own expressions keeps every word of an item tl docs's (NG-0001), and uid in [...] is the filter language throughline already has (tl:SR-0045). An unknown identifier is refused rather than skipped: a document silently missing an item that was asked for is the failure this option exists to prevent.
+
+*Implements:* UR-0007
+*Satisfies:* tl:SR-0045
+*Relates:* SR-0002
+
+**origin**: ai · **priority**: should · **verification**: Over the fixture with --only naming two items, the Markdown holds exactly those two catalogue blocks and each matrix only their rows; the csv and xlsx hold two item rows and only the links between them; the notes hold two notes and no wikilink naming a third; the provenance says 2 of the fixture's count. --only naming an identifier the fixture lacks exits 2, names it, and writes no file. · **ratified_by**: Henry Grech-Cini · **ratified_id**: github:rhodium289 · **ratified_fingerprint**: sha256:23529b600edc9128f9a1fc834f0302439bd4e676d6f0df4d2bfd7b44a3e0ad5a
+<!-- tl:end -->
+
+
 ## Traceability
 
 ### implements
@@ -372,6 +400,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 | UR-0004 | A front end that lays out its own pages takes the document's structure from the tool | SR-0012 |
 | UR-0005 | A caller that knows the repository, ref and commit states them | SR-0013 |
 | UR-0006 | The tool runs where there are no processes | SR-0014 |
+| UR-0007 | An output holds only the items its caller names, and says so | SR-0016 |
 <!-- tl:end -->
 
 ### derives from
@@ -379,6 +408,6 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:matrix incoming:derives_from links.incoming('derives_from') -->
 | UID | Title | Derives_from (incoming) |
 |---|---|---|
-| INT-0001 | The outputs of a graph come from the graph on disk, committed or not | UR-0001, UR-0002, UR-0003 |
+| INT-0001 | The outputs of a graph come from the graph on disk, committed or not | UR-0001, UR-0002, UR-0003, UR-0007 |
 | INT-0002 | One implementation of every form, for the command line and the editor alike | UR-0004, UR-0005, UR-0006 |
 <!-- tl:end -->

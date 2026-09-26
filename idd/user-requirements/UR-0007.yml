@@ -1,0 +1,36 @@
+uid: UR-0007
+type: user_requirement
+status: ratified
+title: An output holds only the items its caller names, and says so
+text: 'A caller may name the items an output holds. Every form then holds those items
+  and no others, with the links between them, and says it holds a selection: how
+  many items of how many. Named nothing, an output holds every item, as it always
+  has.'
+rationale: 'The operator, 26 September 2026, on table.iddn.uk: "I want to be able
+  to generate the doc containing all the items or the filtered doc." A reader who
+  has narrowed a list to what they must decide wants the document of that list, not
+  of the whole graph; filtering the file afterwards would mean rendering items outside
+  tl docs, which NG-0001 refuses. The count is said because a partial document read
+  as a whole one misleads. Who pays: nobody new. A caller that names nothing gets
+  the bytes it got before (SR-0011).'
+normative: true
+links:
+- target: INT-0001
+  type: derives_from
+attrs:
+  origin: ai
+  verification: For one graph and two items named, each form holds those two and
+    no other, and its provenance says 2 of the graph's count. With nothing named,
+    each output is byte for byte what it was before the option existed.
+  ratified_by: Henry Grech-Cini
+  ratified_id: github:rhodium289
+  ratified_fingerprint: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
+  ratified_content:
+    type: user_requirement
+    text: 'A caller may name the items an output holds. Every form then holds those
+      items and no others, with the links between them, and says it holds a selection:
+      how many items of how many. Named nothing, an output holds every item, as it
+      always has.'
+    normative: true
+    derived: false
+    attrs: {}

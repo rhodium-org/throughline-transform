@@ -1,0 +1,52 @@
+uid: SR-0016
+type: system_requirement
+status: implemented
+title: --only narrows every form to the items it names
+text: --only takes item identifiers separated by commas and may be given more than
+  once. For md, docx, html and blocks, each directive's expression is joined with
+  uid in [the identifiers], so tl docs writes only those items. The tabular outputs
+  keep only their rows, and the links table only links with both ends kept. The notes
+  output writes only their notes, and an identifier left out stays plain text, not
+  a wikilink. The provenance lines add the items held, n of N. An identifier the
+  graph does not hold is a usage error, exit 2, naming it, and nothing is written.
+rationale: 'Identifiers rather than a filter expression, because the caller''s own
+  filter — the table''s free-text search, a hand-picked set — is often not a tl expression,
+  while the items it leaves are always a list of identifiers. Joining the directives''
+  own expressions keeps every word of an item tl docs''s (NG-0001), and uid in [...]
+  is the filter language throughline already has (tl:SR-0045). An unknown identifier
+  is refused rather than skipped: a document silently missing an item that was asked
+  for is the failure this option exists to prevent.'
+normative: true
+links:
+- target: UR-0007
+  type: implements
+- target: tl:SR-0045
+  type: satisfies
+- target: SR-0002
+  type: relates
+attrs:
+  origin: ai
+  priority: should
+  verification: Over the fixture with --only naming two items, the Markdown holds
+    exactly those two catalogue blocks and each matrix only their rows; the csv and
+    xlsx hold two item rows and only the links between them; the notes hold two notes
+    and no wikilink naming a third; the provenance says 2 of the fixture's count.
+    --only naming an identifier the fixture lacks exits 2, names it, and writes no
+    file.
+  ratified_by: Henry Grech-Cini
+  ratified_id: github:rhodium289
+  ratified_fingerprint: sha256:23529b600edc9128f9a1fc834f0302439bd4e676d6f0df4d2bfd7b44a3e0ad5a
+  ratified_content:
+    type: system_requirement
+    text: --only takes item identifiers separated by commas and may be given more
+      than once. For md, docx, html and blocks, each directive's expression is joined
+      with uid in [the identifiers], so tl docs writes only those items. The tabular
+      outputs keep only their rows, and the links table only links with both ends
+      kept. The notes output writes only their notes, and an identifier left out
+      stays plain text, not a wikilink. The provenance lines add the items held,
+      n of N. An identifier the graph does not hold is a usage error, exit 2, naming
+      it, and nothing is written.
+    normative: true
+    derived: false
+    attrs:
+      priority: should

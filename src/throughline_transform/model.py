@@ -9,7 +9,8 @@ is not a rule — it is the same edges read the other way.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from collections.abc import Iterable
+from dataclasses import dataclass, field, replace
 from typing import Any
 
 
@@ -169,3 +170,22 @@ def source_titles(graph: Graph) -> dict[str, str]:
         parts = [s.url or s.path or "", f"at {s.ref}" if s.ref else "", f"in {s.subdir}/" if s.subdir else ""]
         out[s.namespace] = " ".join(p for p in parts if p)
     return out
+
+
+def narrowed(graph: Graph, only: Iterable[str]) -> Graph:
+    """The graph holding only the named items of its own (SR-0016).
+
+    Its registers, sources and clauses stay as they are: a clause is cited or
+    not by what is kept, and the writers already ask only for what is cited.
+    An edge from an item left out is not an edge of what is held.
+    """
+    keep = set(only)
+    return replace(
+        graph,
+        items={uid: item for uid, item in graph.items.items() if uid in keep},
+        by_register={prefix: [i for i in items if i.uid in keep] for prefix, items in graph.by_register.items()},
+        incoming={
+            target: [(source, kind) for source, kind in edges if source in keep]
+            for target, edges in graph.incoming.items()
+        },
+    )
