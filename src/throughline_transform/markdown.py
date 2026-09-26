@@ -31,10 +31,25 @@ class Options:
     markers: bool = False
     #: For the tabular outputs: one table for everything, or one per register.
     split: str = "one"
+    #: The items the output holds, where the caller named them (SR-0016);
+    #: empty for every item.
+    only: tuple[str, ...] = ()
 
 
 def _region(directive: str) -> str:
     return f"<!-- tl:{directive} -->\n<!-- tl:end -->"
+
+
+def _within(expression: str, opts: Options) -> str:
+    """A directive's filter, joined with the items named, so tl docs writes only those (SR-0016).
+
+    The identifiers are ones the graph holds (the command refuses any other), so
+    each is written as a quoted literal the filter language reads (tl:SR-0045).
+    """
+    if not opts.only:
+        return expression
+    named = ", ".join(repr(uid) for uid in opts.only)
+    return f"({expression}) and (uid in [{named}])"
 
 
 def directive_document(graph: Graph, opts: Options, provenance: Provenance) -> str:
@@ -44,9 +59,9 @@ def directive_document(graph: Graph, opts: Options, provenance: Provenance) -> s
     lines.append("")
 
     if opts.stats:
-        lines += ["## Summary", "", _region("stats True"), ""]
+        lines += ["## Summary", "", _region(f"stats {_within('True', opts)}"), ""]
     if opts.body in ("table", "both"):
-        lines += ["## Items", "", _region("table True"), ""]
+        lines += ["## Items", "", _region(f"table {_within('True', opts)}"), ""]
     if opts.matrix:
         # One matrix per grounding link type the graph declares, each over the
         # items something actually reaches by that link. Over every item a
@@ -56,16 +71,16 @@ def directive_document(graph: Graph, opts: Options, provenance: Provenance) -> s
             lines += [
                 f"### {link_type.replace('_', ' ')}",
                 "",
-                _region(f"matrix incoming:{link_type} links.incoming('{link_type}')"),
+                _region(f"matrix incoming:{link_type} {_within(f'links.incoming({link_type!r})', opts)}"),
                 "",
             ]
     if opts.body in ("catalog", "both"):
-        lines += ["## Every item", "", _region("catalog True"), ""]
+        lines += ["## Every item", "", _region(f"catalog {_within('True', opts)}"), ""]
     # The words every cited clause answers to. Only over a composed graph: the
     # directive is the composer's, and a graph adopting no source has nothing
     # to mirror.
     if graph.composed:
-        lines += ["## Clauses of adopted sources", "", _region("sourced True"), ""]
+        lines += ["## Clauses of adopted sources", "", _region(f"sourced {_within('True', opts)}"), ""]
     return "\n".join(lines)
 
 

@@ -13,7 +13,7 @@ from __future__ import annotations
 
 import re
 import subprocess
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 CLEAN = "clean"
@@ -31,15 +31,29 @@ class Provenance:
     commit: str
     tree: str
     tool: str
+    #: How many of the graph's items the output holds, where the caller named
+    #: them (SR-0016) — "2 of 7". Empty for an output of every item, which then
+    #: says nothing more than it always did.
+    items: str = ""
 
     def lines(self) -> list[str]:
-        return [
+        lines = [
             f"Repository: {self.repository}",
             f"Ref: {self.ref or 'none'}",
             f"Commit: {self.commit or 'none'}",
             f"Working tree: {self.tree}",
             f"Produced by: {self.tool}",
         ]
+        if self.items:
+            lines.append(f"Items: {self.items}")
+        return lines
+
+    def record(self) -> dict[str, str]:
+        """The fields as data, for the blocks output; ``items`` only where a selection was made."""
+        fields = asdict(self)
+        if not self.items:
+            del fields["items"]
+        return fields
 
     @property
     def stem(self) -> str:

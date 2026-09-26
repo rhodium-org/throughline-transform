@@ -166,7 +166,7 @@ What a person with a graph on disk can do.
 
 
 <!-- tl:item UR-0007 -->
-**UR-0007 — An output holds only the items its caller names, and says so** — `user_requirement`, status `proposed`
+**UR-0007 — An output holds only the items its caller names, and says so** — `user_requirement`, status `ratified`
 
 > A caller may name the items an output holds. Every form then holds those items and no others, with the links between them, and says it holds a selection: how many items of how many. Named nothing, an output holds every item, as it always has.
 
@@ -174,7 +174,7 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: For one graph and two items named, each form holds those two and no other, and its provenance says 2 of the graph's count. With nothing named, each output is byte for byte what it was before the option existed.
+**origin**: ai · **verification**: For one graph and two items named, each form holds those two and no other, and its provenance says 2 of the graph's count. With nothing named, each output is byte for byte what it was before the option existed. · **ratified_by**: Henry Grech-Cini · **ratified_id**: github:rhodium289 · **ratified_fingerprint**: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
 <!-- tl:end -->
 
 
@@ -373,7 +373,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 
 <!-- tl:item SR-0016 -->
-**SR-0016 — --only narrows every form to the items it names** — `system_requirement`, status `proposed`
+**SR-0016 — --only narrows every form to the items it names** — `system_requirement`, status `implemented`
 
 > --only takes item identifiers separated by commas and may be given more than once. For md, docx, html and blocks, each directive's expression is joined with uid in [the identifiers], so tl docs writes only those items. The tabular outputs keep only their rows, and the links table only links with both ends kept. The notes output writes only their notes, and an identifier left out stays plain text, not a wikilink. The provenance lines add the items held, n of N. An identifier the graph does not hold is a usage error, exit 2, naming it, and nothing is written.
 
@@ -383,7 +383,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Satisfies:* tl:SR-0045
 *Relates:* SR-0002
 
-**origin**: ai · **priority**: should · **verification**: Over the fixture with --only naming two items, the Markdown holds exactly those two catalogue blocks and each matrix only their rows; the csv and xlsx hold two item rows and only the links between them; the notes hold two notes and no wikilink naming a third; the provenance says 2 of the fixture's count. --only naming an identifier the fixture lacks exits 2, names it, and writes no file.
+**origin**: ai · **priority**: should · **verification**: Over the fixture with --only naming two items, the Markdown holds exactly those two catalogue blocks and each matrix only their rows; the csv and xlsx hold two item rows and only the links between them; the notes hold two notes and no wikilink naming a third; the provenance says 2 of the fixture's count. --only naming an identifier the fixture lacks exits 2, names it, and writes no file. · **ratified_by**: Henry Grech-Cini · **ratified_id**: github:rhodium289 · **ratified_fingerprint**: sha256:23529b600edc9128f9a1fc834f0302439bd4e676d6f0df4d2bfd7b44a3e0ad5a
 <!-- tl:end -->
 
 

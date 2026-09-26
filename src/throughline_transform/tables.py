@@ -121,12 +121,15 @@ def cited_sources(graph: Graph) -> list[Table]:
     ]
 
 
-def links_of(tables: list[Table]) -> Table:
+def links_of(tables: list[Table], narrowed: bool = False) -> Table:
     """Every link as a row of its own (SR-0006).
 
     The item tables are read, not the graph: the links table names each end by
     the sheet its row is on in this export, which depends on how the export was
     split. A link into an adopted source names the namespace as the sheet.
+    Where the export holds only the items its caller named, a link to one of
+    the graph's own items left out is not given: both ends of every link are
+    in the export (SR-0016).
     """
     sheet_of: dict[str, str] = {}
     for table in tables:
@@ -144,6 +147,8 @@ def links_of(tables: list[Table]) -> Table:
                     continue
                 for target in row[c].split(", "):
                     home = sheet_of.get(target)
+                    if narrowed and home is None and not is_borrowed(target):
+                        continue
                     to_sheet = home if home is not None else (target.split(":")[0] if ":" in target else "")
                     rows.append([table.name, source, link_type, to_sheet, target])
     return Table(name=LINKS_TABLE, columns=list(LINK_COLUMNS), rows=rows)

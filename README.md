@@ -66,6 +66,13 @@ knows them without git — the editor holds them from its clone — states them 
 `--repository`, `--ref`, `--commit` and `--tree clean|dirty|untracked`, and git
 is then not consulted.
 
+`--only UID[,UID…]`, given once or more, narrows any format to the items it
+names: the catalogue, table and matrices hold only those, the tables only their
+rows and the links between them, the notes only their notes, and the clauses
+mirrored are only the ones they cite. The output then says `Items: n of N`,
+because a partial document read as a whole one misleads. An identifier the
+graph does not hold is a usage error (exit 2), and nothing is written.
+
 A quick run is silent. When a step — reading the graph, asking the tool to
 write the document, writing the file — has run for a second, one line on
 stderr says which, because a composed graph fetching its sources for the first

@@ -1,6 +1,6 @@
 uid: SR-0016
 type: system_requirement
-status: ratified
+status: implemented
 title: --only narrows every form to the items it names
 text: --only takes item identifiers separated by commas and may be given more than
   once. For md, docx, html and blocks, each directive's expression is joined with
