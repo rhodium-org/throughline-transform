@@ -1,6 +1,6 @@
 uid: UR-0007
 type: user_requirement
-status: proposed
+status: ratified
 title: An output holds only the items its caller names, and says so
 text: 'A caller may name the items an output holds. Every form then holds those items
   and no others, with the links between them, and says it holds a selection: how
@@ -22,3 +22,15 @@ attrs:
   verification: For one graph and two items named, each form holds those two and
     no other, and its provenance says 2 of the graph's count. With nothing named,
     each output is byte for byte what it was before the option existed.
+  ratified_by: Henry Grech-Cini
+  ratified_id: github:rhodium289
+  ratified_fingerprint: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
+  ratified_content:
+    type: user_requirement
+    text: 'A caller may name the items an output holds. Every form then holds those
+      items and no others, with the links between them, and says it holds a selection:
+      how many items of how many. Named nothing, an output holds every item, as it
+      always has.'
+    normative: true
+    derived: false
+    attrs: {}

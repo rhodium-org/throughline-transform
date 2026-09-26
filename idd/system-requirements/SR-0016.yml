@@ -1,6 +1,6 @@
 uid: SR-0016
 type: system_requirement
-status: proposed
+status: ratified
 title: --only narrows every form to the items it names
 text: --only takes item identifiers separated by commas and may be given more than
   once. For md, docx, html and blocks, each directive's expression is joined with
@@ -33,3 +33,20 @@ attrs:
     and no wikilink naming a third; the provenance says 2 of the fixture's count.
     --only naming an identifier the fixture lacks exits 2, names it, and writes no
     file.
+  ratified_by: Henry Grech-Cini
+  ratified_id: github:rhodium289
+  ratified_fingerprint: sha256:23529b600edc9128f9a1fc834f0302439bd4e676d6f0df4d2bfd7b44a3e0ad5a
+  ratified_content:
+    type: system_requirement
+    text: --only takes item identifiers separated by commas and may be given more
+      than once. For md, docx, html and blocks, each directive's expression is joined
+      with uid in [the identifiers], so tl docs writes only those items. The tabular
+      outputs keep only their rows, and the links table only links with both ends
+      kept. The notes output writes only their notes, and an identifier left out
+      stays plain text, not a wikilink. The provenance lines add the items held,
+      n of N. An identifier the graph does not hold is a usage error, exit 2, naming
+      it, and nothing is written.
+    normative: true
+    derived: false
+    attrs:
+      priority: should
