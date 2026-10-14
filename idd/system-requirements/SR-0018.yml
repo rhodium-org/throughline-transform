@@ -1,0 +1,37 @@
+uid: SR-0018
+type: system_requirement
+status: ratified
+title: The assistant form carries a manifest of what it was true of and how to answer
+text: The folder shall hold a manifest naming the repository, ref and commit and
+  whether the tree was clean, as any output says (UR-0003), the file of each register,
+  and the tl version. It shall also hold the change-set format tl apply accepts,
+  taken from tl, with an instruction that changes come back as a change set quoting
+  each item's fingerprint and never as rewritten files.
+rationale: The assistant has no other briefing, so the folder has to carry it. The
+  format is taken from tl rather than written here, so it cannot drift from what
+  apply accepts. Asking for a change set, not files, is what keeps a length-capped
+  answer from reading as deletions.
+normative: true
+links:
+- target: UR-0008
+  type: implements
+- target: UR-0003
+  type: relates
+attrs:
+  priority: should
+  verification: The manifest of a dirty fixture names its commit and says dirty;
+    an assistant given only the folder can state the change-set format
+  origin: ai
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:ac8096e7f569d9fd28f64e6a2043b1bfcf3a65f27e84fa3e46ac28906628e273
+  ratified_content:
+    type: system_requirement
+    text: The folder shall hold a manifest naming the repository, ref and commit
+      and whether the tree was clean, as any output says (UR-0003), the file of each
+      register, and the tl version. It shall also hold the change-set format tl apply
+      accepts, taken from tl, with an instruction that changes come back as a change
+      set quoting each item's fingerprint and never as rewritten files.
+    normative: true
+    derived: false
+    attrs:
+      priority: should
