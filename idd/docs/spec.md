@@ -17,11 +17,11 @@ follows is this project's own.
 ## Summary
 
 <!-- tl:stats True -->
-- **Items:** 28 — system_requirement 16 · user_requirement 7 · non_goal 3 · intent 2
-- **Links:** 33 — implements 16 · derives_from 7 · satisfies 6 · refines 2 · relates 2
+- **Items:** 31 — system_requirement 18 · user_requirement 8 · non_goal 3 · intent 2
+- **Links:** 38 — implements 18 · derives_from 9 · satisfies 6 · relates 3 · refines 2
 - **Grounding depth:** max 2 · mean 1.4
-- **Most connected:** UR-0002 (9) · INT-0001 (4) · SR-0002 (4)
-- **Degree distribution:** 0 → 3 · 1 → 6 · 2 → 12 · 3 → 3 · 4 → 3 · 9 → 1
+- **Most connected:** UR-0002 (9) · INT-0001 (5) · INT-0002 (4)
+- **Degree distribution:** 0 → 3 · 1 → 7 · 2 → 12 · 3 → 3 · 4 → 4 · 5 → 1 · 9 → 1
 <!-- tl:end -->
 
 
@@ -175,6 +175,19 @@ What a person with a graph on disk can do.
 *Derives from:* INT-0001
 
 **origin**: ai · **verification**: For one graph and two items named, each form holds those two and no other, and its provenance says 2 of the graph's count. With nothing named, each output is byte for byte what it was before the option existed. · **ratified_by**: Henry Grech-Cini · **ratified_id**: github:rhodium289 · **ratified_fingerprint**: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
+<!-- tl:end -->
+
+
+<!-- tl:item UR-0008 -->
+**UR-0008 — A graph is handed to an assistant that reads only a few files and cannot run tl** — `user_requirement`, status `ratified`
+
+> A user shall be able to produce, with one command, a form of the graph that an assistant reading a capped number of files can read whole, and that tells the assistant how to send changes back.
+
+*Rationale:* Raised by controlled environments where users are restricted to using Microsoft 365 Copilot: at most 50 files, no tl, text out only. Graphs there hold hundreds of item files but fewer than 50 registers. A form of output, so it lives here beside the other six and reaches the browser through the same package (INT-0002). Applying what comes back is throughline's (tl:SR-0252).
+
+*Derives from:* INT-0001, INT-0002
+
+**priority**: should · **verification**: A three-register graph exported in this form is read in full by an assistant capped at fewer files than the graph has items · **origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:7b9e5e5a9e450e6cab6d7a83800685636f88950eb5531dd02ccdd56fc4ef9f3d
 <!-- tl:end -->
 
 
@@ -387,6 +400,33 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:end -->
 
 
+<!-- tl:item SR-0017 -->
+**SR-0017 — The assistant form writes one file per register** — `system_requirement`, status `ratified`
+
+> tl-transform assistant shall write a folder holding one file per register, each carrying that register's items exactly as tl dump gives them, including each item's fingerprint. --wrap json writes JSON; --wrap md writes Markdown holding one fenced JSON block, for an assistant that will not read a .json file.
+
+*Rationale:* One file per register because the assistant's cap counts files, not items. A folder, not an archive, because some networks refuse archive downloads and an assistant cannot open one. Content is the dump's, unreshaped, so no word or fingerprint is computed here (NG-0001, tl:SR-0251). Rejected: concatenated item YAML, a second on-disk shape to keep stable.
+
+*Implements:* UR-0008
+
+**priority**: should · **verification**: On the fixture graph the folder holds one file per register plus the manifest, and every item and link in tl dump appears exactly once · **origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:c367c7d260e929e6d1e3c5906803b2288701aa4e826d7a16d56bbdbeec8b96f5
+<!-- tl:end -->
+
+
+<!-- tl:item SR-0018 -->
+**SR-0018 — The assistant form carries a manifest of what it was true of and how to answer** — `system_requirement`, status `ratified`
+
+> The folder shall hold a manifest naming the repository, ref and commit and whether the tree was clean, as any output says (UR-0003), the file of each register, and the tl version. It shall also hold the change-set format tl apply accepts, taken from tl, with an instruction that changes come back as a change set quoting each item's fingerprint and never as rewritten files.
+
+*Rationale:* The assistant has no other briefing, so the folder has to carry it. The format is taken from tl rather than written here, so it cannot drift from what apply accepts. Asking for a change set, not files, is what keeps a length-capped answer from reading as deletions.
+
+*Implements:* UR-0008
+*Relates:* UR-0003
+
+**priority**: should · **verification**: The manifest of a dirty fixture names its commit and says dirty; an assistant given only the folder can state the change-set format · **origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:ac8096e7f569d9fd28f64e6a2043b1bfcf3a65f27e84fa3e46ac28906628e273
+<!-- tl:end -->
+
+
 ## Traceability
 
 ### implements
@@ -401,6 +441,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 | UR-0005 | A caller that knows the repository, ref and commit states them | SR-0013 |
 | UR-0006 | The tool runs where there are no processes | SR-0014 |
 | UR-0007 | An output holds only the items its caller names, and says so | SR-0016 |
+| UR-0008 | A graph is handed to an assistant that reads only a few files and cannot run tl | SR-0017, SR-0018 |
 <!-- tl:end -->
 
 ### derives from
@@ -408,6 +449,6 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:matrix incoming:derives_from links.incoming('derives_from') -->
 | UID | Title | Derives_from (incoming) |
 |---|---|---|
-| INT-0001 | The outputs of a graph come from the graph on disk, committed or not | UR-0001, UR-0002, UR-0003, UR-0007 |
-| INT-0002 | One implementation of every form, for the command line and the editor alike | UR-0004, UR-0005, UR-0006 |
+| INT-0001 | The outputs of a graph come from the graph on disk, committed or not | UR-0001, UR-0002, UR-0003, UR-0007, UR-0008 |
+| INT-0002 | One implementation of every form, for the command line and the editor alike | UR-0004, UR-0005, UR-0006, UR-0008 |
 <!-- tl:end -->

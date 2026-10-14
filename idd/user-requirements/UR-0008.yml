@@ -1,0 +1,34 @@
+uid: UR-0008
+type: user_requirement
+status: ratified
+title: A graph is handed to an assistant that reads only a few files and cannot run
+  tl
+text: A user shall be able to produce, with one command, a form of the graph that
+  an assistant reading a capped number of files can read whole, and that tells the
+  assistant how to send changes back.
+rationale: 'Raised by controlled environments where users are restricted to using
+  Microsoft 365 Copilot: at most 50 files, no tl, text out only. Graphs there hold
+  hundreds of item files but fewer than 50 registers. A form of output, so it lives
+  here beside the other six and reaches the browser through the same package (INT-0002).
+  Applying what comes back is throughline''s (tl:SR-0252).'
+normative: true
+links:
+- target: INT-0001
+  type: derives_from
+- target: INT-0002
+  type: derives_from
+attrs:
+  priority: should
+  verification: A three-register graph exported in this form is read in full by an
+    assistant capped at fewer files than the graph has items
+  origin: ai
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:7b9e5e5a9e450e6cab6d7a83800685636f88950eb5531dd02ccdd56fc4ef9f3d
+  ratified_content:
+    type: user_requirement
+    text: A user shall be able to produce, with one command, a form of the graph
+      that an assistant reading a capped number of files can read whole, and that
+      tells the assistant how to send changes back.
+    normative: true
+    derived: false
+    attrs: {}

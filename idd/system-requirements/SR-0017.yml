@@ -1,0 +1,35 @@
+uid: SR-0017
+type: system_requirement
+status: ratified
+title: The assistant form writes one file per register
+text: tl-transform assistant shall write a folder holding one file per register,
+  each carrying that register's items exactly as tl dump gives them, including each
+  item's fingerprint. --wrap json writes JSON; --wrap md writes Markdown holding
+  one fenced JSON block, for an assistant that will not read a .json file.
+rationale: 'One file per register because the assistant''s cap counts files, not
+  items. A folder, not an archive, because some networks refuse archive downloads
+  and an assistant cannot open one. Content is the dump''s, unreshaped, so no word
+  or fingerprint is computed here (NG-0001, tl:SR-0251). Rejected: concatenated item
+  YAML, a second on-disk shape to keep stable.'
+normative: true
+links:
+- target: UR-0008
+  type: implements
+attrs:
+  priority: should
+  verification: On the fixture graph the folder holds one file per register plus
+    the manifest, and every item and link in tl dump appears exactly once
+  origin: ai
+  ratified_by: Henry Grech-Cini
+  ratified_fingerprint: sha256:c367c7d260e929e6d1e3c5906803b2288701aa4e826d7a16d56bbdbeec8b96f5
+  ratified_content:
+    type: system_requirement
+    text: tl-transform assistant shall write a folder holding one file per register,
+      each carrying that register's items exactly as tl dump gives them, including
+      each item's fingerprint. --wrap json writes JSON; --wrap md writes Markdown
+      holding one fenced JSON block, for an assistant that will not read a .json
+      file.
+    normative: true
+    derived: false
+    attrs:
+      priority: should
