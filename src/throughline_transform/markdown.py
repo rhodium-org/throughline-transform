@@ -31,6 +31,9 @@ class Options:
     markers: bool = False
     #: For the tabular outputs: one table for everything, or one per register.
     split: str = "one"
+    #: For the assistant form: each file as JSON, or as Markdown holding one
+    #: fenced JSON block.
+    wrap: str = "json"
     #: The items the output holds, where the caller named them (SR-0016);
     #: empty for every item.
     only: tuple[str, ...] = ()
