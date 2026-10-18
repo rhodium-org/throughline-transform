@@ -13,7 +13,6 @@ tl-transform csv     -C idd             # one row per item, a links file, a file
 tl-transform xlsx    -C idd             # the same as a read-only workbook that still sorts and filters
 tl-transform docx    -C idd             # a Word document: title page, contents, a heading per item
 tl-transform html    -C idd             # a print-ready page — print it to PDF from any browser
-tl-transform assistant -C idd           # a folder an assistant that cannot run tl reads whole: one file per register, and how to answer
 ```
 
 It is the command-line half of the
@@ -58,7 +57,6 @@ second, and is run as a command — its command line is the surface it publishes
 | `xlsx` | The same as sheets, read-only by recommendation with the structure locked and no password. Sorting and filtering stay allowed; a spreadsheet nobody can sort is one nobody can review. |
 | `docx` | A title page with the provenance, a contents field Word fills in, a section per register, a heading per item with its type and status beneath, its words as a quotation, its rationale, its attributes in small print, and one appendix per cited source. |
 | `html` | The same document as one self-contained page with print typography, A4 page rules and a contents list of links. Print it to PDF; the browser numbers the pages. |
-| `assistant` | A folder for an assistant that reads only a few files and cannot run `tl` — Microsoft 365 Copilot in a controlled environment reads at most fifty: one file per register carrying its items exactly as `tl dump` gives them, each with its fingerprint, and a manifest naming the repository, ref, commit and tree state, the file of each register, the `tl` that wrote it, and the change-set form `tl apply` accepts, taken from `tl apply --describe`, with the instruction to answer with a change set quoting each fingerprint and never with rewritten files. `--wrap md` writes each file as Markdown holding one fenced JSON block, for an assistant that will not read a `.json` file. Always a folder, never an archive. |
 | `blocks` | The document's structure as JSON — the same list of headings, quotations, paragraphs, attribute lines, tables and appendices the Word and HTML outputs are built from — for a front end that lays out its own pages. The editor's PDF is laid out from it. |
 
 Every output carries the repository, ref, commit, working-tree state and tool

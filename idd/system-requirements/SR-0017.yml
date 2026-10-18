@@ -1,6 +1,6 @@
 uid: SR-0017
 type: system_requirement
-status: ratified
+status: deleted
 title: The assistant form writes one file per register
 text: tl-transform assistant shall write a folder holding one file per register,
   each carrying that register's items exactly as tl dump gives them, including each
@@ -33,3 +33,9 @@ attrs:
     derived: false
     attrs:
       priority: should
+deleted:
+  date: '2026-10-18'
+  reason: 'Moved out of throughline-transform by operator decision (2026-10-18):
+    Microsoft 365 Copilot export and reply now belong to rhodium-org/throughline-ms-copilot;
+    tl dump fingerprints and tl apply stay generic in throughline (tl:SR-0251, tl:SR-0252).'
+  fingerprint: sha256:c367c7d260e929e6d1e3c5906803b2288701aa4e826d7a16d56bbdbeec8b96f5
