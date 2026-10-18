@@ -141,14 +141,6 @@ def load(root: Path) -> Graph:
     return index(raw, composed)
 
 
-def change_set_format(root: Path, composed: bool) -> str:
-    """The change-set form ``tl apply`` accepts, as the tool itself states it
-    (SR-0018): taken from the command, never written here, so what an assistant
-    is told to write cannot drift from what apply reads."""
-    with slow(f"still asking {_tool(composed)} for the change-set format…"):
-        return run(root, ["apply", "--describe"], composed)
-
-
 def docs(root: Path, document: str, composed: bool) -> str:
     """Hand the tool a document of directives and read back what it wrote.
 

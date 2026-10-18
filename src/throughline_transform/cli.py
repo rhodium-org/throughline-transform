@@ -9,7 +9,6 @@
     tl-transform docx      [-C DIR] [-o FILE] [--body …] [--matrix] [--no-stats]
     tl-transform html      [-C DIR] [-o FILE] [--body …] [--matrix] [--no-stats]
     tl-transform blocks    [-C DIR] [-o FILE] [--body …] [--matrix] [--no-stats]
-    tl-transform assistant [-C DIR] [-o DIR] [--wrap json|md]
 
 Any format takes --repository, --ref, --commit and --tree to state the
 provenance instead of reading git (SR-0013), and --only UID[,UID…] to hold
@@ -29,22 +28,19 @@ from throughline.version import distribution_version as _v
 
 from . import markdown as md
 from .blocks import as_blocks, to_json
-from .assistant import WRAPS, to_assistant
 from .html import to_html
 from .model import Graph, narrowed, register_titles, source_titles
 from .notes import to_notes
 from .office import to_docx, to_xlsx
 from .package import Entry, archive, unpack, utf8
 from .progress import slow
-from .project import TransformError, change_set_format, find_graph, load
+from .project import TransformError, find_graph, load
 from .provenance import TREE_WORDS, Provenance, provenance_of, stated
 from .tables import Table, cited_sources, file_name, links_of, per_register, to_csv, whole_graph
 
-FORMATS = ("md", "notes", "csv", "xlsx", "docx", "html", "blocks", "assistant")
+FORMATS = ("md", "notes", "csv", "xlsx", "docx", "html", "blocks")
 PROSE = ("md", "docx", "html", "blocks")
-FOLDERS = ("notes", "csv", "assistant")
-#: Always a folder, never an archive: an assistant cannot open one (SR-0017).
-FOLDER_ONLY = ("assistant",)
+FOLDERS = ("notes", "csv")
 
 
 def version_string() -> str:
@@ -70,12 +66,6 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--matrix", action="store_true", help="md, docx, html, blocks: add a traceability matrix per grounding link")
     p.add_argument("--no-stats", dest="stats", action="store_false", help="md, docx, html, blocks: leave out the tool's summary")
     p.add_argument("--markers", action="store_true", help="md: keep the tool's region markers so `tl docs` can refill the file")
-    p.add_argument(
-        "--wrap",
-        choices=WRAPS,
-        default="json",
-        help="assistant: each file as JSON, or as Markdown holding one fenced JSON block for an assistant that will not read a .json file",
-    )
     p.add_argument("--repository", metavar="OWNER/NAME", help="state the repository instead of reading git")
     p.add_argument("--ref", metavar="REF", help="state the ref instead of reading git")
     p.add_argument("--commit", metavar="SHA", help="state the commit instead of reading git")
@@ -134,12 +124,6 @@ def produce(graph: Graph, root: Path, fmt: str, opts: md.Options, provenance: Pr
             return utf8(to_json(blocks, provenance.lines(), provenance.record())), f"{stem}-blocks.json"
         return utf8(to_html(blocks, provenance)), f"{stem}.html"
 
-    if fmt == "assistant":
-        entries = to_assistant(
-            graph.raw, provenance, change_set_format(root, graph.composed), wrap=opts.wrap, only=opts.only
-        )
-        return entries, f"{stem}-assistant"
-
     if fmt == "notes":
         text = md.to_markdown(
             root, graph, replace(opts, body="catalog", matrix=False, stats=False, markers=False), provenance
@@ -185,9 +169,7 @@ def main(argv: list[str] | None = None) -> int:
     only = named(args.only)
     if args.only is not None and not only:
         parser.error("--only names no item")
-    opts = md.Options(
-        body=args.body, matrix=args.matrix, stats=args.stats, markers=args.markers, split=args.split, only=only, wrap=args.wrap
-    )
+    opts = md.Options(body=args.body, matrix=args.matrix, stats=args.stats, markers=args.markers, split=args.split, only=only)
     try:
         root = find_graph(args.directory)
         graph = load(root)
@@ -209,7 +191,7 @@ def main(argv: list[str] | None = None) -> int:
             provenance = replace(provenance, items=f"{len(only)} of {len(graph.items)}")
         result, default = produce(graph, root, args.format, opts, provenance)
         with slow(f"still writing {args.output or default}…"):
-            target = write(result, default, args.output, args.folder or args.format in FOLDER_ONLY)
+            target = write(result, default, args.output, args.folder)
     except (TransformError, OSError, ValueError) as exc:
         print(f"tl-transform: {exc}", file=sys.stderr)
         return 1

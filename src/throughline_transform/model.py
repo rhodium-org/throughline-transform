@@ -72,9 +72,6 @@ class Graph:
     #: What the tool called itself in the dump.
     tool_version: str
     composed: bool
-    #: The dump itself, as the tool wrote it, for the assistant form that hands
-    #: it on unreshaped (SR-0017).
-    raw: dict[str, Any] = field(default_factory=dict)
 
 
 def prefix_of(uid: str) -> str:
@@ -152,7 +149,6 @@ def index(dump: dict[str, Any], composed: bool) -> Graph:
         sources=sources,
         tool_version=str(meta.get("tool_version") or "?"),
         composed=composed,
-        raw=dump,
     )
 
 

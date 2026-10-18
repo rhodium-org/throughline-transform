@@ -1,6 +1,6 @@
 uid: SR-0018
 type: system_requirement
-status: ratified
+status: deleted
 title: The assistant form carries a manifest of what it was true of and how to answer
 text: The folder shall hold a manifest naming the repository, ref and commit and
   whether the tree was clean, as any output says (UR-0003), the file of each register,
@@ -35,3 +35,9 @@ attrs:
     derived: false
     attrs:
       priority: should
+deleted:
+  date: '2026-10-18'
+  reason: 'Moved out of throughline-transform by operator decision (2026-10-18):
+    Microsoft 365 Copilot export and reply now belong to rhodium-org/throughline-ms-copilot;
+    tl dump fingerprints and tl apply stay generic in throughline (tl:SR-0251, tl:SR-0252).'
+  fingerprint: sha256:ac8096e7f569d9fd28f64e6a2043b1bfcf3a65f27e84fa3e46ac28906628e273

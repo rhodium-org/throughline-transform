@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "throughline-transform"
-version = "0.6.0"
+version = "0.7.0"
 description = "Turn a throughline requirements graph on disk, committed or not, into the forms its readers open: Markdown, a folder of Obsidian notes, CSV, an Excel workbook, a Word document, or a print-ready HTML document. Ships the tl-transform CLI."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -41,7 +41,7 @@ classifiers = [
 # (SR-0003). It was written against throughline 2.2.0 and throughline-compose
 # 0.16.1; since 3.11.1 composition is the Tool's own (throughline UR-0037), `tl`
 # renders both directives, and throughline is the one floor.
-dependencies = ["throughline>=3.18.0"]  # the assistant form reads each item's fingerprint from the dump and takes the change-set form from `tl apply --describe` (throughline SR-0251, SR-0252)
+dependencies = ["throughline>=3.11.1"]  # composition is the Tool's own since 3.11.1 (throughline UR-0037)
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]

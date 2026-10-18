@@ -1,6 +1,6 @@
 uid: UR-0008
 type: user_requirement
-status: ratified
+status: deleted
 title: A graph is handed to an assistant that reads only a few files and cannot run
   tl
 text: A user shall be able to produce, with one command, a form of the graph that
@@ -32,3 +32,9 @@ attrs:
     normative: true
     derived: false
     attrs: {}
+deleted:
+  date: '2026-10-18'
+  reason: 'Moved out of throughline-transform by operator decision (2026-10-18):
+    Microsoft 365 Copilot export and reply now belong to rhodium-org/throughline-ms-copilot;
+    tl dump fingerprints and tl apply stay generic in throughline (tl:SR-0251, tl:SR-0252).'
+  fingerprint: sha256:7b9e5e5a9e450e6cab6d7a83800685636f88950eb5531dd02ccdd56fc4ef9f3d
