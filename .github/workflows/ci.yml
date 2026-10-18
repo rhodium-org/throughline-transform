@@ -12,11 +12,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [blacksmith-4vcpu-ubuntu-2404, blacksmith-6vcpu-macos-latest]
         python-version: ["3.12"]
         include:
           # Prove the supported floor (Python >= 3.11).
-          - os: ubuntu-latest
+          - os: blacksmith-4vcpu-ubuntu-2404
             python-version: "3.11"
     steps:
       - uses: actions/checkout@v5
