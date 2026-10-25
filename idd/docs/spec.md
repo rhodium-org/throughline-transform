@@ -36,7 +36,9 @@ Why throughline-transform exists. Everything below grounds upward into this.
 
 *Rationale:* The editor produces these outputs from a graph on GitHub. A graph that is not yet committed, or that lives where the editor cannot reach, has no way out. The person who needs the output most often has the graph open on their own disk and wants to see what a reader will see before they commit it.
 
-**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5c8c4b4356e989b22048214676015a60315e57254b6ebf8bb963d7948a4ea541
+**origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item INT-0002 -->
@@ -46,7 +48,9 @@ Why throughline-transform exists. Everything below grounds upward into this.
 
 *Rationale:* Before this package existed the editor held its own writers in TypeScript and this package ported them to Python, so there were two implementations of every form and a change to one had to be made in the other or they drifted. The editor already runs throughline, the tl command, as an unmodified wheel; running this package the same way ends the duplication.
 
-**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:fd7fc42054311923a5d6946802b3e788ca4839e1ade4e1feb13485f66f7a0ba1
+**origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -62,7 +66,9 @@ What is deliberately left out, recorded so a reviewer or an agent can point at i
 
 *Rationale:* A second renderer drifts from what tl docs --check gates, and a document that quietly differs from the published specification is worse than none.
 
-**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:f5c33390e2febaec19e6d13dba176393393481e4f256b9d023c921dd8bd9ab41
+**origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item NG-0002 -->
@@ -72,7 +78,9 @@ What is deliberately left out, recorded so a reviewer or an agent can point at i
 
 *Rationale:* A PDF library is the largest dependency this package could take, for a format every browser already produces with a renderer maintained by someone else.
 
-**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:d94996ab16dfb87585262313cfd3acd1cada6b19c9d2a38abd4bdc9b655c7bfe
+**origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item NG-0003 -->
@@ -82,7 +90,9 @@ What is deliberately left out, recorded so a reviewer or an agent can point at i
 
 *Rationale:* The editor is the interactive surface for this family. A second one here would be a second implementation to keep in step.
 
-**origin**: ai · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:a162c86b2df6460a5be7c61c68d3eb7694a4cb46c3d8fb4aae660cca4c0e9dfe
+**origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -99,7 +109,9 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: Run the command on a graph with an uncommitted edit and on a copy outside git. Each produces the file, and each output's provenance says which it was. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:3cf8d1cae9eb2de5c7843800fdd8949c09b35049d262fdac7bd89ce38cf8a773
+**origin**: ai · **verification**: Run the command on a graph with an uncommitted edit and on a copy outside git. Each produces the file, and each output's provenance says which it was.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item UR-0002 -->
@@ -111,7 +123,9 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: For one graph, each output opens in an ordinary reader for that format and lists every item the graph holds. A notes output has one note per item and no wikilink that names no note. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:441c3e12f160a1d6e395b16ef26ee59e3a83f87ec69b89dc1d38727383c57022
+**origin**: ai · **verification**: For one graph, each output opens in an ordinary reader for that format and lists every item the graph holds. A notes output has one note per item and no wikilink that names no note.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item UR-0003 -->
@@ -123,7 +137,9 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: The provenance lines of an output from a clean tree, a tree with an edit, and a folder outside git read differently, and each is right. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5874c3937f9d7fc47b61fe150059ea6b758f08f0673cbcb40eacb1e1dbbd285c
+**origin**: ai · **verification**: The provenance lines of an output from a clean tree, a tree with an edit, and a folder outside git read differently, and each is right.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item UR-0004 -->
@@ -135,7 +151,9 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: The blocks output for the fixture parses as JSON, carries one item entry per item with its identifier, type and status, and matches the headings the docx output carries. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:a3fd3f45e87a3ce64e171eb1fd2a11e45a0aa007ece9f0a24e241f0a45ddc8d1
+**origin**: ai · **verification**: The blocks output for the fixture parses as JSON, carries one item entry per item with its identifier, type and status, and matches the headings the docx output carries.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -148,7 +166,9 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: With the four provenance flags given, the output's provenance lines carry the stated values, and no git command is run. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:dd5ac1f1953237d7c7de847229567eafe015a3300d1e49f31406692dd47c5479
+**origin**: ai · **verification**: With the four provenance flags given, the output's provenance lines carry the stated values, and no git command is run.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -161,7 +181,9 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0002
 
-**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:c58882ade187f85235ccc85d98ea7d7f1859bcb737567182d61e74cb62bddcad
+**origin**: ai · **verification**: With the platform reported as emscripten, every format for the fixture is produced and matches the output produced through the command.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -174,7 +196,9 @@ What a person with a graph on disk can do.
 
 *Derives from:* INT-0001
 
-**origin**: ai · **verification**: For one graph and two items named, each form holds those two and no other, and its provenance says 2 of the graph's count. With nothing named, each output is byte for byte what it was before the option existed. · **ratified_by**: Henry Grech-Cini · **ratified_id**: github:rhodium289 · **ratified_fingerprint**: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
+**origin**: ai · **verification**: For one graph and two items named, each form holds those two and no other, and its provenance says 2 of the graph's count. With nothing named, each output is byte for byte what it was before the option existed.
+
+*Ratified by:* Henry Grech-Cini (github:rhodium289)
 <!-- tl:end -->
 
 
@@ -194,7 +218,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0187
 
-**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:1ebf0b8c50fff9eb6d5835723d46b9ee76b1ba5f979859881a061de9a2e321db
+**origin**: ai · **priority**: must · **verification**: On the composed fixture the Markdown carries the borrowed clause as src:SR-0001 and mirrors it. On the plain fixture the core command is run. Removing the tool from the path produces one line saying so.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0002 -->
@@ -207,7 +233,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0111, tl:SR-0113
 
-**origin**: ai · **priority**: must · **verification**: The Markdown for the fixture holds the catalogue block of every item, a block this package has no code to produce. With --markers the region markers are present; without, none. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5916267f5d0db1c4daa658ae5659d2d3d805e3cb21e41104f3b829049918293f
+**origin**: ai · **priority**: must · **verification**: The Markdown for the fixture holds the catalogue block of every item, a block this package has no code to produce. With --markers the region markers are present; without, none.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0003 -->
@@ -220,7 +248,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0111
 
-**origin**: ai · **priority**: should · **verification**: One module holds the patterns. A search of the package finds no second definition of the item line. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:ce5afe7aa1f654996f709ebb2fcd64b499883ed6d13aa94da32e4064ea156a45
+**origin**: ai · **priority**: should · **verification**: One module holds the patterns. A search of the package finds no second definition of the item line.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0004 -->
@@ -232,7 +262,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0003
 
-**origin**: ai · **priority**: must · **verification**: A fixture copied into a repository reports clean; after an edit to one item it reports uncommitted changes with the same commit; outside git it reports not under version control with no ref and no commit. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:249b07d7ebede023ddc29df6e3f265616758b185927a43ed4619fe832c3ad6ed
+**origin**: ai · **priority**: must · **verification**: A fixture copied into a repository reports clean; after an edit to one item it reports uncommitted changes with the same commit; outside git it reports not under version control with no ref and no commit.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0005 -->
@@ -243,7 +275,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0002
 *Satisfies:* tl:SR-0055
 
-**origin**: ai · **priority**: must · **verification**: An attribute the package has no knowledge of appears as a populated column. Per register, the Intents table carries no priority column. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:67277d2f6dbd425c9176fd872dd8b2e88a4e6be75eb90b8621fcc62c9d274f00
+**origin**: ai · **priority**: must · **verification**: An attribute the package has no knowledge of appears as a populated column. Per register, the Intents table carries no priority column.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0006 -->
@@ -255,7 +289,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: must · **verification**: Per register, a relates link between two system requirements names System requirements at both ends; a satisfies link into a source names the namespace. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:43c700f598f7814de525dd8e84151adbe8128e9cec9a8996b183b21e5b78540c
+**origin**: ai · **priority**: must · **verification**: Per register, a relates link between two system requirements names System requirements at both ends; a satisfies link into a source names the namespace.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0007 -->
@@ -267,7 +303,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: should · **verification**: The composed fixture's workbook holds a sheet named by the namespace with exactly the cited clause. The workbook XML carries read-only recommended, structure lock, and sort and filter allowed. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:8f54e2a4d79e1e2da0bfdc82212ede313e62a42bb6e893358600dbee44d5f9d8
+**origin**: ai · **priority**: should · **verification**: The composed fixture's workbook holds a sheet named by the namespace with exactly the cited clause. The workbook XML carries read-only recommended, structure lock, and sort and filter allowed.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0008 -->
@@ -279,7 +317,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: should · **verification**: The Word document carries Heading2 through Heading4 styles, a TOC field, and a page break per section. The HTML page holds one section per item, a contents list of anchors, and an A4 page rule. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:a7d75e08596a7b76fa757dff4add5375f45f34699229f7da388f75879567939b
+**origin**: ai · **priority**: should · **verification**: The Word document carries Heading2 through Heading4 styles, a TOC field, and a page break per section. The HTML page holds one section per item, a contents list of anchors, and an A4 page rule.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0009 -->
@@ -291,7 +331,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0002
 
-**origin**: ai · **priority**: should · **verification**: For the fixtures, one note per item under its register's folder; each note opens with a level-one heading of its identifier and title and a line with its type and status; front matter parses as YAML with the item's properties and no attribute line follows the body; an item that something implements carries an Implements this line naming it as a wikilink; every wikilink names a note in the folder; the TOML brackets are escaped; a clause note is named with a space where the colon was. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:c17dbff0d34e2751ca92e03607778359e6cb2beefbfddd6f61483b06c64c6ba2
+**origin**: ai · **priority**: should · **verification**: For the fixtures, one note per item under its register's folder; each note opens with a level-one heading of its identifier and title and a line with its type and status; front matter parses as YAML with the item's properties and no attribute line follows the body; an item that something implements carries an Implements this line naming it as a wikilink; every wikilink names a note in the folder; the TOML brackets are escaped; a clause note is named with a space where the colon was.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0010 -->
@@ -303,7 +345,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0001
 
-**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:00a9707d29a3e292d32f3f51131a2c694f166373410220c90234451cc8ce7254
+**origin**: ai · **priority**: must · **verification**: The dependency list in pyproject.toml names the two packages only. The Office outputs open in LibreOffice.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0011 -->
@@ -315,7 +359,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0001
 
-**origin**: ai · **priority**: should · **verification**: Each format writes a file that opens; --folder unpacks the vault; two runs over one graph are byte-identical; a directory without a graph gives one line on stderr and exit 1; --folder on xlsx exits 2. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:288caa80a8c8f4f9faae9bcdd26baf94e5183f2ecbb520431f90e1ddd4d27b9c
+**origin**: ai · **priority**: should · **verification**: Each format writes a file that opens; --folder unpacks the vault; two runs over one graph are byte-identical; a directory without a graph gives one line on stderr and exit 1; --folder on xlsx exits 2.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0012 -->
@@ -328,7 +374,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0004
 *Relates:* SR-0008
 
-**origin**: ai · **priority**: must · **verification**: tl-transform blocks over the fixture yields JSON whose blocks list has one entry with an item field per item, whose headings agree with the docx output, and whose provenance matches the other outputs. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:8e6c1a1311ddea7b2b9342bccfe5d5f5ea90b7d142a89971b81368e0d0010279
+**origin**: ai · **priority**: must · **verification**: tl-transform blocks over the fixture yields JSON whose blocks list has one entry with an item field per item, whose headings agree with the docx output, and whose provenance matches the other outputs.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -342,7 +390,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0005
 *Refines:* SR-0004
 
-**origin**: ai · **priority**: must · **verification**: Run over a git working tree with --repository x/y --ref v1 --commit abc --tree clean, the output names x/y, v1, abc and clean; run with --repository alone, ref and commit read none and the tree reads not under version control. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:5270fc2db0a7f1fdb7df3da851c7711c4dc03d8ed2e7b3ce7cd93c8f81ec1563
+**origin**: ai · **priority**: must · **verification**: Run over a git working tree with --repository x/y --ref v1 --commit abc --tree clean, the output names x/y, v1, abc and clean; run with --repository alone, ref and commit read none and the tree reads not under version control.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -356,7 +406,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0006
 *Refines:* SR-0001
 
-**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:da400e35ac2046d0f707eb3d10147ee37a19c03d21b97e908331b5c4d8291902
+**origin**: ai · **priority**: must · **verification**: With sys.platform patched to emscripten, dump and docs succeed for the fixtures and the outputs equal those produced by spawning the command; the entry point is resolved from package metadata, not from a module path written here.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -369,7 +421,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 
 *Implements:* UR-0001
 
-**priority**: should · **origin**: ai · **verification**: With the tool slowed so that reading the graph takes over a second, stderr carries one line naming that step and stdout is unchanged; with a quick run, stderr is empty; with the platform reported as having no threads, stderr is empty regardless. · **ratified_by**: Henry Grech-Cini · **ratified_fingerprint**: sha256:46e70c987916faa37c99be0931c98579d70bf2ad5734abcaa5d269a5aaa2c746
+**priority**: should · **origin**: ai · **verification**: With the tool slowed so that reading the graph takes over a second, stderr carries one line naming that step and stdout is unchanged; with a quick run, stderr is empty; with the platform reported as having no threads, stderr is empty regardless.
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
@@ -384,7 +438,9 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Satisfies:* tl:SR-0045
 *Relates:* SR-0002
 
-**origin**: ai · **priority**: should · **verification**: Over the fixture with --only naming two items, the Markdown holds exactly those two catalogue blocks and each matrix only their rows; the csv and xlsx hold two item rows and only the links between them; the notes hold two notes and no wikilink naming a third; the provenance says 2 of the fixture's count. --only naming an identifier the fixture lacks exits 2, names it, and writes no file. · **ratified_by**: Henry Grech-Cini · **ratified_id**: github:rhodium289 · **ratified_fingerprint**: sha256:23529b600edc9128f9a1fc834f0302439bd4e676d6f0df4d2bfd7b44a3e0ad5a
+**origin**: ai · **priority**: should · **verification**: Over the fixture with --only naming two items, the Markdown holds exactly those two catalogue blocks and each matrix only their rows; the csv and xlsx hold two item rows and only the links between them; the notes hold two notes and no wikilink naming a third; the provenance says 2 of the fixture's count. --only naming an identifier the fixture lacks exits 2, names it, and writes no file.
+
+*Ratified by:* Henry Grech-Cini (github:rhodium289)
 <!-- tl:end -->
 
 
