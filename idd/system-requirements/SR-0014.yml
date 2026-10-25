@@ -24,5 +24,18 @@ attrs:
     the fixtures and the outputs equal those produced by spawning the command; the
     entry point is resolved from package metadata, not from a module path written
     here.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:da400e35ac2046d0f707eb3d10147ee37a19c03d21b97e908331b5c4d8291902
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:da400e35ac2046d0f707eb3d10147ee37a19c03d21b97e908331b5c4d8291902
+  content:
+    type: system_requirement
+    text: Where the platform reports itself as emscripten, or a process cannot be
+      started, the tool loads the console entry point that throughline declares in
+      its package metadata under the name tl, calls it in-process with the same argument
+      vector, and captures its standard output and error. A SystemExit is read as
+      the exit code. Everywhere else the command is spawned as SR-0001 says.
+    normative: true
+    derived: false
+    attrs:
+      priority: must
+  revision: 1fe09a47bdc0f0f8f911a4134e8b89eeb1c78085

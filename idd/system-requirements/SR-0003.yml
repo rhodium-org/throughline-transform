@@ -19,5 +19,16 @@ attrs:
   priority: should
   verification: One module holds the patterns. A search of the package finds no second
     definition of the item line.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:ce5afe7aa1f654996f709ebb2fcd64b499883ed6d13aa94da32e4064ea156a45
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:ce5afe7aa1f654996f709ebb2fcd64b499883ed6d13aa94da32e4064ea156a45
+  content:
+    type: system_requirement
+    text: The item line, the attribute line and the identifier pattern the tool writes
+      are defined once and read by every writer that cuts or reshapes the tool's
+      Markdown. If the tool changes a line, every output falls back the same way.
+    normative: true
+    derived: false
+    attrs:
+      priority: should
+  revision: e24af10b70ec99dc5e6da7e939fb214ba2898048

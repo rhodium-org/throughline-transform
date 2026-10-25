@@ -14,5 +14,17 @@ rationale: Before this package existed the editor held its own writers in TypeSc
 normative: true
 attrs:
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:fd7fc42054311923a5d6946802b3e788ca4839e1ade4e1feb13485f66f7a0ba1
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:fd7fc42054311923a5d6946802b3e788ca4839e1ade4e1feb13485f66f7a0ba1
+  content:
+    type: intent
+    text: The forms a graph leaves in — a document, a workbook, a folder of notes
+      — are produced by one implementation, whichever surface asks for them. The
+      throughline editor runs this package as a wheel under Pyodide, so an export
+      from a browser tab and an export from a terminal are the same bytes for the
+      same graph.
+    normative: true
+    derived: false
+    attrs: {}
+  revision: a02ec09fdf501149ba4fab99c52b7f6b9075fdf3

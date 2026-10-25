@@ -13,5 +13,16 @@ rationale: The editor produces these outputs from a graph on GitHub. A graph tha
 normative: true
 attrs:
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:5c8c4b4356e989b22048214676015a60315e57254b6ebf8bb963d7948a4ea541
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:5c8c4b4356e989b22048214676015a60315e57254b6ebf8bb963d7948a4ea541
+  content:
+    type: intent
+    text: A person with a throughline graph on their own machine can produce every
+      form a reader opens — a document, a spreadsheet, a folder of notes — from the
+      working tree as it is, before anything is committed or pushed, with one command.
+      The output says what state the tree was in.
+    normative: true
+    derived: false
+    attrs: {}
+  revision: 8e51e25b8fe9977235bfb7aa5c37f13e174ba2d1

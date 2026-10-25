@@ -10,5 +10,15 @@ rationale: A second renderer drifts from what tl docs --check gates, and a docum
 normative: true
 attrs:
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:f5c33390e2febaec19e6d13dba176393393481e4f256b9d023c921dd8bd9ab41
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:f5c33390e2febaec19e6d13dba176393393481e4f256b9d023c921dd8bd9ab41
+  content:
+    type: non_goal
+    text: This tool never composes the prose of an item. Every word of an item in
+      an output is written by tl docs. The tool adds containers, front matter and
+      link syntax, and nothing else.
+    normative: true
+    derived: false
+    attrs: {}
+  revision: 8e51e25b8fe9977235bfb7aa5c37f13e174ba2d1

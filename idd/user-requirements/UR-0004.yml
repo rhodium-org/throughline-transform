@@ -22,5 +22,18 @@ attrs:
   verification: The blocks output for the fixture parses as JSON, carries one item
     entry per item with its identifier, type and status, and matches the headings
     the docx output carries.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:a3fd3f45e87a3ce64e171eb1fd2a11e45a0aa007ece9f0a24e241f0a45ddc8d1
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:a3fd3f45e87a3ce64e171eb1fd2a11e45a0aa007ece9f0a24e241f0a45ddc8d1
+  content:
+    type: user_requirement
+    text: 'A caller that renders a document itself — the editor lays the PDF''s pages
+      out in the browser so its contents can carry page numbers — can ask for the
+      document''s structure as data: the title, the front matter, each heading with
+      its level, each item heading with its identifier, type and status, each quotation,
+      paragraph, attribute line and table, and each appendix with where its source
+      comes from. It is the same structure the Word and HTML outputs are built from.'
+    normative: true
+    derived: false
+    attrs: {}
+  revision: f982d712757bee5bb05f908fbb3261751d03960f

@@ -9,5 +9,14 @@ rationale: The editor is the interactive surface for this family. A second one h
 normative: true
 attrs:
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:a162c86b2df6460a5be7c61c68d3eb7694a4cb46c3d8fb4aae660cca4c0e9dfe
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:a162c86b2df6460a5be7c61c68d3eb7694a4cb46c3d8fb4aae660cca4c0e9dfe
+  content:
+    type: non_goal
+    text: This tool is a command run over a directory. It listens on nothing, serves
+      nothing and opens no window.
+    normative: true
+    derived: false
+    attrs: {}
+  revision: 8e51e25b8fe9977235bfb7aa5c37f13e174ba2d1

@@ -33,10 +33,11 @@ attrs:
     and no wikilink naming a third; the provenance says 2 of the fixture's count.
     --only naming an identifier the fixture lacks exits 2, names it, and writes no
     file.
-  ratified_by: Henry Grech-Cini
-  ratified_id: github:rhodium289
-  ratified_fingerprint: sha256:23529b600edc9128f9a1fc834f0302439bd4e676d6f0df4d2bfd7b44a3e0ad5a
-  ratified_content:
+ratifications:
+- by: Henry Grech-Cini
+  id: github:rhodium289
+  fingerprint: sha256:23529b600edc9128f9a1fc834f0302439bd4e676d6f0df4d2bfd7b44a3e0ad5a
+  content:
     type: system_requirement
     text: --only takes item identifiers separated by commas and may be given more
       than once. For md, docx, html and blocks, each directive's expression is joined
@@ -50,3 +51,4 @@ attrs:
     derived: false
     attrs:
       priority: should
+  revision: 7735f6df646566b02eec3c0251f6858b8fc040c0

@@ -19,5 +19,18 @@ attrs:
   verification: A fixture copied into a repository reports clean; after an edit to
     one item it reports uncommitted changes with the same commit; outside git it
     reports not under version control with no ref and no commit.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:249b07d7ebede023ddc29df6e3f265616758b185927a43ed4619fe832c3ad6ed
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:249b07d7ebede023ddc29df6e3f265616758b185927a43ed4619fe832c3ad6ed
+  content:
+    type: system_requirement
+    text: The repository name is read from the origin remote, or failing that the
+      top-level directory's name; the ref from HEAD; the commit from HEAD; and cleanliness
+      from git status over the graph's directory only. Without a repository the tree
+      is reported as not under version control. Without a commit it is reported as
+      holding uncommitted changes.
+    normative: true
+    derived: false
+    attrs:
+      priority: must
+  revision: e24af10b70ec99dc5e6da7e939fb214ba2898048

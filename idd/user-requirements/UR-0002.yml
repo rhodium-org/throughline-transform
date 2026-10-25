@@ -18,5 +18,16 @@ attrs:
   verification: For one graph, each output opens in an ordinary reader for that format
     and lists every item the graph holds. A notes output has one note per item and
     no wikilink that names no note.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:441c3e12f160a1d6e395b16ef26ee59e3a83f87ec69b89dc1d38727383c57022
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:441c3e12f160a1d6e395b16ef26ee59e3a83f87ec69b89dc1d38727383c57022
+  content:
+    type: user_requirement
+    text: 'Markdown, a folder of notes for a note-taking tool such as Obsidian, CSV,
+      an Excel workbook, a Word document, and a print-ready HTML document. Each holds
+      what the editor''s export of the same graph holds: the same items, links, attributes
+      and cited clauses, laid out the same way.'
+    normative: true
+    derived: false
+    attrs: {}
+  revision: 8e51e25b8fe9977235bfb7aa5c37f13e174ba2d1

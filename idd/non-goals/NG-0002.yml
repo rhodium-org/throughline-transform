@@ -9,5 +9,14 @@ rationale: A PDF library is the largest dependency this package could take, for 
 normative: true
 attrs:
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:d94996ab16dfb87585262313cfd3acd1cada6b19c9d2a38abd4bdc9b655c7bfe
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:d94996ab16dfb87585262313cfd3acd1cada6b19c9d2a38abd4bdc9b655c7bfe
+  content:
+    type: non_goal
+    text: This tool ships no PDF renderer. The print-ready HTML output is what a
+      browser prints to PDF.
+    normative: true
+    derived: false
+    attrs: {}
+  revision: 8e51e25b8fe9977235bfb7aa5c37f13e174ba2d1

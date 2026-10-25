@@ -22,5 +22,20 @@ attrs:
   verification: The Word document carries Heading2 through Heading4 styles, a TOC
     field, and a page break per section. The HTML page holds one section per item,
     a contents list of anchors, and an A4 page rule.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:a7d75e08596a7b76fa757dff4add5375f45f34699229f7da388f75879567939b
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:a7d75e08596a7b76fa757dff4add5375f45f34699229f7da388f75879567939b
+  content:
+    type: system_requirement
+    text: The Word and HTML outputs open with a title page naming the provenance,
+      then a contents list, then a section per register with a heading per item carrying
+      its identifier and title, its type and status beneath, its words as a quotation,
+      its rationale, and its attributes in smaller type. Cited clauses follow as
+      one appendix per source with where the source comes from beneath its title.
+      The Word contents is a field Word fills in. The HTML contents is a list of
+      links; page numbers are the browser's to print.
+    normative: true
+    derived: false
+    attrs:
+      priority: should
+  revision: e24af10b70ec99dc5e6da7e939fb214ba2898048

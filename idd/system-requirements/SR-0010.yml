@@ -17,5 +17,16 @@ attrs:
   priority: must
   verification: The dependency list in pyproject.toml names the two packages only.
     The Office outputs open in LibreOffice.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:00a9707d29a3e292d32f3f51131a2c694f166373410220c90234451cc8ce7254
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:00a9707d29a3e292d32f3f51131a2c694f166373410220c90234451cc8ce7254
+  content:
+    type: system_requirement
+    text: The package depends on throughline and nothing else. xlsx and docx are
+      written from their own specifications over the standard library's zip module.
+      There is no PDF writer (NG-0002).
+    normative: true
+    derived: false
+    attrs:
+      priority: must
+  revision: 1fe09a47bdc0f0f8f911a4134e8b89eeb1c78085

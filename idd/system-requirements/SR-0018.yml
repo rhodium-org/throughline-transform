@@ -22,9 +22,10 @@ attrs:
   verification: The manifest of a dirty fixture names its commit and says dirty;
     an assistant given only the folder can state the change-set format
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:ac8096e7f569d9fd28f64e6a2043b1bfcf3a65f27e84fa3e46ac28906628e273
-  ratified_content:
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:ac8096e7f569d9fd28f64e6a2043b1bfcf3a65f27e84fa3e46ac28906628e273
+  content:
     type: system_requirement
     text: The folder shall hold a manifest naming the repository, ref and commit
       and whether the tree was clean, as any output says (UR-0003), the file of each
@@ -35,6 +36,7 @@ attrs:
     derived: false
     attrs:
       priority: should
+  revision: 112cca3338b2ef992353ba66cc2c55fe74322094
 deleted:
   date: '2026-10-18'
   reason: 'Moved out of throughline-transform by operator decision (2026-10-18):

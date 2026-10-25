@@ -20,9 +20,10 @@ attrs:
   verification: On the fixture graph the folder holds one file per register plus
     the manifest, and every item and link in tl dump appears exactly once
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:c367c7d260e929e6d1e3c5906803b2288701aa4e826d7a16d56bbdbeec8b96f5
-  ratified_content:
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:c367c7d260e929e6d1e3c5906803b2288701aa4e826d7a16d56bbdbeec8b96f5
+  content:
     type: system_requirement
     text: tl-transform assistant shall write a folder holding one file per register,
       each carrying that register's items exactly as tl dump gives them, including
@@ -33,6 +34,7 @@ attrs:
     derived: false
     attrs:
       priority: should
+  revision: 112cca3338b2ef992353ba66cc2c55fe74322094
 deleted:
   date: '2026-10-18'
   reason: 'Moved out of throughline-transform by operator decision (2026-10-18):

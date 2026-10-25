@@ -21,5 +21,17 @@ attrs:
   verification: Run over a git working tree with --repository x/y --ref v1 --commit
     abc --tree clean, the output names x/y, v1, abc and clean; run with --repository
     alone, ref and commit read none and the tree reads not under version control.
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:5270fc2db0a7f1fdb7df3da851c7711c4dc03d8ed2e7b3ce7cd93c8f81ec1563
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:5270fc2db0a7f1fdb7df3da851c7711c4dc03d8ed2e7b3ce7cd93c8f81ec1563
+  content:
+    type: system_requirement
+    text: The options --repository, --ref, --commit and --tree state the provenance.
+      When any of them is given, git is not run; an unstated ref or commit is none,
+      and an unstated tree is not under version control. --tree accepts clean, dirty
+      and untracked, written into the output in the words the git reading uses.
+    normative: true
+    derived: false
+    attrs:
+      priority: must
+  revision: 3284a56c367fd5252a9542923501d361572fe9f7

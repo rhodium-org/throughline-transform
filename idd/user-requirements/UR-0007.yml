@@ -22,10 +22,11 @@ attrs:
   verification: For one graph and two items named, each form holds those two and
     no other, and its provenance says 2 of the graph's count. With nothing named,
     each output is byte for byte what it was before the option existed.
-  ratified_by: Henry Grech-Cini
-  ratified_id: github:rhodium289
-  ratified_fingerprint: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
-  ratified_content:
+ratifications:
+- by: Henry Grech-Cini
+  id: github:rhodium289
+  fingerprint: sha256:2a127913a9a612f1ad60e4b98632ae99d8c77c16e7b6d036184817d5f6f77290
+  content:
     type: user_requirement
     text: 'A caller may name the items an output holds. Every form then holds those
       items and no others, with the links between them, and says it holds a selection:
@@ -34,3 +35,4 @@ attrs:
     normative: true
     derived: false
     attrs: {}
+  revision: f00634ef4e2b04c1c430b205530dcddeba5e8ff0

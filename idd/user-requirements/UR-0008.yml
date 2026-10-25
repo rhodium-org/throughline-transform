@@ -22,9 +22,10 @@ attrs:
   verification: A three-register graph exported in this form is read in full by an
     assistant capped at fewer files than the graph has items
   origin: ai
-  ratified_by: Henry Grech-Cini
-  ratified_fingerprint: sha256:7b9e5e5a9e450e6cab6d7a83800685636f88950eb5531dd02ccdd56fc4ef9f3d
-  ratified_content:
+ratifications:
+- by: Henry Grech-Cini
+  fingerprint: sha256:7b9e5e5a9e450e6cab6d7a83800685636f88950eb5531dd02ccdd56fc4ef9f3d
+  content:
     type: user_requirement
     text: A user shall be able to produce, with one command, a form of the graph
       that an assistant reading a capped number of files can read whole, and that
@@ -32,6 +33,7 @@ attrs:
     normative: true
     derived: false
     attrs: {}
+  revision: 112cca3338b2ef992353ba66cc2c55fe74322094
 deleted:
   date: '2026-10-18'
   reason: 'Moved out of throughline-transform by operator decision (2026-10-18):
