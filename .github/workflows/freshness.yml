@@ -71,5 +71,8 @@ jobs:
       - name: Unit tests
         run: pytest -q
 
-      - name: Self-host gate
-        run: tl -C idd check --strict --quiet
+      # No self-host gate here. The floor promises what the package runs on, and
+      # this repo's own graph is at a newer format than the floor tl can open
+      # (format 4 since 2026-10-25; 3.11.1 reads 3). Raising the floor to read it
+      # would refuse consumers whose graphs are still at format 3. The ceiling job
+      # gates the graph.
