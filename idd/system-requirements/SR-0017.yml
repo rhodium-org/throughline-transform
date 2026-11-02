@@ -35,6 +35,20 @@ ratifications:
     attrs:
       priority: should
   revision: 112cca3338b2ef992353ba66cc2c55fe74322094
+- by: Henry Grech-Cini
+  id: email:henry.grechcini@gmail.com
+  at: '2026-10-18T14:33:00Z'
+  fingerprint: sha256:a798169fc92c22094ea1047322cbaad8b6eb26b43903e74a2f1c247187c5150d
+  content:
+    deleted:
+      date: '2026-10-18'
+      reason: 'Moved out of throughline-transform by operator decision (2026-10-18):
+        Microsoft 365 Copilot export and reply now belong to rhodium-org/throughline-ms-copilot;
+        tl dump fingerprints and tl apply stay generic in throughline (tl:SR-0251,
+        tl:SR-0252).'
+      fingerprint: sha256:c367c7d260e929e6d1e3c5906803b2288701aa4e826d7a16d56bbdbeec8b96f5
+  backfilled: true
+  revision: 112cca3338b2ef992353ba66cc2c55fe74322094
 deleted:
   date: '2026-10-18'
   reason: 'Moved out of throughline-transform by operator decision (2026-10-18):
