@@ -40,28 +40,53 @@ def _region(directive: str) -> str:
     return f"<!-- tl:{directive} -->\n<!-- tl:end -->"
 
 
-def _within(expression: str, opts: Options) -> str:
-    """A directive's filter, joined with the items named, so tl docs writes only those (SR-0016).
+class _Filters:
+    """Filters written in the language the graph declares (SR-0021).
 
-    The identifiers are ones the graph holds (the command refuses any other), so
-    each is written as a quoted literal the filter language reads (tl:SR-0045).
+    tl reads every filter of a project in the one language its configuration names
+    as ``filter_language`` under ``[project]`` (tl:SR-0337): ``gql`` for a graph
+    made or migrated by tl 6, the earlier expression language where it names none.
+    The tool never guesses a filter's language from its text, so neither does this.
     """
-    if not opts.only:
-        return expression
-    named = ", ".join(repr(uid) for uid in opts.only)
-    return f"({expression}) and (uid in [{named}])"
+
+    def __init__(self, graph: Graph) -> None:
+        project = graph.config.get("project") or {}
+        self.gql = project.get("filter_language") == "gql"
+
+    @property
+    def every(self) -> str:
+        return "TRUE" if self.gql else "True"
+
+    def incoming(self, link_type: str) -> str:
+        if self.gql:
+            return f"EXISTS {{ (item)<-[:{link_type}]-() }}"
+        return f"links.incoming({link_type!r})"
+
+    def within(self, expression: str, opts: Options) -> str:
+        """A directive's filter, joined with the items named, so tl docs writes only those (SR-0016).
+
+        The identifiers are ones the graph holds (the command refuses any other), so
+        each is written as a quoted literal the filter language reads (tl:SR-0045).
+        """
+        if not opts.only:
+            return expression
+        named = ", ".join(repr(uid) for uid in opts.only)
+        if self.gql:
+            return f"({expression}) AND (item.uid IN [{named}])"
+        return f"({expression}) and (uid in [{named}])"
 
 
 def directive_document(graph: Graph, opts: Options, provenance: Provenance) -> str:
     """The document the tool is asked to fill."""
+    f = _Filters(graph)
     lines: list[str] = [f"# {provenance.repository} — requirements", ""]
     lines += [f"- {line}" for line in provenance.lines()]
     lines.append("")
 
     if opts.stats:
-        lines += ["## Summary", "", _region(f"stats {_within('True', opts)}"), ""]
+        lines += ["## Summary", "", _region(f"stats {f.within(f.every, opts)}"), ""]
     if opts.body in ("table", "both"):
-        lines += ["## Items", "", _region(f"table {_within('True', opts)}"), ""]
+        lines += ["## Items", "", _region(f"table {f.within(f.every, opts)}"), ""]
     if opts.matrix:
         # One matrix per grounding link type the graph declares, each over the
         # items something actually reaches by that link. Over every item a
@@ -71,16 +96,16 @@ def directive_document(graph: Graph, opts: Options, provenance: Provenance) -> s
             lines += [
                 f"### {link_type.replace('_', ' ')}",
                 "",
-                _region(f"matrix incoming:{link_type} {_within(f'links.incoming({link_type!r})', opts)}"),
+                _region(f"matrix incoming:{link_type} {f.within(f.incoming(link_type), opts)}"),
                 "",
             ]
     if opts.body in ("catalog", "both"):
-        lines += ["## Every item", "", _region(f"catalog {_within('True', opts)}"), ""]
+        lines += ["## Every item", "", _region(f"catalog {f.within(f.every, opts)}"), ""]
     # The words every cited clause answers to. Only over a composed graph: the
     # directive is the composer's, and a graph adopting no source has nothing
     # to mirror.
     if graph.composed:
-        lines += ["## Clauses of adopted sources", "", _region(f"sourced {_within('True', opts)}"), ""]
+        lines += ["## Clauses of adopted sources", "", _region(f"sourced {f.within(f.every, opts)}"), ""]
     return "\n".join(lines)
 
 

@@ -17,11 +17,11 @@ follows is this project's own.
 ## Summary
 
 <!-- tl:stats True -->
-- **Items:** 28 — system_requirement 16 · user_requirement 7 · non_goal 3 · intent 2
-- **Links:** 33 — implements 16 · derives_from 7 · satisfies 6 · refines 2 · relates 2
-- **Grounding depth:** max 2 · mean 1.4
-- **Most connected:** UR-0002 (9) · INT-0001 (5) · INT-0002 (4)
-- **Degree distribution:** 0 → 3 · 1 → 6 · 2 → 11 · 3 → 3 · 4 → 3 · 5 → 1 · 9 → 1
+- **Items:** 31 — system_requirement 19 · user_requirement 7 · non_goal 3 · intent 2
+- **Links:** 36 — implements 19 · derives_from 7 · satisfies 6 · refines 2 · relates 2
+- **Grounding depth:** max 2 · mean 1.5
+- **Most connected:** UR-0002 (9) · UR-0001 (7) · INT-0001 (5)
+- **Degree distribution:** 0 → 3 · 1 → 9 · 2 → 11 · 3 → 3 · 4 → 2 · 5 → 1 · 7 → 1 · 9 → 1
 <!-- tl:end -->
 
 
@@ -443,6 +443,48 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Ratified by:* Henry Grech-Cini (github:rhodium289)
 <!-- tl:end -->
 
+<!-- tl:item SR-0019 -->
+**SR-0019 — The install instructions survive an operating system's Python upgrade** — `system_requirement`, status `ratified`
+
+> The README's install section shall recommend uv tool install with a uv-managed Python, keep pipx as an alternative, and carry a section on bad interpreter after a Python upgrade that says why it happens and gives, for each installer, the one command that rebuilds the environment.
+
+*Rationale:* Found on the operator's workstation on 21 November 2026 (rhodium-org/cluster#226): an Ubuntu upgrade replaced Python 3.12 with 3.14 and every pipx-installed throughline command failed with bad interpreter. A pipx or venv environment runs on the interpreter it was made with; when the OS removes that interpreter nothing in the package runs, so nothing in the package can catch it. A uv-managed Python is one the OS package manager does not upgrade or remove. Rejected, dropping pipx: many users already have it. Rejected, a check inside the tool: it cannot run without its interpreter. Who pays: nobody installing afresh; a pipx user reads one more section.
+
+*Implements:* UR-0001
+
+**priority**: should · **verification**: inspection · **origin**: ai
+
+*Ratified by:* Henry Grech-Cini
+<!-- tl:end -->
+
+<!-- tl:item SR-0020 -->
+**SR-0020 — Every supported Python minor release is tested and declared** — `system_requirement`, status `ratified`
+
+> CI shall run the tests on every Python minor release from the declared floor to the newest released (3.11 to 3.14 today), and the trove classifiers shall name exactly those releases.
+
+*Rationale:* The classifiers stopped at 3.12 while operating systems moved to 3.14, so a user could not tell whether the package runs on the Python they have. tl 6.0.0 and tl-ratify 0.19.1 were seen to run on 3.14.4 on 22 November 2026. Who pays: this repository's CI, more jobs a run; and its maintainers, who add each new Python minor release when it comes out.
+
+*Implements:* UR-0001
+
+**priority**: should · **verification**: inspection · **origin**: ai
+
+*Ratified by:* Henry Grech-Cini
+<!-- tl:end -->
+
+<!-- tl:item SR-0021 -->
+**SR-0021 — Every filter the tool writes is in the graph's declared filter language** — `system_requirement`, status `ratified`
+
+> Each filter tl-transform writes into the document it hands tl docs shall be in the language the graph declares as filter_language under [project]: a GQL search condition where it declares gql, the earlier expression language where it declares none.
+
+*Rationale:* Found on 22 November 2026 running the suite on Python 3.14: tl 6 reads every filter of a graph made by tl init in GQL (tl:SR-0337), so --only and the traceability matrix, which wrote (True) and (uid in [...]) and links.incoming(...), failed on any new graph, on every Python. Rejected, writing GQL always: a graph that declares no language is read in the earlier one, and tl never guesses a filter's language from its text, so neither may this. Who pays: nobody; one more key read from the dump the tool already takes.
+
+*Implements:* UR-0001
+
+**priority**: must · **verification**: tests/test_only.py and tests/test_outputs.py against a graph tl 6 made · **origin**: ai
+
+*Ratified by:* Henry Grech-Cini
+<!-- tl:end -->
+
 
 
 
@@ -453,7 +495,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:matrix incoming:implements links.incoming('implements') -->
 | UID | Title | Implements (incoming) |
 |---|---|---|
-| UR-0001 | Produce an output from a working tree with one command | SR-0010, SR-0011, SR-0015 |
+| UR-0001 | Produce an output from a working tree with one command | SR-0010, SR-0011, SR-0015, SR-0019, SR-0020, SR-0021 |
 | UR-0002 | The same six forms the editor offers | SR-0001, SR-0002, SR-0003, SR-0005, SR-0006, SR-0007, SR-0008, SR-0009 |
 | UR-0003 | An output says what it was true of | SR-0004 |
 | UR-0004 | A front end that lays out its own pages takes the document's structure from the tool | SR-0012 |

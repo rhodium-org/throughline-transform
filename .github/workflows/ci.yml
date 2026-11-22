@@ -18,6 +18,13 @@ jobs:
           # Prove the supported floor (Python >= 3.11).
           - os: blacksmith-4vcpu-ubuntu-2404
             python-version: "3.11"
+          # And every newer Python minor release (SR-0020).
+          - os: blacksmith-4vcpu-ubuntu-2404
+            python-version: "3.13"
+          - os: blacksmith-4vcpu-ubuntu-2404
+            python-version: "3.14"
+          - os: blacksmith-6vcpu-macos-latest
+            python-version: "3.14"
     steps:
       - uses: actions/checkout@v5
 

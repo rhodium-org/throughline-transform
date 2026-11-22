@@ -13,6 +13,8 @@ from pathlib import Path
 
 import pytest
 
+from conftest import born
+
 from throughline_transform import project
 from throughline_transform.cli import main
 from throughline_transform.provenance import CLEAN, DIRTY, UNTRACKED, stated
@@ -31,7 +33,7 @@ def test_blocks_output_is_the_documents_structure(plain_graph: Path, tmp_path: P
     items = [b for b in blocks if "item" in b]
     assert len(items) == 7
     sr1 = next(b for b in items if b["item"]["uid"] == "SR-0001")
-    assert sr1["heading"] == 4 and sr1["item"]["type"] == "system_requirement" and sr1["item"]["status"] == "draft"
+    assert sr1["heading"] == 4 and sr1["item"]["type"] == "system_requirement" and sr1["item"]["status"] == born(plain_graph)
     assert any(b.get("quote") for b in blocks) and any(b.get("small") for b in blocks)
     assert any(b.get("group") and b["text"] == "System requirements" for b in blocks)
     assert any("table" in b for b in blocks)  # --body both carries the table of items

@@ -4,7 +4,7 @@ A [throughline](https://github.com/rhodium-org/throughline) requirements graph o
 disk — committed or not — in the forms its readers open. One command, one file:
 
 ```bash
-pipx install throughline-transform      # pulls tl along too
+uv tool install --python 3.13 --managed-python throughline-transform --with-executables-from throughline   # tl too
 
 tl-transform md      -C idd             # Markdown, written by the tool itself
 tl-transform notes   -C idd             # a folder of notes for Obsidian (zip)
@@ -21,6 +21,30 @@ the same six forms, laid out the same way, from the graph as it stands on your
 disk. The editor needs the graph on GitHub. This does not — it reads the working
 tree, and the output says whether that tree was clean, carried uncommitted
 changes, or was not under version control at all.
+
+`--managed-python` has uv use its own build of Python rather than the operating
+system's, so an OS Python upgrade does not break the install;
+`--with-executables-from throughline` puts `tl` on your `PATH` beside it. Get uv
+from [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/).
+If you use pipx instead: `pipx install --include-deps throughline-transform`.
+
+## If `tl-transform` says `bad interpreter` after a Python upgrade
+
+A tool installed with pipx (or into any virtual environment) runs on the Python it
+was installed with. When your operating system upgrades its Python and removes the
+old one, every command in that environment fails before any of its code runs, with
+`bad interpreter` or `No module named ...`. Your graphs are fine; the environment has
+to be rebuilt on the new Python:
+
+| Installed with | Rebuild with |
+|---|---|
+| pipx | `pipx reinstall-all --python python3` (or the new Python's full path) |
+| pipx, when `pipx` itself is broken too | `uvx pipx reinstall-all --python python3` |
+| uv | `uv tool install --reinstall --python 3.13 --managed-python throughline-transform --with-executables-from throughline` |
+
+An install made with uv's `--managed-python` does not hit this: the operating system
+does not touch the Python uv manages. `tl doctor` (throughline releases after 6.0.0) says
+which Python runs `tl` and how it was installed.
 
 ## What it does not do
 
