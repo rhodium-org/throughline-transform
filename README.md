@@ -28,6 +28,11 @@ system's, so an OS Python upgrade does not break the install;
 from [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/).
 If you use pipx instead: `pipx install --include-deps throughline-transform`.
 
+Already installed throughline itself with `uv tool install`? Then `tl` is on
+your `PATH` already, and uv will not install it twice (`Executables already
+exist: throughline, tl`): leave out `--with-executables-from throughline`, as
+in `uv tool install --python 3.13 --managed-python throughline-transform`.
+
 ## If `tl-transform` says `bad interpreter` after a Python upgrade
 
 A tool installed with pipx (or into any virtual environment) runs on the Python it
