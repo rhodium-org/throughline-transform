@@ -444,7 +444,7 @@ How the tool does it. Each implements a user requirement; several read a clause 
 <!-- tl:end -->
 
 <!-- tl:item SR-0019 -->
-**SR-0019 — The install instructions survive an operating system's Python upgrade** — `system_requirement`, status `proposed`
+**SR-0019 — The install instructions survive an operating system's Python upgrade** — `system_requirement`, status `ratified`
 
 > The README's install section shall recommend uv tool install with a uv-managed Python, keep pipx as an alternative, and carry a section on bad interpreter after a Python upgrade that says why it happens and gives, for each installer, the one command that rebuilds the environment.
 
@@ -453,10 +453,12 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0001
 
 **priority**: should · **verification**: inspection · **origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0020 -->
-**SR-0020 — Every supported Python minor release is tested and declared** — `system_requirement`, status `proposed`
+**SR-0020 — Every supported Python minor release is tested and declared** — `system_requirement`, status `ratified`
 
 > CI shall run the tests on every Python minor release from the declared floor to the newest released (3.11 to 3.14 today), and the trove classifiers shall name exactly those releases.
 
@@ -465,10 +467,12 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0001
 
 **priority**: should · **verification**: inspection · **origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 <!-- tl:item SR-0021 -->
-**SR-0021 — Every filter the tool writes is in the graph's declared filter language** — `system_requirement`, status `proposed`
+**SR-0021 — Every filter the tool writes is in the graph's declared filter language** — `system_requirement`, status `ratified`
 
 > Each filter tl-transform writes into the document it hands tl docs shall be in the language the graph declares as filter_language under [project]: a GQL search condition where it declares gql, the earlier expression language where it declares none.
 
@@ -477,6 +481,8 @@ How the tool does it. Each implements a user requirement; several read a clause 
 *Implements:* UR-0001
 
 **priority**: must · **verification**: tests/test_only.py and tests/test_outputs.py against a graph tl 6 made · **origin**: ai
+
+*Ratified by:* Henry Grech-Cini
 <!-- tl:end -->
 
 
