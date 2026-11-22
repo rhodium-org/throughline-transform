@@ -17,6 +17,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+import tomllib
+
 import pytest
 
 BIN = Path(sys.executable).parent
@@ -69,13 +71,14 @@ implements   = { from = ["system_requirement"], to = ["user_requirement"] }
 
 """
     config.write_text(head + model + tail, encoding="utf-8")
-    for prefix, folder, title in (
-        ("INT", "intents", "Intents"),
-        ("NG", "non-goals", "Non-goals"),
-        ("UR", "user-requirements", "User requirements"),
-        ("SR", "system-requirements", "System requirements"),
+    # tl 6 makes a register with the item type it holds (tl SR-0351).
+    for prefix, folder, title, type_ in (
+        ("INT", "intents", "Intents", "intent"),
+        ("NG", "non-goals", "Non-goals", "non_goal"),
+        ("UR", "user-requirements", "User requirements", "user_requirement"),
+        ("SR", "system-requirements", "System requirements", "system_requirement"),
     ):
-        _tl(root, "register", "new", prefix, folder, "--title", title)
+        _tl(root, "register", "new", prefix, folder, "--title", title, "--type", type_)
 
 
 def _new(root: Path, prefix: str, type_: str, title: str, text: str, **kw: str) -> str:
@@ -108,7 +111,8 @@ def plain_graph(tmp_path_factory: pytest.TempPathFactory) -> Path:
     _tl(root, "link", sr2, sr1, "--type", "relates")
     _tl(root, "link", sr3, sr1, "--type", "refines")
     _tl(root, "amend", sr1, "--rationale", "Because a second renderer drifts. Rejected: writing it here.")
-    _tl(root, "check", "--strict")
+    # Sound, not signed: tl 6's --strict also refuses an unsigned item.
+    _tl(root, "check")
     return root
 
 
@@ -125,7 +129,7 @@ def composed_graph(tmp_path_factory: pytest.TempPathFactory, plain_graph: Path) 
     ur = _new(root, "UR", "user_requirement", "Cite a clause", "One requirement satisfies a borrowed clause.", ground=intent, ground_type="derives_from")
     sr = _new(root, "SR", "system_requirement", "Satisfies the source", "It does what the clause says.", ground=ur, ground_type="implements", attr_priority="must")
     _tl(root, "link", sr, "src:SR-0001", "--type", "satisfies", compose=True)
-    _tl(root, "check", "--strict", compose=True)
+    _tl(root, "check", compose=True)
     return root
 
 
@@ -142,3 +146,19 @@ def git_graph(tmp_path_factory: pytest.TempPathFactory, plain_graph: Path) -> Pa
     git("add", ".")
     git("commit", "-q", "-m", "fixture")
     return repo / "idd"
+
+
+def born(root: Path) -> str:
+    """The status the fixture graph's tl gave its items at birth: ``draft`` before
+    tl 6, ``proposed`` from it. Read from an item, so the suite runs on either."""
+    for line in (root / "system-requirements" / "SR-0001.yml").read_text(encoding="utf-8").splitlines():
+        if line.startswith("status:"):
+            return line.split(":", 1)[1].strip()
+    raise AssertionError("SR-0001 has no status")
+
+
+def every(root: Path) -> str:
+    """The filter that selects every item, in the language the graph declares."""
+    with open(root / "throughline.toml", "rb") as fh:
+        project = tomllib.load(fh).get("project", {})
+    return "TRUE" if project.get("filter_language") == "gql" else "True"

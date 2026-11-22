@@ -17,7 +17,7 @@ live under [`idd/`](idd).
 ## Using tl-transform in a project
 
 ```bash
-pipx install throughline-transform
+uv tool install --python 3.13 --managed-python throughline-transform --with-executables-from throughline
 tl-transform notes -C idd --folder     # a vault to open in Obsidian
 tl-transform xlsx  -C idd              # a read-only workbook
 tl-transform html  -C idd              # print to PDF from a browser

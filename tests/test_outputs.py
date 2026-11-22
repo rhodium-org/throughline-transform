@@ -13,6 +13,8 @@ from pathlib import Path
 
 import pytest
 
+from conftest import born, every
+
 from throughline_transform import markdown as md
 from throughline_transform.blocks import as_blocks
 from throughline_transform.cli import main, produce
@@ -84,7 +86,7 @@ def test_markdown_is_written_by_the_tool(plain_graph: Path):
 
 def test_markdown_keeps_markers_when_asked(plain_graph: Path):
     _, text = _md(plain_graph, markers=True)
-    assert "<!-- tl:catalog True -->" in text and "<!-- tl:end -->" in text
+    assert f"<!-- tl:catalog {every(plain_graph)} -->" in text and "<!-- tl:end -->" in text
 
 
 def test_markdown_options_change_the_document(plain_graph: Path):
@@ -115,7 +117,7 @@ def test_blocks_read_the_shape_of_the_tools_output(plain_graph: Path):
     items = [b for b in blocks if b.item]
     assert len(items) == 7
     sr1 = next(b for b in items if b.item["uid"] == "SR-0001")
-    assert sr1.heading == 4 and sr1.item["status"] == "draft"
+    assert sr1.heading == 4 and sr1.item["status"] == born(plain_graph)
     assert 'a colon, "quotes" & <angles>' in sr1.text
     quotes = [b for b in blocks if b.quote]
     assert any("The tool writes the Markdown." in b.text for b in quotes)
@@ -234,11 +236,11 @@ def test_notes_are_one_per_item_with_front_matter_and_links(plain_graph: Path):
     assert "System requirements/SR-0001.md" in entries and "Intents/INT-0001.md" in entries
     sr2 = entries["System requirements/SR-0002.md"].decode()
     assert sr2.startswith('---\nuid: "SR-0002"\n')
-    assert 'priority: "should"' in sr2 and '  - "type/system_requirement"' in sr2 and '  - "status/draft"' in sr2
+    assert 'priority: "should"' in sr2 and '  - "type/system_requirement"' in sr2 and f'  - "status/{born(plain_graph)}"' in sr2
     # The body is the tool's block reshaped for a note (SR-0009): a heading,
     # the type and status beneath, no attribute line, the incoming links.
     body = sr2.split("\n---\n", 1)[1]
-    assert body.startswith("# SR-0002 — Declare it in \\[\\[sources\\]\\]\nsystem requirement · draft\n")
+    assert body.startswith(f"# SR-0002 — Declare it in \\[\\[sources\\]\\]\nsystem requirement · {born(plain_graph)}\n")
     assert "**priority**" not in body and "**origin**" not in body
     assert "*Relates:* [[SR-0001]]" in sr2
     assert "*Implements:* [[UR-0002]]" in sr2

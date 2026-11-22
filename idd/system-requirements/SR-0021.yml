@@ -1,0 +1,25 @@
+uid: SR-0021
+type: system_requirement
+status: proposed
+title: Every filter the tool writes is in the graph's declared filter language
+text: 'Each filter tl-transform writes into the document it hands tl docs shall be
+  in the language the graph declares as filter_language under [project]: a GQL search
+  condition where it declares gql, the earlier expression language where it declares
+  none.'
+rationale: 'Found on 22 November 2026 running the suite on Python 3.14: tl 6 reads
+  every filter of a graph made by tl init in GQL (tl:SR-0337), so --only and the
+  traceability matrix, which wrote (True) and (uid in [...]) and links.incoming(...),
+  failed on any new graph, on every Python. Rejected, writing GQL always: a graph
+  that declares no language is read in the earlier one, and tl never guesses a filter''s
+  language from its text, so neither may this. Who pays: nobody; one more key read
+  from the dump the tool already takes.'
+normative: true
+links:
+- target: UR-0001
+  type: implements
+  stamp: sha256:3cf8d1cae9eb2de5c7843800fdd8949c09b35049d262fdac7bd89ce38cf8a773
+attrs:
+  priority: must
+  verification: tests/test_only.py and tests/test_outputs.py against a graph tl 6
+    made
+  origin: ai
